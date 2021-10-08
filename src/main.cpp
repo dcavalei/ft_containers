@@ -1,9 +1,9 @@
 #include <iostream>
-#include "ft.hpp"
+#include "vector.hpp"
 
 int main() {
 
-	ft::Vector tmp;
+ft::Vector tmp;
 
 
 

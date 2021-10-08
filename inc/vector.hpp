@@ -1,25 +1,32 @@
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
-#include "ft.hpp"
-
-class Vector
+namespace ft
 {
-	private:
-		/* data */
-	public:
-		Vector(/* args */);
-		~Vector();
-};
+	template<
+    	class T,
+    	class Allocator = std::allocator<T>
+	> class vector	{
+		private:
+			T							value_type;
+			Allocator					allocator_type;
+			std::size_t					size_type;
+			T&							reference = value_type;
+			const T&					const_reference = value_type;
+			Allocator::pointer			pointer;
+			Allocator::const_pointer	const_pointer;
 
-Vector::Vector(/* args */)
-{
-	std::cout << "hello" << std::endl;
+			// https://en.cppreference.com/w/cpp/named_req/RandomAccessIterator
+
+			// iterator 				LegacyRandomAccessIterator to value_type
+			// const_iterator 			LegacyRandomAccessIterator to const value_type
+			// reverse_iterator 		std::reverse_iterator<iterator>
+			// const_reverse_iterator 	std::reverse_iterator<const_iterator>
+
+		public:
+			Vector(/* args */);
+			~Vector();
+	};
 }
-
-Vector::~Vector()
-{
-}
-
 
 #endif
