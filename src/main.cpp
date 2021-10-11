@@ -1,14 +1,15 @@
 #include <iostream>
-#include "ft.hpp"
+#include "vector.hpp"
+#include <vector>
 
 int main() {
 
-	ft::Vector tmp;
+	ft::vector<int>		tmp;
+	std::vector<int>	vector;
 
+	std::allocator<int> alloc;
 
-
-
-
+	alloc.
 
 
 
