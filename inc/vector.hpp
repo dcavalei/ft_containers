@@ -21,5 +21,4 @@ Vector::~Vector()
 {
 }
 
-
 #endif
