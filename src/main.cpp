@@ -1,18 +1,40 @@
 #include <iostream>
 #include "vector.hpp"
 #include <vector>
+#include <memory>
 
 int main() {
 
-	ft::vector<int>		tmp;
-	std::vector<int>	vector;
+	ft::vector<int>						tmp;
+	std::vector<int>					vector(3);
+	std::allocator< ft::vector<int> >	alloc;
 
+	ft::vector<int>* ptr = alloc.allocate(10); //malloc
+	std::cout << "=================" << std::endl;
 
+	alloc.construct(ptr, tmp); //ctor called
+	std::cout << "original size(): " << tmp.size() << " | ft size(): " << vector.size() << std::endl;
+	std::cout << "original max_size(): " << tmp.max_size() << " | ft max_size(): " << vector.max_size() << std::endl;
+	std::cout << "original capacity(): " << tmp.capacity() << " | ft capacity(): " << vector.capacity() << std::endl;
 
+	std::cout << "=================" << std::endl;
 
+	vector.push_back(1);
+	vector.push_back(2);
+	vector.push_back(3);
+	vector.push_back(4);
+
+	for (std::vector<int>::iterator it = vector.begin(); it != vector.end(); ++it)
+		std::cout << "vec = " << *it << std::endl;
+
+	std::cout << "original size(): " << tmp.size() << " | ft size(): " << vector.size() << std::endl;
+	std::cout << "original max_size(): " << tmp.max_size() << " | ft max_size(): " << vector.max_size() << std::endl;
+	std::cout << "original capacity(): " << tmp.capacity() << " | ft capacity(): " << vector.capacity() << std::endl;
 
 	return (0);
+
 }
+
 
 
 

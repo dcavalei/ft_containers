@@ -43,5 +43,12 @@
 		"stdexcept": "cpp",
 		"streambuf": "cpp",
 		"typeinfo": "cpp"
-	}
+	},
+	"makefile.launchConfigurations": [
+		{
+			"cwd": "/home/dcavalei/Desktop/ft_containers",
+			"binaryPath": "/home/dcavalei/Desktop/ft_containers/main.out",
+			"binaryArgs": []
+		}
+	]
 }
