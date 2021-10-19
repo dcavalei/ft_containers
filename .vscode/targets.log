@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Oct 15 13:21:57 2021
+# Make data base, printed on Tue Oct 19 12:28:37 2021
 
 # Variables
 
@@ -53,7 +53,7 @@ VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupp
 # environment
 _ = /usr/bin/code
 # makefile (from 'Makefile', line 5)
-CFLAGS = -Wall -Wextra -Werror -Wno-unused -std=c++98 -Iinc
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -Iinc
 # environment
 XDG_CONFIG_DIRS = /etc/xdg
 # makefile (from 'Makefile', line 1)
@@ -65,13 +65,13 @@ GNUMAKEFLAGS :=
 # environment
 XDG_DATA_DIRS = /usr/share/xfce4:/home/dcavalei/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/usr/share
 # environment
-DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-t1dAA9dYyF,guid=c503f03091d70325ddac7f1c61694fd3
+DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-avRI7gW7eV,guid=2c045f76f350524fe0fb0579616e8444
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
 QT_SCALE_FACTOR = 1
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-855c7f9f-8dbe-4a79-b10d-eb08bdc27d00.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-7799da9f-ce00-4764-9106-41f0d4fbedc5.sock
 # environment
 VSCODE_CWD = /home/dcavalei/Desktop/ft_containers
 # environment
@@ -83,11 +83,11 @@ PATH = /usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-SESSION_MANAGER = local/mx:@/tmp/.ICE-unix/5545,unix/mx:/tmp/.ICE-unix/5545
+SESSION_MANAGER = local/mx:@/tmp/.ICE-unix/6490,unix/mx:/tmp/.ICE-unix/6490
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
-WINDOWID = 132120579
+WINDOWID = 144703491
 # environment
 XDG_MENU_PREFIX = xfce-
 # environment
@@ -105,7 +105,7 @@ LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 # environment
 XDG_SESSION_DESKTOP = xfce
 # environment
-SSH_AUTH_SOCK = /tmp/ssh-hEU9780yrFAJ/agent.5545
+SSH_AUTH_SOCK = /tmp/ssh-6ZNCwLc2THec/agent.6490
 # automatic
 %F = $(notdir $%)
 # environment
@@ -121,7 +121,7 @@ QT_QPA_PLATFORMTHEME = gtk2
 # environment
 XDG_SEAT = seat0
 # environment
-SSH_AGENT_PID = 5629
+SSH_AGENT_PID = 6561
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = XFCE
 # environment
@@ -233,9 +233,9 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 32015
+VSCODE_PID = 22038
 # variable set hash-table stats:
-# Load=112/1024=11%, Rehash=0, Collisions=13/154=8%
+# Load=112/1024=11%, Rehash=0, Collisions=13/149=9%
 
 # Pattern-specific Variable Values
 
@@ -244,10 +244,10 @@ VSCODE_PID = 32015
 # Directories
 
 # . (device 66309, inode 1345528): 11 files, no impossibilities.
-# src (device 66309, inode 1345662): 1 files, no impossibilities so far.
+# src (device 66309, inode 1345662): 3 files, no impossibilities so far.
 # inc (device 66309, inode 1345656): 1 files, no impossibilities so far.
 
-# 13 files, no impossibilities in 3 directories.
+# 15 files, no impossibilities in 3 directories.
 
 # Implicit Rules
 
@@ -263,7 +263,7 @@ obj/%.o: src/%.cpp inc/vector.hpp
 # Not a target:
 inc/vector.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-15 12:16:23.08429479
+#  Last modified 2021-10-19 12:27:54.374137882
 #  File has been updated.
 #  Successfully updated.
 
@@ -272,36 +272,36 @@ all: main.out
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+#  Successfully updated.
 
 main.out: obj/vector.o obj/main.o
 #  Implicit rule search has not been done.
- 
-#  Last modified 2021-10-15 11:59:57.676510528
+#  Last modified 2021-10-19 12:28:30.478275426
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 15):
 				@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) && echo "generating executable file '$@'"
 
 .PHONY: clean fclean run re
+ 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-obj/main.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/main.o: src/main.cpp inc/vector.hpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'main'
+#  Last modified 2021-10-19 12:28:30.414275183
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 11):
+				@mkdir -pv $(dir $@)
+				@$(CC) $(CFLAGS) -Iinc -c $< -o $@ && echo "generating object file '$@'"
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-12 12:20:39.763778921
+#  Last modified 2021-10-19 09:46:23.704687909
 #  File has been updated.
 #  Successfully updated.
 
@@ -348,48 +348,37 @@ clean:
 #  recipe to execute (from 'Makefile', line 18):
 				@rm -vrf obj
 
+# Not a target:
+src/main.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-10-19 12:24:05.581267592
+#  File has been updated.
+#  Successfully updated.
+
 obj/vector.o: src/vector.cpp inc/vector.hpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'vector'
-#  Last modified 2021-10-15 11:59:57.420509241
+#  Last modified 2021-10-19 12:28:30.246274543
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := obj/vector.o
-# automatic
-# % := 
-# automatic
-# * := vector
-# automatic
-# + := src/vector.cpp inc/vector.hpp
-# automatic
-# | := 
-# automatic
-# < := src/vector.cpp
-# automatic
-# ^ := src/vector.cpp inc/vector.hpp
-# automatic
-# ? := inc/vector.hpp
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/17=6%
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 11):
 				@mkdir -pv $(dir $@)
 				@$(CC) $(CFLAGS) -Iinc -c $< -o $@ && echo "generating object file '$@'"
 
 # files hash-table stats:
-# Load=14/1024=1%, Rehash=0, Collisions=0/42=0%
+# Load=15/1024=1%, Rehash=0, Collisions=0/48=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 30 / storage = 251 B / avg = 8 B
-# current buf: size = 8162 B / used = 251 B / count = 30 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 33 / storage = 278 B / avg = 8 B
+# current buf: size = 8162 B / used = 278 B / count = 33 / avg = 8 B
 
-# strcache performance: lookups = 57 / hit rate = 47%
+# strcache performance: lookups = 64 / hit rate = 48%
 # hash-table stats:
-# Load=30/8192=0%, Rehash=0, Collisions=1/57=2%
-# Finished Make data base on Fri Oct 15 13:21:57 2021
+# Load=33/8192=0%, Rehash=0, Collisions=1/64=2%
+# Finished Make data base on Tue Oct 19 12:28:37 2021
 
  

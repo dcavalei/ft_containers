@@ -10,9 +10,7 @@ namespace ft
     	class Alloc = std::allocator<T>
 	> class vector
 	{
-
 		public:
-
 			typedef Alloc										allocator_type;
 			typedef T											value_type;
 			typedef typename allocator_type::reference			reference;
@@ -21,6 +19,48 @@ namespace ft
 			typedef typename allocator_type::const_pointer		const_pointer;
 			typedef typename allocator_type::size_type			size_type;
 			typedef typename allocator_type::difference_type	difference_type;
+
+		private:
+			allocator_type	_alloc;
+			pointer			_start;
+			size_type		_size;
+			size_type		_capacity;
+			size_type		_max_size;
+
+		public:
+			class iterator : public std::iterator<std::random_access_iterator_tag, value_type> {
+
+				private:
+					value_type*	_ptr;
+
+				public:
+					// Default constructor
+					iterator() : _ptr(NULL) {}
+					// Copy constructor
+					iterator(const iterator& other) { *this = other; }
+					// Destructor
+					~iterator() {}
+
+					iterator&	operator=(const iterator& rhs) {
+						_ptr = rhs._ptr;
+						return *this;
+					}
+			};
+
+		public:
+
+
+// begin
+//     Return iterator to beginning (public member function )
+
+// end
+//     Return iterator to end (public member function )
+
+// rbegin
+//     Return reverse iterator to reverse beginning (public member function )
+
+// rend
+//     Return reverse iterator to reverse end (public member function )
 
 
 			// https://en.cppreference.com/w/cpp/named_req/RandomAccessIterator
@@ -35,7 +75,7 @@ namespace ft
 		// Constructs an empty container, with no elements.
 			explicit vector( const allocator_type& alloc = allocator_type() ) :
 				_alloc(alloc),
-				_start(0),
+				_start(NULL),
 				_size(0),
 				_capacity(0),
 				_max_size(alloc.max_size()) {}
@@ -45,12 +85,16 @@ namespace ft
 			explicit vector( size_type n, const value_type& val = value_type(),
 				const allocator_type& alloc = allocator_type() ) :
 				_alloc(alloc),
-				_start(0),
+				_start(NULL),
 				_size(n),
-				_capacity(0),
+				_capacity(n),
 				_max_size(alloc.max_size())
 			{
-				if ()
+				// if ()
+				_start = _alloc.allocate(n);
+				for (size_type i = 0; i < n; i++) {
+					_alloc.construct(_start + i, val);
+				}
 			}
 
 		// (3)	range constructor
@@ -81,14 +125,6 @@ namespace ft
 			// void		reserve (size_type n);
 
 			// ###---------------- Capacity ----------------###
-
-			private:
-
-				allocator_type	_alloc;
-				pointer			_start;
-				size_type		_size;
-				size_type		_capacity;
-				size_type		_max_size;
 	};
 };
 

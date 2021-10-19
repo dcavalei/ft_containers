@@ -2,20 +2,28 @@
 #include "vector.hpp"
 #include <vector>
 #include <memory>
+#include <iomanip>
+
+template<class T>
+void	print_table( const std::vector<T>& vector, const ft::vector<T>& ft_vector );
 
 int main() {
 
-	ft::vector<int>						tmp;
-	std::vector<int>					vector(3);
+	ft::vector<int>						ft_vector(10);
+	std::vector<int>					vector(10);
+
 	std::allocator< ft::vector<int> >	alloc;
 
 	ft::vector<int>* ptr = alloc.allocate(10); //malloc
-	std::cout << "=================" << std::endl;
 
-	alloc.construct(ptr, tmp); //ctor called
-	std::cout << "original size(): " << tmp.size() << " | ft size(): " << vector.size() << std::endl;
-	std::cout << "original max_size(): " << tmp.max_size() << " | ft max_size(): " << vector.max_size() << std::endl;
-	std::cout << "original capacity(): " << tmp.capacity() << " | ft capacity(): " << vector.capacity() << std::endl;
+	alloc.construct(ptr, ft_vector); //ctor called
+
+	print_table(vector, ft_vector);
+
+	ft::vector<int>::iterator it;
+	ft::vector<int>::iterator it2(it);
+
+
 
 	std::cout << "=================" << std::endl;
 
@@ -26,18 +34,20 @@ int main() {
 
 	for (std::vector<int>::iterator it = vector.begin(); it != vector.end(); ++it)
 		std::cout << "vec = " << *it << std::endl;
-
-	std::cout << "original size(): " << tmp.size() << " | ft size(): " << vector.size() << std::endl;
-	std::cout << "original max_size(): " << tmp.max_size() << " | ft max_size(): " << vector.max_size() << std::endl;
-	std::cout << "original capacity(): " << tmp.capacity() << " | ft capacity(): " << vector.capacity() << std::endl;
-
 	return (0);
 
 }
 
+template<class T>
+void	print_table( const std::vector<T>& vector, const ft::vector<T>& ft_vector ) {
 
+	std::cout << "======================================================" << std::endl;
+	std::cout << std::left << '|' << std::setw(10) << "##########" << '|' << std::setw(20) << "std::vector" << '|' << std::setw(20) << "ft::vector" << '|' << std::endl;
+	std::cout << std::left << '|' << std::setw(10) << "size()" << '|' << std::setw(20) << vector.size() << '|' << std::setw(20) << ft_vector.size() << '|' << std::endl;
+	std::cout << std::left << '|' << std::setw(10) << "max_size()" << '|' << std::setw(20) << vector.max_size() << '|' << std::setw(20) << ft_vector.max_size() << '|' << std::endl;
+	std::cout << std::left << '|' << std::setw(10) << "capacity()" << '|' << std::setw(20) << vector.capacity() << '|' << std::setw(20) << ft_vector.capacity() << '|' << std::endl;
 
-
+}
 
 
 

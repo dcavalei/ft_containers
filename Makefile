@@ -2,7 +2,7 @@ SRC		= $(subst src/,, $(shell find src -type f -name "*.cpp"))
 INC		= $(shell find inc -type f -name "*.hpp")
 OBJ		= $(SRC:%.cpp=obj/%.o)
 CC		= clang++
-CFLAGS	= -Wall -Wextra -Werror -Wno-unused -std=c++98 -Iinc
+CFLAGS	= -Wall -Wextra -Werror -std=c++98 -Iinc
 NAME	= main.out
 
 all:		$(NAME)
