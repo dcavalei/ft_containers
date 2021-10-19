@@ -25,11 +25,9 @@ namespace ft
 			pointer			_start;
 			size_type		_size;
 			size_type		_capacity;
-			size_type		_max_size;
 
 		public:
 			class iterator : public std::iterator<std::random_access_iterator_tag, value_type> {
-
 				private:
 					value_type*	_ptr;
 
@@ -37,16 +35,21 @@ namespace ft
 					// Default constructor
 					iterator() : _ptr(NULL) {}
 					// Copy constructor
-					iterator(const iterator& other) { *this = other; }
+					iterator( const iterator& other ) { *this = other; }
 					// Destructor
 					~iterator() {}
 
-					iterator&	operator=(const iterator& rhs) {
+					iterator&	operator=( const iterator& rhs ) {
 						_ptr = rhs._ptr;
 						return *this;
 					}
 			};
 
+			iterator	begin() {
+				iterator it;
+				it._ptr = _start;
+				return it;
+			}
 		public:
 
 
@@ -77,21 +80,17 @@ namespace ft
 				_alloc(alloc),
 				_start(NULL),
 				_size(0),
-				_capacity(0),
-				_max_size(alloc.max_size()) {}
+				_capacity(0) {}
 
 		// (2)	fill constructor
 		// Constructs a container with n elements. Each element is a copy of val.
 			explicit vector( size_type n, const value_type& val = value_type(),
 				const allocator_type& alloc = allocator_type() ) :
 				_alloc(alloc),
-				_start(NULL),
+				_start(_alloc.allocate(n)),
 				_size(n),
-				_capacity(n),
-				_max_size(alloc.max_size())
+				_capacity(n)
 			{
-				// if ()
-				_start = _alloc.allocate(n);
 				for (size_type i = 0; i < n; i++) {
 					_alloc.construct(_start + i, val);
 				}
@@ -101,12 +100,12 @@ namespace ft
 		// Constructs a container with as many elements as the range [first,last),
 		// with each element constructed from its corresponding element in that range, in the same order.
 			template <class InputIterator>
-			vector (InputIterator first, InputIterator last,
-				const allocator_type& alloc = allocator_type());
+			vector( InputIterator first, InputIterator last,
+				const allocator_type& alloc = allocator_type() );
 
 		// (4)	copy constructor
 		// 	Constructs a container with a copy of each of the elements in x, in the same order.
-			vector (const vector& x) {
+			vector( const vector& x ) {
 				std::cout << "Copy C/tor" << std::endl;
 				(void)x;
 			}
@@ -118,7 +117,7 @@ namespace ft
 			// ###---------------- Capacity ----------------###
 
 			size_type	size() const { return _size; }
-			size_type	max_size() const { return _max_size; }
+			size_type	max_size() const { return _alloc.max_size(); }
 			// void		resize (size_type n, value_type val = value_type());
 			size_type	capacity() const { return _capacity; }
 			bool		empty() const { return _size == 0; };

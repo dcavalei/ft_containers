@@ -22,8 +22,9 @@ int main() {
 
 	ft::vector<int>::iterator it;
 	ft::vector<int>::iterator it2(it);
+	// ft_vector.begin();
 
-
+	// std::vector<int>::iterator it1111;
 
 	std::cout << "=================" << std::endl;
 
