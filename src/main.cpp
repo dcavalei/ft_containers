@@ -4,6 +4,16 @@
 #include <memory>
 #include <iomanip>
 
+struct Animal {
+
+	Animal(){}
+	~Animal(){}
+
+	void	function() {
+		debug_msg("F called");
+	}
+};
+
 template<class T>
 void	print_table( const std::vector<T>& vector, const ft::vector<T>& ft_vector );
 
@@ -20,11 +30,19 @@ int main() {
 
 	print_table(vector, ft_vector);
 
-	ft::vector<int>::iterator it;
-	ft::vector<int>::iterator it2(it);
-	// ft_vector.begin();
+	ft::vector<int>::iterator ft_it;
+	ft::vector<int>::iterator it2(ft_it);
+	ft_it = ft_vector.begin();
 
-	// std::vector<int>::iterator it1111;
+	std::cout << *ft_it << std::endl;
+
+
+	std::cout << *ft_it << std::endl;
+
+	std::vector<int>::iterator it123(&vector[0]);
+	std::vector<int>::iterator it321(&vector[8]);
+
+	std::cout << it123 - it321 << std::endl;
 
 	std::cout << "=================" << std::endl;
 
@@ -33,7 +51,7 @@ int main() {
 	vector.push_back(3);
 	vector.push_back(4);
 
-	for (std::vector<int>::iterator it = vector.begin(); it != vector.end(); ++it)
+	for (std::vector<int>::iterator it(&vector[0]); it != vector.end(); ++it)
 		std::cout << "vec = " << *it << std::endl;
 	return (0);
 

@@ -2,6 +2,11 @@
 # define VECTOR_HPP
 
 #include <memory>
+#include <iostream>
+
+void	debug_msg( const std::string& str ) {
+	std::cout << str << std::endl;
+}
 
 namespace ft
 {
@@ -11,14 +16,14 @@ namespace ft
 	> class vector
 	{
 		public:
-			typedef Alloc										allocator_type;
-			typedef T											value_type;
-			typedef typename allocator_type::reference			reference;
-			typedef typename allocator_type::const_reference	const_reference;
-			typedef typename allocator_type::pointer			pointer;
-			typedef typename allocator_type::const_pointer		const_pointer;
-			typedef typename allocator_type::size_type			size_type;
-			typedef typename allocator_type::difference_type	difference_type;
+			typedef Alloc										allocator_type;		//	Alloc
+			typedef T											value_type;			//	T
+			typedef typename allocator_type::reference			reference;			//	T&
+			typedef typename allocator_type::const_reference	const_reference;	//	const T&
+			typedef typename allocator_type::pointer			pointer;			//	T*
+			typedef typename allocator_type::const_pointer		const_pointer;		//	const T*
+			typedef typename allocator_type::size_type			size_type;			//	std::size_t
+			typedef typename allocator_type::difference_type	difference_type;	//	std::ptrdiff_t
 
 		private:
 			allocator_type	_alloc;
@@ -29,27 +34,88 @@ namespace ft
 		public:
 			class iterator : public std::iterator<std::random_access_iterator_tag, value_type> {
 				private:
-					value_type*	_ptr;
+					pointer	_ptr;
 
 				public:
 					// Default constructor
 					iterator() : _ptr(NULL) {}
+
 					// Copy constructor
 					iterator( const iterator& other ) { *this = other; }
+
+					// Pointer constructor
+					iterator( const pointer& ptr ) : _ptr(ptr) {}
+
 					// Destructor
 					~iterator() {}
 
+					// Assignment operator
 					iterator&	operator=( const iterator& rhs ) {
 						_ptr = rhs._ptr;
 						return *this;
 					}
+
+					// Comparison operator
+					bool		operator==( const iterator& rhs ) const {
+						return (_ptr == rhs._ptr);
+					}
+
+					// Comparison operator
+					bool		operator!=( const iterator& rhs ) const {
+						return (!(*this == rhs));
+					}
+
+					// Dereference operator
+					value_type&	operator*() const {
+						return *_ptr;
+					}
+
+					// Member access operator
+					pointer		operator->() const {
+						return _ptr;
+					}
+
+					// Prefix increment
+					iterator&	operator++() {
+						_ptr++;
+						return *this;
+					}
+
+					// Postfix increment
+					iterator	operator++(int) {
+						iterator old = *this;
+						operator++();
+						return old;
+					}
+
+					// Prefix decrement
+					iterator&	operator--() {
+						_ptr--;
+						return *this;
+					}
+
+					// Postfix decrement
+					iterator	operator--(int) {
+						iterator old = *this;
+						operator--();
+						return old;
+					}
+
+					// Addition operator
+					int	operator+( const iterator& rhs ) const {
+						
+					}
 			};
 
 			iterator	begin() {
-				iterator it;
-				it._ptr = _start;
-				return it;
+				return (iterator(_start));
 			}
+
+			iterator	end() {
+				return (iterator(_start + _size));
+			}
+
+
 		public:
 
 
