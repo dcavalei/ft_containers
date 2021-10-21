@@ -6,13 +6,27 @@
 
 struct Animal {
 
-	Animal(){}
-	~Animal(){}
+
+	Animal() {
+		static int CTOR = 0;
+		std::cout << "Animal C/tor " << CTOR++ << std::endl;
+	}
+
+	Animal( const Animal& other ) {
+		*this = other;
+		static int COPYTOR = 0;
+		std::cout << "Animal C/tor copy " << COPYTOR++ << std::endl;
+	}
+	~Animal() {
+		static int DTOR = 0;
+		std::cout << "Animal D/tor " << DTOR++ << std::endl;
+	}
 
 	void	function() {
 		debug_msg("F called");
 	}
 };
+
 
 template<class T>
 void	print_table( const std::vector<T>& vector, const ft::vector<T>& ft_vector );
@@ -22,6 +36,8 @@ int main() {
 	ft::vector<int>						ft_vector(10);
 	std::vector<int>					vector(10);
 
+	vector[10] = 1;
+
 	std::allocator< ft::vector<int> >	alloc;
 
 	ft::vector<int>* ptr = alloc.allocate(10); //malloc
@@ -30,19 +46,35 @@ int main() {
 
 	print_table(vector, ft_vector);
 
-	ft::vector<int>::iterator ft_it;
-	ft::vector<int>::iterator it2(ft_it);
-	ft_it = ft_vector.begin();
+	ft::vector<int>::iterator ft_it_begin;
+	ft::vector<int>::iterator ft_it_end(ft_it_begin);
+	ft_it_begin = ft_vector.begin();
+	ft_it_end = ft_vector.end();
 
-	std::cout << *ft_it << std::endl;
+	std::cout << *ft_it_begin << std::endl;
 
 
-	std::cout << *ft_it << std::endl;
+	std::cout << *ft_it_begin << std::endl;
 
-	std::vector<int>::iterator it123(&vector[0]);
-	std::vector<int>::iterator it321(&vector[8]);
+	std::vector<int>::iterator it_begin(vector.begin());
+	std::vector<int>::iterator it_end(vector.end());
 
-	std::cout << it123 - it321 << std::endl;
+	std::cout << *(ft_it_begin + 1) << std::endl;
+	std::cout << ft_it_end - ft_it_begin << std::endl;
+
+	std::cout << it_end - it_begin << std::endl;
+	std::cout << "======== <= =========" << std::endl;
+
+	std::cout << (it_end <= it_begin) << std::endl;
+	std::cout << (ft_it_end <= ft_it_begin) << std::endl;
+
+	std::cout << "=================" << std::endl;
+
+	it_begin += 3;
+	ft_it_begin += 3;
+
+	std::cout << it_end - it_begin << std::endl;
+	std::cout << ft_it_end - ft_it_begin << std::endl;
 
 	std::cout << "=================" << std::endl;
 
@@ -51,10 +83,26 @@ int main() {
 	vector.push_back(3);
 	vector.push_back(4);
 
-	for (std::vector<int>::iterator it(&vector[0]); it != vector.end(); ++it)
-		std::cout << "vec = " << *it << std::endl;
-	return (0);
+{
+	std::cout << "=================" << std::endl;
+	std::vector<Animal>	animal(10);
+}
+{
+	std::cout << "=================" << std::endl;
+	ft::vector<Animal>	animal(10);
+}
+	std::cout << "=================" << std::endl;
 
+
+	for (std::vector<int>::iterator it(vector.begin()); it != vector.end(); ++it)
+		std::cout << "vec = " << *it << std::endl;
+	std::cout << "=================" << std::endl;
+	std::cout << "=================" << std::endl;
+
+	it_begin = vector.begin();
+
+	std::cout << it_begin[0] - it_begin[2] << std::endl;
+	return (0);
 }
 
 template<class T>

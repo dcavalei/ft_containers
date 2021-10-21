@@ -11,8 +11,8 @@ void	debug_msg( const std::string& str ) {
 namespace ft
 {
 	template<
-    	class T,
-    	class Alloc = std::allocator<T>
+		class T,
+		class Alloc = std::allocator<T>
 	> class vector
 	{
 		public:
@@ -32,7 +32,69 @@ namespace ft
 			size_type		_capacity;
 
 		public:
-			class iterator : public std::iterator<std::random_access_iterator_tag, value_type> {
+
+			// ########################################################################################
+			// (1)	empty container constructor (default constructor)
+			// Constructs an empty container, with no elements.
+			explicit vector( const allocator_type& alloc = allocator_type() ) :
+				_alloc(alloc),
+				_start(NULL),
+				_size(0),
+				_capacity(0) {}
+
+			// (2)	fill constructor
+			// Constructs a container with n elements. Each element is a copy of val.
+			explicit vector( size_type n, const value_type& val = value_type(),
+				const allocator_type& alloc = allocator_type() ) :
+				_alloc(alloc),
+				_start(_alloc.allocate(n)),
+				_size(n),
+				_capacity(n)
+			{
+				std::cout << "Fill C/tor" << std::endl;
+				for (size_type i = 0; i < n; i++) {
+					_alloc.construct(_start + i, val);
+				}
+			}
+
+			// (3)	range constructor
+			// Constructs a container with as many elements as the range [first,last),
+			// with each element constructed from its corresponding element in that range, in the same order.
+			template <class InputIterator>
+			vector( InputIterator first, InputIterator last,
+				const allocator_type& alloc = allocator_type() );
+
+			// (4)	copy constructor
+			// Constructs a container with a copy of each of the elements in x, in the same order.
+			vector( const vector& x ) {
+				std::cout << "Copy C/tor" << std::endl;
+				(void)x;
+			}
+
+			~vector() {
+				std::cout << "Default D/tor" << std::endl;
+				for (size_type i = 0; i < _size; i++) {
+					_alloc.destroy(_start + i);
+				}
+				_alloc.deallocate(_start, _capacity);
+			}
+
+			// Copy
+			vector&	operator=( const vector& other ) {
+				if (this == &other) {
+					return (*this);
+				}
+				this->~vector();
+
+				_start = _alloc.allocate(other._capacity);
+
+				for (size_type i = 0; i < other._size; i++) {
+					_alloc.construct(_start + i, *(other._start + i));
+				}
+			}
+
+			// ########################################################################################
+			class iterator {
 				private:
 					pointer	_ptr;
 
@@ -50,61 +112,109 @@ namespace ft
 					~iterator() {}
 
 					// Assignment operator
-					iterator&	operator=( const iterator& rhs ) {
+					iterator&		operator=( const iterator& rhs ) {
 						_ptr = rhs._ptr;
 						return *this;
 					}
 
 					// Comparison operator
-					bool		operator==( const iterator& rhs ) const {
+					bool			operator==( const iterator& rhs ) const {
 						return (_ptr == rhs._ptr);
 					}
 
 					// Comparison operator
-					bool		operator!=( const iterator& rhs ) const {
+					bool			operator!=( const iterator& rhs ) const {
 						return (!(*this == rhs));
 					}
 
 					// Dereference operator
-					value_type&	operator*() const {
+					value_type&		operator*() const {
 						return *_ptr;
 					}
 
 					// Member access operator
-					pointer		operator->() const {
+					pointer			operator->() const {
 						return _ptr;
 					}
 
 					// Prefix increment
-					iterator&	operator++() {
+					iterator&		operator++() {
 						_ptr++;
 						return *this;
 					}
 
 					// Postfix increment
-					iterator	operator++(int) {
+					iterator		operator++(int) {
 						iterator old = *this;
 						operator++();
 						return old;
 					}
 
 					// Prefix decrement
-					iterator&	operator--() {
+					iterator&		operator--() {
 						_ptr--;
 						return *this;
 					}
 
 					// Postfix decrement
-					iterator	operator--(int) {
+					iterator		operator--(int) {
 						iterator old = *this;
 						operator--();
 						return old;
 					}
 
 					// Addition operator
-					int	operator+( const iterator& rhs ) const {
-						
+					iterator		operator+( int n ) const {
+						return iterator(_ptr + n);
 					}
+
+					// Subtraction operator
+					iterator		operator-( int n ) const {
+						return iterator(_ptr - n);
+					}
+
+					// Difference operator
+					difference_type	operator-( const iterator& rhs ) const {
+						return _ptr - rhs._ptr;
+					}
+
+					// Comparison operator
+					bool			operator<( const iterator& rhs ) const {
+						return _ptr < rhs._ptr;
+					}
+
+					// Comparison operator
+					bool			operator>( const iterator& rhs ) const {
+						return rhs < *this;
+					}
+
+					// Comparison operator
+					bool			operator<=( const iterator& rhs ) const {
+						return !(*this > rhs);
+					}
+
+					// Comparison operator
+					bool			operator>=( const iterator& rhs ) const {
+						return !(*this < rhs);
+					}
+
+					// Assignment operator
+					iterator&		operator+=( int n ) {
+						_ptr += n;
+						return *this;
+					}
+
+					// Assignment operator
+					iterator&		operator-=( int n ) {
+						_ptr -= n;
+						return *this;
+					}
+
+					// Subscript operator
+					value_type&		operator[]( size_type n ) {
+						return *(_ptr + n);
+					}
+
 			};
 
 			iterator	begin() {
@@ -115,22 +225,7 @@ namespace ft
 				return (iterator(_start + _size));
 			}
 
-
 		public:
-
-
-// begin
-//     Return iterator to beginning (public member function )
-
-// end
-//     Return iterator to end (public member function )
-
-// rbegin
-//     Return reverse iterator to reverse beginning (public member function )
-
-// rend
-//     Return reverse iterator to reverse end (public member function )
-
 
 			// https://en.cppreference.com/w/cpp/named_req/RandomAccessIterator
 
@@ -140,53 +235,26 @@ namespace ft
 			// const_reverse_iterator 	std::reverse_iterator<const_iterator>
 
 
-		// (1)	empty container constructor (default constructor)
-		// Constructs an empty container, with no elements.
-			explicit vector( const allocator_type& alloc = allocator_type() ) :
-				_alloc(alloc),
-				_start(NULL),
-				_size(0),
-				_capacity(0) {}
-
-		// (2)	fill constructor
-		// Constructs a container with n elements. Each element is a copy of val.
-			explicit vector( size_type n, const value_type& val = value_type(),
-				const allocator_type& alloc = allocator_type() ) :
-				_alloc(alloc),
-				_start(_alloc.allocate(n)),
-				_size(n),
-				_capacity(n)
-			{
-				for (size_type i = 0; i < n; i++) {
-					_alloc.construct(_start + i, val);
-				}
-			}
-
-		// (3)	range constructor
-		// Constructs a container with as many elements as the range [first,last),
-		// with each element constructed from its corresponding element in that range, in the same order.
-			template <class InputIterator>
-			vector( InputIterator first, InputIterator last,
-				const allocator_type& alloc = allocator_type() );
-
-		// (4)	copy constructor
-		// 	Constructs a container with a copy of each of the elements in x, in the same order.
-			vector( const vector& x ) {
-				std::cout << "Copy C/tor" << std::endl;
-				(void)x;
-			}
-
-			~vector() {
-				std::cout << "Default D/tor" << std::endl;
-			}
-
 			// ###---------------- Capacity ----------------###
 
-			size_type	size() const { return _size; }
-			size_type	max_size() const { return _alloc.max_size(); }
+			size_type	size() const {
+				return _size;
+			}
+
+			size_type	max_size() const {
+				return _alloc.max_size();
+			}
+
 			// void		resize (size_type n, value_type val = value_type());
-			size_type	capacity() const { return _capacity; }
-			bool		empty() const { return _size == 0; };
+
+			size_type	capacity() const {
+				return _capacity;
+			}
+
+			bool		empty() const {
+				return _size == 0;
+			};
+
 			// void		reserve (size_type n);
 
 			// ###---------------- Capacity ----------------###
