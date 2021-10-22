@@ -4,33 +4,6 @@
 #include <memory>
 #include <iomanip>
 
-struct Animal {
-
-	int	*ptr;
-
-	Animal() {
-		static int CTOR = 0;
-		ptr = new int(10);
-		std::cout << "Animal C/tor " << CTOR++ << std::endl;
-	}
-
-	Animal( const Animal& other ) {
-		*this = other;
-		static int COPYTOR = 0;
-		ptr = new int(10);
-		std::cout << "Animal C/tor copy " << COPYTOR++ << std::endl;
-	}
-	~Animal() {
-		static int DTOR = 0;
-		std::cout << "Animal D/tor " << DTOR++ << std::endl;
-		delete ptr;
-	}
-
-	void	function() {
-		debug_msg("F called");
-	}
-};
-
 template<class T>
 void	print_table( const std::vector<T>& vector, const ft::vector<T>& ft_vector );
 
@@ -39,7 +12,6 @@ int main() {
 	ft::vector<int>						ft_vector(10);
 	std::vector<int>					vector(10);
 
-	vector[10] = 1;
 
 	std::allocator< ft::vector<int> >	alloc;
 
@@ -86,17 +58,6 @@ int main() {
 	vector.push_back(3);
 	vector.push_back(4);
 
-{
-	std::cout << "=================" << std::endl;
-	std::vector<Animal>	animal(10);
-}
-{
-	std::cout << "=================" << std::endl;
-	ft::vector<Animal>	animal(10);
-}
-	std::cout << "=================" << std::endl;
-
-
 	for (std::vector<int>::iterator it(vector.begin()); it != vector.end(); ++it)
 		std::cout << "vec = " << *it << std::endl;
 	std::cout << "=================" << std::endl;
@@ -105,6 +66,7 @@ int main() {
 	it_begin = vector.begin();
 
 	std::cout << it_begin[0] - it_begin[2] << std::endl;
+	delete ptr;
 	return (0);
 }
 
