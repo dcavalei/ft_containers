@@ -6,27 +6,30 @@
 
 struct Animal {
 
+	int	*ptr;
 
 	Animal() {
 		static int CTOR = 0;
+		ptr = new int(10);
 		std::cout << "Animal C/tor " << CTOR++ << std::endl;
 	}
 
 	Animal( const Animal& other ) {
 		*this = other;
 		static int COPYTOR = 0;
+		ptr = new int(10);
 		std::cout << "Animal C/tor copy " << COPYTOR++ << std::endl;
 	}
 	~Animal() {
 		static int DTOR = 0;
 		std::cout << "Animal D/tor " << DTOR++ << std::endl;
+		delete ptr;
 	}
 
 	void	function() {
 		debug_msg("F called");
 	}
 };
-
 
 template<class T>
 void	print_table( const std::vector<T>& vector, const ft::vector<T>& ft_vector );
