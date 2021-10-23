@@ -49,12 +49,9 @@ namespace test {
 		}
 	};
 
-	int Derived::derived_leak = 0;
-	int Base::base_leak = 0;
-
 	void	sigsegv( int signal );
-	void	test_instances();
-
+	void	ok();
+	void	ko();
 }
 
 #endif
