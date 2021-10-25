@@ -5,8 +5,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Sat Oct 23 14:13:31 2021
+# Make data base, printed on Mon Oct 25 12:12:31 2021
 
 # Variables
 
@@ -53,7 +54,7 @@ VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupp
 # environment
 _ = /usr/bin/code
 # makefile (from 'Makefile', line 5)
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -Iinc
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 # environment
 XDG_CONFIG_DIRS = /etc/xdg
 # makefile (from 'Makefile', line 1)
@@ -65,13 +66,13 @@ GNUMAKEFLAGS :=
 # environment
 XDG_DATA_DIRS = /usr/share/xfce4:/home/dcavalei/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/usr/share
 # environment
-DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-LSLQahTpGW,guid=ea9bb8fe20a8e36130c67755617408a7
+DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-85Hih2q4KM,guid=4ae8b4cd861d4dae2a6bd1f6617687e4
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
 QT_SCALE_FACTOR = 1
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-87b89bcc-7dcb-4bdf-b648-db7dfdd64f9e.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-f84debd2-98d0-4304-931e-b303c61cb1b1.sock
 # environment
 VSCODE_CWD = /home/dcavalei/Desktop/ft_containers
 # environment
@@ -83,11 +84,11 @@ PATH = /usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-SESSION_MANAGER = local/mx:@/tmp/.ICE-unix/19712,unix/mx:/tmp/.ICE-unix/19712
+SESSION_MANAGER = local/mx:@/tmp/.ICE-unix/24033,unix/mx:/tmp/.ICE-unix/24033
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
-WINDOWID = 132120579
+WINDOWID = 83886083
 # environment
 XDG_MENU_PREFIX = xfce-
 # environment
@@ -105,7 +106,7 @@ LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 # environment
 XDG_SESSION_DESKTOP = xfce
 # environment
-SSH_AUTH_SOCK = /tmp/ssh-bdZB0O9xtM1K/agent.19712
+SSH_AUTH_SOCK = /tmp/ssh-9q29zh8JjFEK/agent.24033
 # automatic
 %F = $(notdir $%)
 # environment
@@ -121,7 +122,7 @@ QT_QPA_PLATFORMTHEME = gtk2
 # environment
 XDG_SEAT = seat0
 # environment
-SSH_AGENT_PID = 19783
+SSH_AGENT_PID = 24104
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = XFCE
 # environment
@@ -159,7 +160,7 @@ SHLVL = 1
 # makefile (from 'Makefile', line 4)
 CC = clang++
 # environment
-XDG_SESSION_ID = 3
+XDG_SESSION_ID = 2
 # environment
 USER = dcavalei
 # makefile
@@ -210,6 +211,7 @@ QT_ACCESSIBILITY = 1
 .SHELLSTATUS := 0
 # default
 MAKEFILES := 
+ 
 # automatic
 <F = $(notdir $<)
 # environment
@@ -225,7 +227,6 @@ SUFFIXES :=
 # environment
 CHROME_DESKTOP = code-url-handler.desktop
 # default
- 
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
 # default
 .RECIPEPREFIX := 
@@ -234,7 +235,7 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 27098
+VSCODE_PID = 17107
 # variable set hash-table stats:
 # Load=112/1024=11%, Rehash=0, Collisions=13/154=8%
 
@@ -244,16 +245,16 @@ VSCODE_PID = 27098
 
 # Directories
 
-# . (device 66309, inode 1345528): 13 files, no impossibilities.
+# . (device 66309, inode 1345528): 12 files, no impossibilities.
 # src (device 66309, inode 1345662): 1 files, no impossibilities so far.
 # inc (device 66309, inode 1345656): 4 files, no impossibilities so far.
 
-# 18 files, no impossibilities in 3 directories.
+# 17 files, no impossibilities in 3 directories.
 
 # Implicit Rules
 
 obj/%.o: src/%.cpp inc/vector.hpp inc/test.hpp inc/color.hpp
-#  recipe to execute (from 'Makefile', line 11):
+#  recipe to execute (from 'Makefile', line 15):
 				@mkdir -pv $(dir $@)
 				@$(CC) $(CFLAGS) -Iinc -c $< -o $@ && echo "generating object file '$@'"
 
@@ -264,7 +265,7 @@ obj/%.o: src/%.cpp inc/vector.hpp inc/test.hpp inc/color.hpp
 # Not a target:
 inc/vector.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-22 17:54:29.72238756
+#  Last modified 2021-10-23 14:50:59.703703335
 #  File has been updated.
 #  Successfully updated.
 
@@ -279,15 +280,15 @@ all: main.out
 
 main.out: obj/vector.o obj/main.o
 #  Implicit rule search has not been done.
-#  Last modified 2021-10-22 18:53:44.900930178
+#  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/5=0%
-#  recipe to execute (from 'Makefile', line 15):
+#  recipe to execute (from 'Makefile', line 19):
 				@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) && echo "generating executable file '$@'"
 
-.PHONY: clean fclean run re
+.PHONY: clean fclean run re test
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -301,15 +302,24 @@ obj/main.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-22 18:07:32.919551415
+#  Last modified 2021-10-25 12:00:58.684624929
 #  File has been updated.
 #  Successfully updated.
+
+test:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 11):
+				$(CC) $(CFLAGS) -Iinc test/test.cpp test/test_default_ctor.cpp -o ok
 
 # Not a target:
 src/vector.cpp:
 #  Implicit rule search has been done.
 #  Last modified 2021-10-12 12:22:38.040330217
 #  File has been updated.
+ 
 #  Successfully updated.
 
 fclean: clean
@@ -317,13 +327,13 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 21):
+#  recipe to execute (from 'Makefile', line 25):
 				@rm -vrf $(NAME)
 
 # Not a target:
 inc/color.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-22 18:37:50.117553378
+#  Last modified 2021-10-23 14:50:56.619697959
 #  File has been updated.
 #  Successfully updated.
 
@@ -336,7 +346,7 @@ inc/color.hpp:
 # Not a target:
 inc/test.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-22 20:56:39.2965637
+#  Last modified 2021-10-23 15:06:06.917573255
 #  File has been updated.
 #  Successfully updated.
 
@@ -351,7 +361,7 @@ run: all
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 24):
+#  recipe to execute (from 'Makefile', line 28):
 				@./$(NAME)
 
 clean:
@@ -359,13 +369,13 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 18):
+#  recipe to execute (from 'Makefile', line 22):
 				@rm -vrf obj
 
 obj/vector.o: src/vector.cpp inc/vector.hpp inc/test.hpp inc/color.hpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'vector'
-#  Last modified 2021-10-22 18:51:50.692447139
+#  Last modified 2021-10-23 14:53:02.435918713
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # automatic
@@ -386,12 +396,13 @@ obj/vector.o: src/vector.cpp inc/vector.hpp inc/test.hpp inc/color.hpp
 # ? := inc/test.hpp
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/17=6%
-#  recipe to execute (from 'Makefile', line 11):
+#  recipe to execute (from 'Makefile', line 15):
 				@mkdir -pv $(dir $@)
+ 
 				@$(CC) $(CFLAGS) -Iinc -c $< -o $@ && echo "generating object file '$@'"
 
 # files hash-table stats:
-# Load=16/1024=2%, Rehash=0, Collisions=0/48=0%
+# Load=17/1024=2%, Rehash=0, Collisions=0/50=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
@@ -401,9 +412,9 @@ obj/vector.o: src/vector.cpp inc/vector.hpp inc/test.hpp inc/color.hpp
 # strcache buffers: 1 (0) / strings = 36 / storage = 312 B / avg = 8 B
 # current buf: size = 8162 B / used = 312 B / count = 36 / avg = 8 B
 
-# strcache performance: lookups = 68 / hit rate = 47%
+# strcache performance: lookups = 70 / hit rate = 48%
 # hash-table stats:
-# Load=36/8192=0%, Rehash=0, Collisions=1/68=1%
-# Finished Make data base on Sat Oct 23 14:13:31 2021
+# Load=36/8192=0%, Rehash=0, Collisions=1/70=1%
+# Finished Make data base on Mon Oct 25 12:12:31 2021
 
  

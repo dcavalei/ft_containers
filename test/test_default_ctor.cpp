@@ -44,7 +44,6 @@ void	show_size() {
 	<< std::endl;
 }
 
-
 void	show_max_size() {
 	std::cout << "[Max Size] ";
 
