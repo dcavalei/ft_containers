@@ -1,16 +1,20 @@
 {
     "configurations": [
         {
-            "name": "Linux",
+            "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/inc",
+				"/Users/dcavalei/Desktop/ft_containers/inc"
             ],
             "defines": [],
+            "macFrameworkPath": [
+                "/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks"
+            ],
             "compilerPath": "/usr/bin/clang",
-            "cStandard": "c99",
-            "intelliSenseMode": "linux-clang-x64",
-            "compilerArgs": [],
-            "cppStandard": "c++98"
+            "cStandard": "c11",
+            "intelliSenseMode": "macos-clang-x64",
+            "configurationProvider": "ms-vscode.makefile-tools"
         }
     ],
     "version": 4

@@ -1,10 +1,6 @@
-make all --dry-run --keep-going --print-directory
-make: Entering directory '/home/dcavalei/Desktop/ft_containers'
-mkdir -pv obj/
-clang++ -Wall -Wextra -Werror -std=c++98 -Iinc -c src/vector.cpp -o obj/vector.o && echo "generating object file 'obj/vector.o'"
-mkdir -pv obj/
-clang++ -Wall -Wextra -Werror -std=c++98 -Iinc -c src/main.cpp -o obj/main.o && echo "generating object file 'obj/main.o'"
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/dcavalei/Desktop/ft_containers'
+make: Nothing to be done for `all'.
  
-clang++ -Wall -Wextra -Werror -std=c++98 obj/vector.o obj/main.o -o main.out && echo "generating executable file 'main.out'"
-make: Leaving directory '/home/dcavalei/Desktop/ft_containers'
+make: Leaving directory `/Users/dcavalei/Desktop/ft_containers'
  

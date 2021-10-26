@@ -1,6 +1,10 @@
-#include "test.hpp"
+#ifdef _STD_
+# include <vector>
+#endif
+
 #include "vector.hpp"
-#include <vector>
+
+#include "test.hpp"
 
 void	test_instances() {
 	std::cout << "[Object Creation/Destruction] ";
@@ -69,7 +73,6 @@ int main() {
 	show_capacity();
 	show_size();
 	show_max_size();
-
 
 	return 0;
 }

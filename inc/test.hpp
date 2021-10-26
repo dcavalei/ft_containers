@@ -49,9 +49,19 @@ namespace test {
 		}
 	};
 
-	void	sigsegv( int signal );
-	void	ok();
-	void	ko();
+	void	sigsegv( int signal ) {
+		(void)signal;
+		std::cout << _BLUE_ << "SIGSEGV" << _RESET_ << std::endl;
+		exit(EXIT_SUCCESS);
+	}
+
+	void	ok() {
+		std::cout << _GREEN_ << "OK" << _RESET_ << std::endl;
+	}
+
+	void	ko() {
+		std::cout << _RED_ << "KO" << _RESET_ << std::endl;
+	}
 }
 
 #endif
