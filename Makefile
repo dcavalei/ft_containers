@@ -1,27 +1,39 @@
-SRC			= $(subst src/,, $(shell find src -type f -name "*.cpp"))
-INC			= $(shell find inc -type f -name "*.hpp")
+SRC			= $(shell find $(SRC_DIR) -type f -name "*.cpp")
+INC			= $(shell find $(INC_DIR) -type f -name "*.hpp")
 OBJ			= $(SRC:%.cpp=obj/%.o)
-CC			= clang++
-CFLAGS		= -Wall -Wextra -Werror -std=c++98
+CCPP		= clang++
+CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
 NAME		= main.out
 
 TEST		= $(shell find test -type f -name "*.cpp")
-OBJ_TEST	= $(TEST:%.cpp=%.o)
+OBJ_TEST	= $(TEST:%.cpp=obj/%.o)
+
+INC_DIR		= inc
+SRC_DIR		= src
+TEST_DIR	= test
 
 all:		$(NAME)
 
+d:
+		@echo $(SRC)
+
 test:		$(OBJ_TEST)
 
-obj/%.o:	src/%.cpp $(INC)
+obj/src/%.o:	src/%.cpp $(INC)
 				@mkdir -pv $(dir $@)
-				@echo "generating object file '$@'" && $(CC) $(CFLAGS) -Iinc -c $< -o $@
+				$(CCPP) $(CPPFLAGS) -I $(INC_DIR) -c $< -o $@
 
-test/%.o:	$(TEST) $(INC)
-				echo "generating object file '$@'" && $(CC) $(CFLAGS) -Iinc -c $< -o $@
-				echo "generating executable file '$(subst .o,,$@)'" && $(CC) $(CFLAGS) $(OBJ_TEST) -o $(subst .o,, $@)
+obj/test/%.o:	test/%.cpp $(INC)
+				@mkdir -pv $(dir $@)
+				$(CCPP) $(CPPFLAGS) -D _FT_ -I $(INC_DIR) -c $< -o $@
+
+
+# test/%.o:	$(TEST) $(INC)
+# 				$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
+# 				$(CC) $(CFLAGS) $(OBJ_TEST) -o $(subst .o,, $@)
 
 $(NAME):	$(OBJ)
-				@echo "generating executable file '$@'" && $(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+				@$(CCPP) $(CPPFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 				@rm -vrf obj

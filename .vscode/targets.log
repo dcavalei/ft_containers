@@ -1,14 +1,13 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-# GNU Make 3.81
-# Copyright (C) 2006  Free Software Foundation, Inc.
-# This is free software; see the source for copying conditions.
-# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
-# PARTICULAR PURPOSE.
-
-# This program built for i386-apple-darwin11.3.0
+# GNU Make 4.2.1
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
  
 
-# Make data base, printed on Tue Oct 26 17:34:33 2021
+# Make data base, printed on Wed Oct 27 15:28:29 2021
 
 # Variables
 
@@ -16,83 +15,149 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
-# makefile (from `Makefile', line 3)
+# environment
+QT_PLATFORMTHEME = gtk2
+# environment
+PAPERSIZE = letter
+# environment
+DESKTOP_SESSION = xfce
+# default
+.SHELLFLAGS := -c
+# makefile (from 'Makefile', line 3)
 OBJ = $(SRC:%.cpp=obj/%.o)
-# makefile (from `Makefile', line 1)
-SRC = $(subst src/,, $(shell find src -type f -name "*.cpp"))
+# environment
+XDG_SESSION_CLASS = user
+# makefile (from 'Makefile', line 1)
+SRC = $(shell find $(SRC_DIR) -type f -name "*.cpp")
+# environment
+XDG_SESSION_TYPE = x11
 # environment
 VSCODE_LOG_NATIVE = false
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
+# makefile (from 'Makefile', line 5)
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
-# automatic
-@F = $(notdir $@)
+# environment
+XAUTHORITY = /home/dcavalei/.Xauthority
+# environment
+GDMSESSION = xfce
+# default
+MAKE_VERSION := 4.2.1
 # makefile
-CURDIR := /Users/dcavalei/Desktop/ft_containers
+CURDIR := /home/dcavalei/Desktop/ft_containers
 # makefile
 SHELL = /bin/sh
 # environment
+VTE_VERSION = 5402
+# environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
- 
 # environment
-_ = /usr/bin/make
-# makefile (from `Makefile', line 5)
-CFLAGS = -Wall -Wextra -Werror -std=c++98
-# makefile (from `Makefile', line 1)
+_ = /usr/bin/code
+# environment
+XDG_CONFIG_DIRS = /etc/xdg
+# makefile (from 'Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
+# automatic
+@F = $(notdir $@)
+# 'override' directive
+GNUMAKEFLAGS := 
 # environment
-VSCODE_NODE_CACHED_DATA_DIR = /Users/dcavalei/Library/Application Support/Code/CachedData/b4c1bd0a9b03c749ea011b06c6d2676c8091a70c
+XDG_DATA_DIRS = /usr/share/xfce4:/home/dcavalei/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/usr/share
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-9nhpn7ovEy,guid=baf69df2bd953e1c38eb037961793812
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n00017l80009wt/T/vscode-ipc-0c2ed757-5780-4b88-b736-a87313f1d625.sock
+QT_SCALE_FACTOR = 1
 # environment
-VSCODE_CWD = /Users/dcavalei/Desktop/ft_containers
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-80c7de9e-b575-4153-8d25-eee551600561.sock
 # environment
-PATH = /Users/dcavalei/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/dcavalei/.brew/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin
+VSCODE_CWD = /home/dcavalei/Desktop/ft_containers
 # environment
+XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session0
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# environment
+PATH = /usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+# environment
+ 
 LSCOLORS = Gxfxcxdxbxegedabagacad
-# makefile (from `Makefile', line 9)
-OBJ_TEST = $(TEST:%.cpp=%.o)
+# environment
+SESSION_MANAGER = local/mx:@/tmp/.ICE-unix/3411,unix/mx:/tmp/.ICE-unix/3411
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# environment
+WINDOWID = 130023427
+# makefile (from 'Makefile', line 13)
+TEST_DIR = test
+# environment
+XDG_MENU_PREFIX = xfce-
+# makefile (from 'Makefile', line 9)
+OBJ_TEST = $(TEST:%.cpp=obj/%.o)
 # environment
 VSCODE_LOG_STACK = false
 # environment
-ELECTRON_RUN_AS_NODE = 1
+VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=b6f8eb3a-af2e-4a86-8160-3b8c30c8bc5e&iid=b6f8eb3a-af2e-4a86-8160-3b8c30c8bc5e&sid=b6f8eb3a-af2e-4a86-8160-3b8c30c8bc5e","uploadToServer":true}
 # default
-.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.o9ifDqBDM8/Listeners
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+XDG_GREETER_DATA_DIR = /var/lib/lightdm/data/dcavalei
+# environment
+LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+# environment
+XDG_SESSION_DESKTOP = xfce
+# environment
+SSH_AUTH_SOCK = /tmp/ssh-ufByrVDXQk7Q/agent.3411
 # automatic
 %F = $(notdir $%)
 # environment
-HOMEBREW_TEMP = /tmp/dcavalei/Homebrew/Temp
+DISPLAY = :0.0
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-PWD = /Users/dcavalei/Desktop/ft_containers
+PWD = /home/dcavalei/Desktop/ft_containers
 # environment
-ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+QT_QPA_PLATFORMTHEME = gtk2
+# default
+.LOADED := 
+# environment
+XDG_SEAT = seat0
+# environment
+SSH_AGENT_PID = 3482
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = XFCE
+# makefile (from 'Makefile', line 11)
+INC_DIR = inc
+# environment
+GTK_MODULES = canberra-gtk-module
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProcess
 # environment
-HOME = /Users/dcavalei
-# default
-MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
+HOME = /home/dcavalei
+# environment
+VSCODE_CLI = 1
+# environment
+VSCODE_CODE_CACHE_PATH = /home/dcavalei/.config/Code/CachedData/6cba118ac49a1b88332f312a8f67186f7f3c1643
 # environment
 LOGNAME = dcavalei
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
-ZSH = /Users/dcavalei/.oh-my-zsh
+ZSH = /home/dcavalei/.oh-my-zsh
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
-# makefile (from `Makefile', line 8)
+# environment
+XDG_VTNR = 7
+# makefile (from 'Makefile', line 8)
 TEST = $(shell find test -type f -name "*.cpp")
 # environment
-XPC_FLAGS = 0x0
+MAKELEVEL := 0
 # environment
 COLORTERM = truecolor
 # default
@@ -100,65 +165,68 @@ MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # environment
-HOMEBREW_CACHE = /tmp/dcavalei/Homebrew/Caches
+SHLVL = 1
 # environment
-SHLVL = 2
-# makefile (from `Makefile', line 4)
-CC = clang++
-# default
-MAKE_VERSION := 3.81
+XDG_SESSION_ID = 1
 # environment
 USER = dcavalei
 # makefile
 .DEFAULT_GOAL := all
 # environment
-TERM_SESSION_ID = w0t0p0:09F5579A-C7C8-4980-A548-ECD0B44CECE5
-# makefile (from `Makefile', line 6)
+XDG_CURRENT_DESKTOP = XFCE
+# makefile (from 'Makefile', line 6)
 NAME = main.out
 # environment
 LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
-MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
-# makefile (from `Makefile', line 2)
-INC = $(shell find inc -type f -name "*.hpp")
+MAKE_COMMAND := make
+# makefile (from 'Makefile', line 2)
+INC = $(shell find $(INC_DIR) -type f -name "*.hpp")
 # environment
-TERM_PROGRAM = iTerm.app
+OLDPWD = /home/dcavalei/Desktop
 # default
+ 
 .VARIABLES := 
-# environment
-TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n00017l80009wt/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/dcavalei/Library/Application Support/Code/1.57.0-main.sock
-# makefile
-MAKEFLAGS = Rrqp
+XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
 # environment
-MFLAGS = -Rrqp
+VSCODE_IPC_HOOK = /run/user/1000/vscode-2a99230f-1.61.2-main.sock
+# environment
+PANEL_GDK_CORE_DEVICE_EVENTS = 0
+# makefile
+MAKEFLAGS = pqrR
+# environment
+MFLAGS = -pqrR
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-TERM_PROGRAM_VERSION = 3.2.5
-# environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.2060.A92EA689-7077-4563-A836-04FDE8116605
+BREAKPAD_DUMP_LOCATION = /home/dcavalei/.config/Code/exthost Crash Reports
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
+# makefile (from 'Makefile', line 4)
+CCPP = clang++
+# environment
+GDK_BACKEND = x11
+# environment
+QT_PLATFORM_PLUGIN = gtk2
 # automatic
 +F = $(notdir $+)
 # environment
-ITERM_SESSION_ID = w0t0p0:09F5579A-C7C8-4980-A548-ECD0B44CECE5
-# environment
-COLORFGBG = 7;0
-# environment
-__CF_USER_TEXT_ENCODING = 0x279A:0x0:0x0
+QT_ACCESSIBILITY = 1
+# 'override' directive
+.SHELLSTATUS := 0
 # default
 MAKEFILES := 
+# makefile (from 'Makefile', line 12)
+SRC_DIR = src
 # automatic
 <F = $(notdir $<)
 # environment
-ITERM_PROFILE = Default
+ELECTRON_RUN_AS_NODE = 1
 # environment
 PAGER = less
 # environment
@@ -167,18 +235,20 @@ LC_ALL = C
 ^F = $(notdir $^)
 # default
 SUFFIXES := 
-# default
-.INCLUDE_DIRS = /usr/local/include
 # environment
-MAKELEVEL := 0
+CHROME_DESKTOP = code-url-handler.desktop
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# default
+.RECIPEPREFIX := 
 # environment
 LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 3862
+VSCODE_PID = 5653
 # variable set hash-table stats:
-# Load=82/1024=8%, Rehash=0, Collisions=3/125=2%
+# Load=117/1024=11%, Rehash=0, Collisions=13/168=8%
 
 # Pattern-specific Variable Values
 
@@ -186,25 +256,24 @@ VSCODE_PID = 3862
 
 # Directories
 
-# . (device 16777225, inode 415052): 13 files, no impossibilities.
-# src (device 16777225, inode 420677): 4 files, no impossibilities so far.
-# inc (device 16777225, inode 420678): 5 files, no impossibilities so far.
+# . (device 66309, inode 1345528): 14 files, no impossibilities.
+# test (device 66309, inode 1357072): No files, no impossibilities so far.
+# src (device 66309, inode 1345662): 3 files, no impossibilities so far.
+# inc (device 66309, inode 1345656): 4 files, no impossibilities so far.
 
-# 22 files, no impossibilities in 3 directories.
+# 21 files, no impossibilities in 4 directories.
 
 # Implicit Rules
 
-obj/%.o: src/%.cpp inc/color.hpp inc/test.hpp inc/vector.hpp
-#  commands to execute (from `Makefile', line 16):
-	@mkdir -pv $(dir $@)
-	@echo "generating object file '$@'" && $(CC) $(CFLAGS) -Iinc -c $< -o $@
-	
+obj/src/%.o: src/%.cpp inc/vector.hpp inc/test.hpp inc/color.hpp
+#  recipe to execute (from 'Makefile', line 23):
+				@mkdir -pv $(dir $@)
+				$(CCPP) $(CPPFLAGS) -I $(INC_DIR) -c $< -o $@
 
-test/%.o: test/test_default_ctor.cpp inc/color.hpp inc/test.hpp inc/vector.hpp
-#  commands to execute (from `Makefile', line 20):
-	echo "generating object file '$@'" && $(CC) $(CFLAGS) -Iinc -c $< -o $@
-	echo "generating executable file '$(subst .o,,$@)'" && $(CC) $(CFLAGS) $(OBJ_TEST) -o $(subst .o,, $@)
-	
+obj/test/%.o: test/%.cpp inc/vector.hpp inc/test.hpp inc/color.hpp
+#  recipe to execute (from 'Makefile', line 27):
+				@mkdir -pv $(dir $@)
+				$(CCPP) $(CPPFLAGS) -D _FT_ -I $(INC_DIR) -c $< -o $@
 
 # 2 implicit rules, 0 (0.0%) terminal.
 
@@ -213,52 +282,33 @@ test/%.o: test/test_default_ctor.cpp inc/color.hpp inc/test.hpp inc/vector.hpp
 # Not a target:
 inc/vector.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-21 18:32:12
+#  Last modified 2021-10-27 14:26:16.149370079
 #  File has been updated.
 #  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+d:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 18):
+		@echo $(SRC)
 
 all: main.out
-#  Command-line target.
+#  Command line target.
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
 #  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-main.out: obj/main.o obj/vector.o
+main.out: obj/src/vector.o obj/src/main.o
 #  Implicit rule search has not been done.
-#  Last modified 2021-10-26 17:34:15
+#  Last modified 2021-10-27 15:08:52.884331443
 #  File has been updated.
 #  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 24):
-	@echo "generating executable file '$@'" && $(CC) $(CFLAGS) $(OBJ) -o $(NAME)
-	
+#  recipe to execute (from 'Makefile', line 36):
+				@$(CCPP) $(CPPFLAGS) $(OBJ) -o $(NAME)
 
 .PHONY: clean fclean run re test
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-obj/main.o: src/main.cpp inc/color.hpp inc/test.hpp inc/vector.hpp
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `main'
-#  Last modified 2021-10-26 17:34:15
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 16):
-	@mkdir -pv $(dir $@)
-	@echo "generating object file '$@'" && $(CC) $(CFLAGS) -Iinc -c $< -o $@
-	
-
-# Not a target:
-.SUFFIXES:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -266,13 +316,11 @@ obj/main.o: src/main.cpp inc/color.hpp inc/test.hpp inc/vector.hpp
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-26 17:34:28
+#  Last modified 2021-10-27 15:28:08.295557548
 #  File has been updated.
 #  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-test: test/test_default_ctor.o
+test: obj/test/test_default_ctor.o
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
@@ -281,30 +329,25 @@ test: test/test_default_ctor.o
 # Not a target:
 src/vector.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-21 12:03:14
+#  Last modified 2021-10-27 14:23:54.068984793
 #  File has been updated.
 #  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 fclean: clean
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 31):
-	@rm -vrf $(NAME)
-	@rm -vrf $(subst .o,,$(OBJ_TEST))
-	
+#  recipe to execute (from 'Makefile', line 43):
+				@rm -vrf $(NAME)
+				@rm -vrf $(subst .o,,$(OBJ_TEST))
 
 # Not a target:
 inc/color.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-26 12:37:07
+#  Last modified 2021-10-23 14:50:56.619697959
 #  File has been updated.
 #  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 .DEFAULT:
@@ -315,11 +358,20 @@ inc/color.hpp:
 # Not a target:
 inc/test.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-26 12:45:38
+#  Last modified 2021-10-27 11:35:57.813545769
 #  File has been updated.
 #  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/src/vector.o: src/vector.cpp inc/vector.hpp inc/test.hpp inc/color.hpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'vector'
+#  Last modified 2021-10-27 15:08:52.64833081
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 23):
+				@mkdir -pv $(dir $@)
+ 
+				$(CCPP) $(CPPFLAGS) -I $(INC_DIR) -c $< -o $@
 
 re: fclean all
 #  Phony target (prerequisite of .PHONY).
@@ -330,64 +382,57 @@ re: fclean all
 run: all
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
- 
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 35):
-	@./$(NAME)
-	
+#  recipe to execute (from 'Makefile', line 47):
+				@./$(NAME)
 
 clean:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 27):
-	@rm -vrf obj
-	@rm -vrf $(OBJ_TEST)
-	
+#  recipe to execute (from 'Makefile', line 39):
+				@rm -vrf obj
+				@rm -vrf $(OBJ_TEST)
 
 # Not a target:
 src/main.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-26 12:37:07
+#  Last modified 2021-10-27 14:25:40.561273661
 #  File has been updated.
 #  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/src/main.o: src/main.cpp inc/vector.hpp inc/test.hpp inc/color.hpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'main'
+#  Last modified 2021-10-27 15:08:52.824331282
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 23):
+				@mkdir -pv $(dir $@)
+				$(CCPP) $(CPPFLAGS) -I $(INC_DIR) -c $< -o $@
 
 # Not a target:
-test/test_default_ctor.o:
+obj/test/test_default_ctor.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-obj/vector.o: src/vector.cpp inc/color.hpp inc/test.hpp inc/vector.hpp
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `vector'
-#  Last modified 2021-10-26 17:34:15
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 16):
-	@mkdir -pv $(dir $@)
-	@echo "generating object file '$@'" && $(CC) $(CFLAGS) -Iinc -c $< -o $@
-	
-
 # files hash-table stats:
-# Load=19/1024=2%, Rehash=0, Collisions=0/63=0%
+# Load=20/1024=2%, Rehash=0, Collisions=0/63=0%
 # VPATH Search Paths
 
-# No `vpath' search paths.
+# No 'vpath' search paths.
 
-# No general (`VPATH' variable) search path.
+# No general ('VPATH' variable) search path.
 
-# # of strings in strcache: 1
-# # of strcache buffers: 1
-# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
-# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
+# strcache buffers: 1 (0) / strings = 44 / storage = 417 B / avg = 9 B
+# current buf: size = 8162 B / used = 417 B / count = 44 / avg = 9 B
 
-# Finished Make data base on Tue Oct 26 17:34:33 2021
+# strcache performance: lookups = 92 / hit rate = 52%
+# hash-table stats:
+# Load=44/8192=1%, Rehash=0, Collisions=1/92=1%
+# Finished Make data base on Wed Oct 27 15:28:29 2021
 
  

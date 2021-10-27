@@ -1,8 +1,10 @@
-#ifdef _STD_
-# include <vector>
+#ifdef _FT_
+# include "vector.hpp"
 #endif
 
-#include "vector.hpp"
+#ifndef _FT_
+# include <vector>
+#endif
 
 #include "test.hpp"
 

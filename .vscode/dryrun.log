@@ -1,6 +1,6 @@
-make --dry-run --keep-going --print-directory
-make: Entering directory `/Users/dcavalei/Desktop/ft_containers'
-make: Nothing to be done for `all'.
+make all --dry-run --keep-going --print-directory
+make: Entering directory '/home/dcavalei/Desktop/ft_containers'
  
-make: Leaving directory `/Users/dcavalei/Desktop/ft_containers'
+make: Nothing to be done for 'all'.
+make: Leaving directory '/home/dcavalei/Desktop/ft_containers'
  
