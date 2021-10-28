@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/inc",
-				"/Users/dcavalei/Desktop/ft_containers/inc"
+                "/Users/dcavalei/Desktop/ft_containers/inc",
+                "${workspaceFolder}/inc"
             ],
             "defines": [],
             "macFrameworkPath": [

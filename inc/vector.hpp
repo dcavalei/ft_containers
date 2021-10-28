@@ -4,10 +4,6 @@
 #include <memory>
 #include <iostream>
 
-void	debug_msg( const std::string& str ) {
-	std::cout << str << std::endl;
-}
-
 namespace ft
 {
 	template<
@@ -67,7 +63,7 @@ namespace ft
 			// (4)	copy constructor
 			// Constructs a container with a copy of each of the elements in x, in the same order.
 			vector( const vector& x ) {
-				std::cout << "Copy C/tor" << std::endl;
+				// std::cout << "Copy C/tor" << std::endl;
 				(void)x;
 			}
 

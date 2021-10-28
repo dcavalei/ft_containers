@@ -1,9 +1,10 @@
-#ifdef _FT_
-# include "vector.hpp"
+#ifndef _IS_TEST
+# include <vector>
+namespace ft = std;
 #endif
 
-#ifndef _FT_
-# include <vector>
+#ifdef _IS_TEST
+# include "vector.hpp"
 #endif
 
 #include "test.hpp"
@@ -11,9 +12,9 @@
 void	test_instances() {
 	std::cout << "[Object Creation/Destruction] ";
 	{
-		std::vector<int>			int_vector;
-		std::vector<test::Base>		base_vector;
-		std::vector<test::Derived>	derived_vector;
+		ft::vector<int>				int_vector;
+		ft::vector<test::Base>		base_vector;
+		ft::vector<test::Derived>	derived_vector;
 	}
 	if (test::Base::base_leak || test::Derived::derived_leak) {
 		test::ko();
@@ -25,9 +26,9 @@ void	test_instances() {
 void	show_capacity() {
 	std::cout << "[Capacity] ";
 
-	std::vector<int>			int_vector;
-	std::vector<test::Base>		base_vector;
-	std::vector<test::Derived>	derived_vector;
+	ft::vector<int>				int_vector;
+	ft::vector<test::Base>		base_vector;
+	ft::vector<test::Derived>	derived_vector;
 
 	std::cout
 		<< int_vector.capacity() << ' '
@@ -39,9 +40,9 @@ void	show_capacity() {
 void	show_size() {
 	std::cout << "[Size] ";
 
-	std::vector<int>			int_vector;
-	std::vector<test::Base>		base_vector;
-	std::vector<test::Derived>	derived_vector;
+	ft::vector<int>				int_vector;
+	ft::vector<test::Base>		base_vector;
+	ft::vector<test::Derived>	derived_vector;
 
 	std::cout
 		<< int_vector.size() << ' '
@@ -53,9 +54,9 @@ void	show_size() {
 void	show_max_size() {
 	std::cout << "[Max Size] ";
 
-	std::vector<int>			int_vector;
-	std::vector<test::Base>		base_vector;
-	std::vector<test::Derived>	derived_vector;
+	ft::vector<int>				int_vector;
+	ft::vector<test::Base>		base_vector;
+	ft::vector<test::Derived>	derived_vector;
 
 	std::cout
 		<< int_vector.max_size() << ' '

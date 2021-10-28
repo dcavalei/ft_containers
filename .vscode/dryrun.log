@@ -1,6 +1,11 @@
-make all --dry-run --keep-going --print-directory
-make: Entering directory '/home/dcavalei/Desktop/ft_containers'
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/dcavalei/Desktop/ft_containers'
+mkdir -pv obj/src/
+clang++ -Wall -Wextra -Werror -std=c++98 -Iinc -c src/main.cpp -o obj/src/main.o
  
-make: Nothing to be done for 'all'.
-make: Leaving directory '/home/dcavalei/Desktop/ft_containers'
+mkdir -pv obj/src/
+clang++ -Wall -Wextra -Werror -std=c++98 -Iinc -c src/vector.cpp -o obj/src/vector.o
+ 
+clang++ -Wall -Wextra -Werror -std=c++98 obj/src/main.o obj/src/vector.o -o main.out
+make: Leaving directory `/Users/dcavalei/Desktop/ft_containers'
  
