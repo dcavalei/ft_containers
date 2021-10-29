@@ -15,6 +15,9 @@ TEST_DIR	= test
 
 FILE_NAME	= INVALID_FILE_NAME
 
+RED			= \033[0;31m
+GREEN		= \033[0;32m
+NC			= \033[0m
 # Rules
 
 all:		$(NAME)
@@ -33,12 +36,13 @@ obj/test/%.o:	test/%.cpp $(INC) Makefile
 				$(eval FILE_NAME=$(subst .o,,$@))
 				@mkdir -pv $(dir $@)
 				@$(CCPP) $(CPPFLAGS) -D_IS_TEST -I$(INC_DIR) -c $< -o $@
-				@$(CCPP) $(CPPFLAGS) $(OBJ_TEST) -o $(FILE_NAME)_ft
+				@$(CCPP) $(CPPFLAGS) $@ -o $(FILE_NAME)_ft
 				@./$(FILE_NAME)_ft > $(FILE_NAME)_ft.log
 				@$(CCPP) $(CPPFLAGS) -I$(INC_DIR) -c $< -o $@
-				@$(CCPP) $(CPPFLAGS) $(OBJ_TEST) -o $(FILE_NAME)_std
+				@$(CCPP) $(CPPFLAGS) $@ -o $(FILE_NAME)_std
 				@./$(FILE_NAME)_std > $(FILE_NAME)_std.log
-				@[[ `diff $(FILE_NAME)_std.log $(FILE_NAME)_ft.log > $(FILE_NAME).log` ]] && printf "right" || printf "wrong"
+				@(diff $(FILE_NAME)_std.log $(FILE_NAME)_ft.log > $(FILE_NAME).log && echo "$(GREEN)$(FILE_NAME).log$(NC)") \
+				|| (echo "$(RED)$(FILE_NAME).log$(NC)" && cat $(FILE_NAME).log)
 
 $(NAME):	$(OBJ)
 				@$(CCPP) $(CPPFLAGS) $(OBJ) -o $(NAME)

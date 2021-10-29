@@ -1,13 +1,11 @@
 #ifndef _IS_TEST
 # include <vector>
 namespace ft = std;
-#endif
-
-#ifdef _IS_TEST
+#else
 # include "vector.hpp"
 #endif
 
-#include "test.hpp"
+# include "test.hpp"
 
 void	test_instances() {
 	std::cout << "[Object Creation/Destruction] ";

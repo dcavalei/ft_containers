@@ -47,28 +47,33 @@ namespace ft
 				_size(n),
 				_capacity(n)
 			{
-				std::cout << "Fill C/tor" << std::endl;
+				// std::cout << "Fill C/tor" << std::endl;
 				for (size_type i = 0; i < n; i++) {
 					_alloc.construct(_start + i, val);
 				}
 			}
 
-			// (3)	range constructor
-			// Constructs a container with as many elements as the range [first,last),
-			// with each element constructed from its corresponding element in that range, in the same order.
-			template <class InputIterator>
-			vector( InputIterator first, InputIterator last,
-				const allocator_type& alloc = allocator_type() );
+			// // (3)	range constructor
+			// // Constructs a container with as many elements as the range [first,last),
+			// // with each element constructed from its corresponding element in that range, in the same order.
+			// template <class InputIterator>
+			// 	vector (InputIterator first, InputIterator last,
+			// 	const allocator_type& alloc = allocator_type()) {
+			// 		(void)alloc;
+			// 		(void)first;
+			// 		(void)last;
+			// 		std::cout << "Range C/tor" << std::endl;
+			// 	}
 
 			// (4)	copy constructor
 			// Constructs a container with a copy of each of the elements in x, in the same order.
 			vector( const vector& x ) {
-				// std::cout << "Copy C/tor" << std::endl;
+				std::cout << "Copy C/tor" << std::endl;
 				(void)x;
 			}
 
 			~vector() {
-				std::cout << "Default D/tor" << std::endl;
+				// std::cout << "Default D/tor" << std::endl;
 				for (size_type i = 0; i < _size; i++) {
 					_alloc.destroy(_start + i);
 				}

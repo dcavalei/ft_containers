@@ -1,7 +1,6 @@
 #ifndef TEST_HPP
 # define TEST_HPP
 
-# include <vector>
 # include <csignal>
 # include <iostream>
 # include <cstdlib>
