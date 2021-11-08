@@ -41,7 +41,7 @@ obj/test/%.o:	test/%.cpp $(INC) Makefile
 				@$(CCPP) $(CPPFLAGS) -I$(INC_DIR) -c $< -o $@
 				@$(CCPP) $(CPPFLAGS) $@ -o $(FILE_NAME)_std
 				@./$(FILE_NAME)_std > $(FILE_NAME)_std.log
-				@(diff $(FILE_NAME)_std.log $(FILE_NAME)_ft.log > $(FILE_NAME).log && echo "$(GREEN)$(FILE_NAME).log$(NC)") \
+				@(diff $(FILE_NAME)_std.log $(FILE_NAME)_ft.log > $(FILE_NAME).log && echo "$(GREEN)$(FILE_NAME).log$(NC)" && rm $(FILE_NAME).log) \
 				|| (echo "$(RED)$(FILE_NAME).log$(NC)" && cat $(FILE_NAME).log)
 
 $(NAME):	$(OBJ)

@@ -23,7 +23,8 @@ namespace test {
 		}
 
 		virtual ~Base() {
-			std::cout << "Base D/tor [" << *base_ptr << "]" << std::endl;	base_leak--;
+			// std::cout << "Base D/tor [" << *base_ptr << "]" << std::endl;
+			base_leak--;
 			delete base_ptr;
 		}
 	};
@@ -43,7 +44,8 @@ namespace test {
 		}
 
 		~Derived() {
-			std::cout << "Derived D/tor [" << *derived_ptr << "]" << std::endl;	derived_leak--;
+			// std::cout << "Derived D/tor [" << *derived_ptr << "]" << std::endl;
+			derived_leak--;
 			delete derived_ptr;
 		}
 	};
@@ -52,14 +54,6 @@ namespace test {
 		(void)signal;
 		std::cout << _BLUE_ << "SIGSEGV" << _RESET_ << std::endl;
 		exit(EXIT_SUCCESS);
-	}
-
-	void	ok() {
-		std::cout << _GREEN_ << "OK" << _RESET_ << std::endl;
-	}
-
-	void	ko() {
-		std::cout << _RED_ << "KO" << _RESET_ << std::endl;
 	}
 }
 

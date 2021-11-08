@@ -5,8 +5,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Fri Oct 29 11:27:36 2021
+# Make data base, printed on Mon Nov  8 15:46:17 2021
 
 # Variables
 
@@ -67,17 +68,17 @@ GNUMAKEFLAGS :=
 # environment
 XDG_DATA_DIRS = /usr/share/xfce4:/home/dcavalei/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/usr/share
 # environment
-DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-nD7QJ724Kf,guid=12ca95312d630512d537b1c8617bcc73
+DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-2SwOlWqZmo,guid=75a101f8503fc4e636d931f261890fd9
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
 QT_SCALE_FACTOR = 1
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-5d5c3958-42d7-49b1-857c-cc766711bec1.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-53392c98-badf-4fc8-945e-fc68fbc7304d.sock
 # environment
 VSCODE_CWD = /home/dcavalei/Desktop/ft_containers
 # environment
-XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session1
+XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session0
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
@@ -85,7 +86,7 @@ PATH = /usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-SESSION_MANAGER = local/mx:@/tmp/.ICE-unix/29274,unix/mx:/tmp/.ICE-unix/29274
+SESSION_MANAGER = local/mx:@/tmp/.ICE-unix/3573,unix/mx:/tmp/.ICE-unix/3573
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -113,7 +114,7 @@ LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 # environment
 XDG_SESSION_DESKTOP = xfce
 # environment
-SSH_AUTH_SOCK = /tmp/ssh-nKVm6Jgws5iQ/agent.29274
+SSH_AUTH_SOCK = /tmp/ssh-7ulgItJumKhU/agent.3573
 # automatic
 %F = $(notdir $%)
 # environment
@@ -129,7 +130,7 @@ QT_QPA_PLATFORMTHEME = gtk2
 # environment
 XDG_SEAT = seat0
 # environment
-SSH_AGENT_PID = 29357
+SSH_AGENT_PID = 3644
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = XFCE
 # makefile (from 'Makefile', line 19)
@@ -145,7 +146,7 @@ HOME = /home/dcavalei
 # environment
 VSCODE_CLI = 1
 # environment
-VSCODE_CODE_CACHE_PATH = /home/dcavalei/.config/Code/CachedData/6cba118ac49a1b88332f312a8f67186f7f3c1643
+VSCODE_CODE_CACHE_PATH = /home/dcavalei/.config/Code/CachedData/b3318bc0524af3d74034b8bb8a64df0ccf35549a
 # environment
 LOGNAME = dcavalei
 # environment
@@ -171,7 +172,7 @@ MAKECMDGOALS := all
 # environment
 SHLVL = 1
 # environment
-XDG_SESSION_ID = 6
+XDG_SESSION_ID = 1
 # environment
 USER = dcavalei
 # makefile
@@ -194,10 +195,11 @@ OLDPWD = /home/dcavalei
 .VARIABLES := 
 # automatic
 *F = $(notdir $*)
+ 
 # environment
 XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-2a99230f-1.61.2-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-2a99230f-1.62.0-main.sock
 # environment
 PANEL_GDK_CORE_DEVICE_EVENTS = 0
 # makefile (from 'Makefile', line 18)
@@ -251,7 +253,7 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 30704
+VSCODE_PID = 22155
 # variable set hash-table stats:
 # Load=121/1024=12%, Rehash=0, Collisions=15/179=8%
 
@@ -283,11 +285,11 @@ obj/test/%.o: test/%.cpp inc/vector.hpp inc/test.hpp inc/color.hpp Makefile
 				@$(CCPP) $(CPPFLAGS) $@ -o $(FILE_NAME)_ft
 				@./$(FILE_NAME)_ft > $(FILE_NAME)_ft.log
 				@$(CCPP) $(CPPFLAGS) -I$(INC_DIR) -c $< -o $@
+ 
 				@$(CCPP) $(CPPFLAGS) $@ -o $(FILE_NAME)_std
 				@./$(FILE_NAME)_std > $(FILE_NAME)_std.log
-				@(diff $(FILE_NAME)_std.log $(FILE_NAME)_ft.log > $(FILE_NAME).log && echo "$(GREEN)$(FILE_NAME).log$(NC)") \
+				@(diff $(FILE_NAME)_std.log $(FILE_NAME)_ft.log > $(FILE_NAME).log && echo "$(GREEN)$(FILE_NAME).log$(NC)" && rm $(FILE_NAME).log) \
 				|| (echo "$(RED)$(FILE_NAME).log$(NC)" && cat $(FILE_NAME).log)
- 
 
 # 2 implicit rules, 0 (0.0%) terminal.
 
@@ -296,7 +298,7 @@ obj/test/%.o: test/%.cpp inc/vector.hpp inc/test.hpp inc/color.hpp Makefile
 # Not a target:
 inc/vector.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-29 11:21:05.709910011
+#  Last modified 2021-11-08 15:44:46.675620912
 #  File has been updated.
 #  Successfully updated.
 
@@ -332,6 +334,7 @@ main.out: obj/src/vector.o obj/src/main.o
 #  recipe to execute (from 'Makefile', line 48):
 				@$(CCPP) $(CPPFLAGS) $(OBJ) -o $(NAME)
 
+ 
 .PHONY: clean fclean run re test
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -340,11 +343,11 @@ main.out: obj/src/vector.o obj/src/main.o
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-29 10:25:22.031571766
+#  Last modified 2021-11-08 15:45:50.287759514
 #  File has been updated.
 #  Successfully updated.
 
-test: obj/test/test_default_ctor.o obj/test/test_fill_ctor.o
+test: obj/test/test_default_ctor.o obj/test/test_range_ctor.o obj/test/test_fill_ctor.o
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
@@ -382,7 +385,8 @@ inc/color.hpp:
 # Not a target:
 inc/test.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-29 09:58:47.502537667
+ 
+#  Last modified 2021-11-08 14:16:25.999713638
 #  File has been updated.
 #  Successfully updated.
 
@@ -418,6 +422,7 @@ re: fclean all
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
+ 
 #  File has not been updated.
 
 run: all
@@ -438,6 +443,12 @@ clean:
 				@rm -vrf $(OBJ_TEST)
 
 # Not a target:
+obj/test/test_range_ctor.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 obj/src/main.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -450,19 +461,19 @@ obj/test/test_default_ctor.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=20/1024=2%, Rehash=0, Collisions=0/57=0%
+# Load=21/1024=2%, Rehash=0, Collisions=1/59=2%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 42 / storage = 416 B / avg = 9 B
-# current buf: size = 8162 B / used = 416 B / count = 42 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 43 / storage = 443 B / avg = 10 B
+# current buf: size = 8162 B / used = 443 B / count = 43 / avg = 10 B
 
-# strcache performance: lookups = 85 / hit rate = 50%
+# strcache performance: lookups = 86 / hit rate = 50%
 # hash-table stats:
-# Load=42/8192=1%, Rehash=0, Collisions=1/85=1%
-# Finished Make data base on Fri Oct 29 11:27:36 2021
+# Load=43/8192=1%, Rehash=0, Collisions=1/86=1%
+# Finished Make data base on Mon Nov  8 15:46:17 2021
 
  

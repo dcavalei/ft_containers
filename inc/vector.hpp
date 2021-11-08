@@ -21,10 +21,12 @@ namespace ft
 			typedef typename allocator_type::size_type			size_type;			//	std::size_t
 			typedef typename allocator_type::difference_type	difference_type;	//	std::ptrdiff_t
 
+			class iterator;
+
 		private:
 			allocator_type	_alloc;
-			pointer			_start;
 			size_type		_size;
+			pointer			_start;
 			size_type		_capacity;
 
 		public:
@@ -32,20 +34,24 @@ namespace ft
 			// ########################################################################################
 			// (1)	empty container constructor (default constructor)
 			// Constructs an empty container, with no elements.
+			// 'explicit' keyword will deny this sort of initialization:
+			// vector<value_type> vec = {} (error)
 			explicit vector( const allocator_type& alloc = allocator_type() ) :
 				_alloc(alloc),
-				_start(NULL),
 				_size(0),
+				_start(NULL),
 				_capacity(0) {}
 
 			// (2)	fill constructor
 			// Constructs a container with n elements. Each element is a copy of val.
+			// 'explicit' keyword will deny this sort of initialization:
+			// vector<value_type> vec = {size_type, value_type} (error)
 			explicit vector( size_type n, const value_type& val = value_type(),
 				const allocator_type& alloc = allocator_type() ) :
 				_alloc(alloc),
-				_start(_alloc.allocate(n)),
 				_size(n),
-				_capacity(n)
+				_start(_alloc.allocate(_size)),
+				_capacity(_size)
 			{
 				// std::cout << "Fill C/tor" << std::endl;
 				for (size_type i = 0; i < n; i++) {
@@ -53,23 +59,28 @@ namespace ft
 				}
 			}
 
-			// // (3)	range constructor
-			// // Constructs a container with as many elements as the range [first,last),
-			// // with each element constructed from its corresponding element in that range, in the same order.
-			// template <class InputIterator>
-			// 	vector (InputIterator first, InputIterator last,
-			// 	const allocator_type& alloc = allocator_type()) {
-			// 		(void)alloc;
-			// 		(void)first;
-			// 		(void)last;
-			// 		std::cout << "Range C/tor" << std::endl;
-			// 	}
+			// (3)	range constructor
+			// Constructs a container with as many elements as the range [first,last),
+			// with each element constructed from its corresponding element in that range, in the same order.
+			vector(iterator first, const iterator& last,
+				const allocator_type& alloc = allocator_type()) :
+				_alloc(alloc),
+				_size(last - first),
+				_start(_alloc.allocate(_size)),
+				_capacity(_size)
+				{
+					// std::cout << "Range C/tor" << std::endl;
+					for (size_type i = 0; i < _size; i++) {
+						_alloc.construct(_start + i, *(first++));
+					}
+				}
 
 			// (4)	copy constructor
 			// Constructs a container with a copy of each of the elements in x, in the same order.
-			vector( const vector& x ) {
+			vector( const vector& x )
+			{
 				std::cout << "Copy C/tor" << std::endl;
-				(void)x;
+				*this = x;
 			}
 
 			~vector() {
@@ -80,13 +91,14 @@ namespace ft
 				_alloc.deallocate(_start, _capacity);
 			}
 
-			// Copy
+			// Assignment operator
 			vector&	operator=( const vector& other ) {
 				if (this == &other) {
 					return (*this);
 				}
 				this->~vector();
 
+				_alloc = other._alloc;
 				_start = _alloc.allocate(other._capacity);
 
 				for (size_type i = 0; i < other._size; i++) {
@@ -259,6 +271,35 @@ namespace ft
 			// void		reserve (size_type n);
 
 			// ###---------------- Capacity ----------------###
+			// ###------------------------------------------###
+			// ###------------- Element access -------------###
+
+			reference		operator[](size_type n) {
+				return *(_start + n);
+			}
+
+			const_reference	operator[](size_type n) const {
+				return *(_start + n);
+			}
+
+			//     Access element (public member function )
+
+			// at
+			//     Access element (public member function )
+
+			// front
+			//     Access first element (public member function )
+
+			// back
+			//     Access last element (public member function )
+
+			// data
+			//     Access data (public member function )
+
+			// ###------------- Element access -------------###
+			// ###------------------------------------------###
+
+
 	};
 };
 

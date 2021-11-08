@@ -14,10 +14,11 @@ void	test_instances() {
 		ft::vector<test::Base>		base_vector;
 		ft::vector<test::Derived>	derived_vector;
 	}
+
 	if (test::Base::base_leak || test::Derived::derived_leak) {
-		test::ko();
+		std::cout << "KO" << std::endl;
 	} else {
-		test::ok();
+		std::cout << "OK" << std::endl;
 	}
 }
 
