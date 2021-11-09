@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dcavalei <dcavalei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/09 15:42:55 by dcavalei          #+#    #+#             */
+/*   Updated: 2021/11/09 17:11:20 by dcavalei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
@@ -62,8 +74,8 @@ namespace ft
 			// (3)	range constructor
 			// Constructs a container with as many elements as the range [first,last),
 			// with each element constructed from its corresponding element in that range, in the same order.
-			vector(iterator first, const iterator& last,
-				const allocator_type& alloc = allocator_type()) :
+			vector( iterator first, const iterator& last,
+				const allocator_type& alloc = allocator_type() ) :
 				_alloc(alloc),
 				_size(last - first),
 				_start(_alloc.allocate(_size)),
@@ -77,11 +89,15 @@ namespace ft
 
 			// (4)	copy constructor
 			// Constructs a container with a copy of each of the elements in x, in the same order.
-			vector( const vector& x )
-			{
-				std::cout << "Copy C/tor" << std::endl;
-				*this = x;
-			}
+			vector( const vector& other ) :
+				_alloc(allocator_type()),
+				_size(0),
+				_start(NULL),
+				_capacity(0)
+				{
+					// std::cout << "Copy C/tor" << std::endl;
+					*this = other;
+				}
 
 			~vector() {
 				// std::cout << "Default D/tor" << std::endl;
@@ -99,11 +115,14 @@ namespace ft
 				this->~vector();
 
 				_alloc = other._alloc;
+				_size = other._size;
 				_start = _alloc.allocate(other._capacity);
+				_capacity = other._capacity;
 
 				for (size_type i = 0; i < other._size; i++) {
 					_alloc.construct(_start + i, *(other._start + i));
 				}
+				return *this;
 			}
 
 			// ########################################################################################
