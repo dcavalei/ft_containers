@@ -68,7 +68,10 @@
 		"clocale": "cpp",
 		"numeric": "cpp",
 		"random": "cpp",
-		"fstream": "cpp"
+		"fstream": "cpp",
+		"__tree": "cpp",
+		"map": "cpp",
+		"stack": "cpp"
 	},
 	"C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
 	"makefile.launchConfigurations": [

@@ -6,7 +6,7 @@
 /*   By: dcavalei <dcavalei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:42:55 by dcavalei          #+#    #+#             */
-/*   Updated: 2021/11/09 17:11:20 by dcavalei         ###   ########.fr       */
+/*   Updated: 2021/11/09 20:39:20 by dcavalei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ namespace ft
 			typedef typename allocator_type::difference_type	difference_type;	//	std::ptrdiff_t
 
 			class iterator;
-
+			typedef iterator const						const_iterator;
+			// typedef	typename iterator< vector<value_type, allocator_type> const >		const_iterator;
 		private:
 			allocator_type	_alloc;
 			size_type		_size;
@@ -153,19 +154,23 @@ namespace ft
 					bool			operator==( const iterator& rhs ) const {
 						return (_ptr == rhs._ptr);
 					}
-
-					// Comparison operator
 					bool			operator!=( const iterator& rhs ) const {
 						return (!(*this == rhs));
 					}
 
 					// Dereference operator
-					value_type&		operator*() const {
+					reference		operator*() {
+						return *_ptr;
+					}
+					const_reference		operator*() const {
 						return *_ptr;
 					}
 
 					// Member access operator
-					pointer			operator->() const {
+					pointer			operator->() {
+						return _ptr;
+					}
+					const_pointer	operator->() const {
 						return _ptr;
 					}
 
@@ -174,9 +179,18 @@ namespace ft
 						_ptr++;
 						return *this;
 					}
+					const_iterator&		operator++() const {
+						const_cast<iterator*>(this)->_ptr++;
+						return *this;
+					}
 
 					// Postfix increment
 					iterator		operator++(int) {
+						iterator old = *this;
+						operator++();
+						return old;
+					}
+					const_iterator	operator++(int) const {
 						iterator old = *this;
 						operator++();
 						return old;
@@ -187,6 +201,10 @@ namespace ft
 						_ptr--;
 						return *this;
 					}
+					const_iterator&		operator--() const {
+						const_cast<iterator*>(this)->_ptr--;
+						return *this;
+					}
 
 					// Postfix decrement
 					iterator		operator--(int) {
@@ -194,14 +212,25 @@ namespace ft
 						operator--();
 						return old;
 					}
+					const_iterator		operator--(int) const {
+						iterator old = *this;
+						operator--();
+						return old;
+					}
 
 					// Addition operator
-					iterator		operator+( int n ) const {
+					iterator		operator+( int n ) {
+						return iterator(_ptr + n);
+					}
+					const_iterator		operator+( int n ) const {
 						return iterator(_ptr + n);
 					}
 
 					// Subtraction operator
-					iterator		operator-( int n ) const {
+					iterator		operator-( int n ) {
+						return iterator(_ptr - n);
+					}
+					const_iterator		operator-( int n ) const {
 						return iterator(_ptr - n);
 					}
 
@@ -235,15 +264,26 @@ namespace ft
 						_ptr += n;
 						return *this;
 					}
+					const_iterator&		operator+=( int n ) const {
+						const_cast<iterator*>(this)->_ptr += n;
+						return *this;
+					}
 
 					// Assignment operator
 					iterator&		operator-=( int n ) {
 						_ptr -= n;
 						return *this;
 					}
+					const_iterator&		operator-=( int n ) const {
+						const_cast<iterator*>(this)->_ptr -= n;
+						return *this;
+					}
 
 					// Subscript operator
-					value_type&		operator[]( size_type n ) {
+					reference		operator[]( size_type n ) {
+						return *(_ptr + n);
+					}
+					const_reference		operator[]( size_type n ) const {
 						return *(_ptr + n);
 					}
 

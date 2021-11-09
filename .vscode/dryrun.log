@@ -1,8 +1,17 @@
-make test --dry-run --keep-going --print-directory
+make test --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/dcavalei/Desktop/ft_containers'
 mkdir -pv obj/test/
-clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_default_ctor.cpp -o obj/test/test_default_ctor.o
+clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_copy_ctor.cpp -o obj/test/test_copy_ctor.o
+clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_copy_ctor.o -o obj/test/test_copy_ctor_ft
  
+./obj/test/test_copy_ctor_ft > obj/test/test_copy_ctor_ft.log
+clang++ -Wall -Wextra -Werror -std=c++98 -Iinc -c test/test_copy_ctor.cpp -o obj/test/test_copy_ctor.o
+clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_copy_ctor.o -o obj/test/test_copy_ctor_std
+./obj/test/test_copy_ctor_std > obj/test/test_copy_ctor_std.log
+(diff obj/test/test_copy_ctor_std.log obj/test/test_copy_ctor_ft.log > obj/test/test_copy_ctor.log && echo "\033[0;32mobj/test/test_copy_ctor.log\033[0m" && rm obj/test/test_copy_ctor.log) \
+				|| (echo "\033[0;31mobj/test/test_copy_ctor.log\033[0m" && cat obj/test/test_copy_ctor.log)
+mkdir -pv obj/test/
+clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_default_ctor.cpp -o obj/test/test_default_ctor.o
 clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_default_ctor.o -o obj/test/test_default_ctor_ft
 ./obj/test/test_default_ctor_ft > obj/test/test_default_ctor_ft.log
 clang++ -Wall -Wextra -Werror -std=c++98 -Iinc -c test/test_default_ctor.cpp -o obj/test/test_default_ctor.o
