@@ -1,0 +1,40 @@
+[##### Test 1 #####]
+[values] OK
+[size] 40
+[capacity] 66
+[##### Test 2 #####]
+[values] OK
+[size] 12
+[capacity] 41
+[##### Test 3 #####]
+[values] KO
+[size] 40
+[capacity] 42
+[##### Test 4 #####]
+[values] KO
+[size] 74
+[capacity] 86
+[##### Test 5 #####]
+[values] OK
+[size] 4
+[capacity] 17
+[##### Test 6 #####]
+[values] KO
+[size] 92
+[capacity] 124
+[##### Test 7 #####]
+[values] OK
+[size] 59
+[capacity] 98
+[##### Test 8 #####]
+[values] OK
+[size] 9
+[capacity] 52
+[##### Test 9 #####]
+[values] KO
+[size] 79
+[capacity] 79
+[##### Test 10 #####]
+[values] KO
+[size] 41
+[capacity] 41

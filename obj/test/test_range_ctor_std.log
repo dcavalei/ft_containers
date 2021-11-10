@@ -1,0 +1,6 @@
+* Testing range Constructor *
+[Object Creation/Destruction] OK
+[Capacity] 10 10 10
+[Size] 10 10 10
+[Max Size] 4611686018427387903 1152921504606846975 768614336404564650
+[Values] 0 42 84 126 168 210 252 294 336 378
