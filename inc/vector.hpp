@@ -6,7 +6,7 @@
 /*   By: dcavalei <dcavalei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:42:55 by dcavalei          #+#    #+#             */
-/*   Updated: 2021/11/10 20:13:49 by dcavalei         ###   ########.fr       */
+/*   Updated: 2021/11/11 18:40:24 by dcavalei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,9 @@ namespace ft {
 				iterator old = *this;
 				operator++();
 				return (old);
+				const iterator "ola";
+				> tmp echo ola
+				ola++;
 			}
 
 			// Prefix decrement
@@ -381,7 +384,6 @@ namespace ft {
 			_capacity = n;
 		}
 
-
 		/*
 			[Resizes the container so that it contains n elements]
 
@@ -404,7 +406,11 @@ namespace ft {
 					_alloc.destroy(_start + i);
 				}
 			} else if (n > _capacity) {
-				reserve(n);
+				if (n / 2 < _size) {
+					reserve(_size * 2);
+				} else {
+					reserve(n);
+				}
 				for (size_type i = _size; i < n; i++) {
 					_alloc.construct(_start + i, val);
 				}

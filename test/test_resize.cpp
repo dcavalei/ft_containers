@@ -14,28 +14,22 @@ void	test_resize( size_type initial_size, size_type to_resize, int val ) {
 	static int	n = 0;
 
 	std::cout << "[##### Test " << ++n << " #####]" << std::endl;
+	std::cout << "[initial size] " << initial_size << std::endl;
+	std::cout << "[expected size] " << to_resize << std::endl;
 
 	ft::vector<int>				foo(initial_size);
-	ft::vector<int>				bar(foo);
 	ft::vector<int>::size_type	size;
 
 
 	foo.resize(to_resize, val);
 	size = foo.size();
 
-	int	trigger = 0;
+	std::cout << "[values]";
 	for (ft::vector<int>::size_type	i = 0; i < size; i++) {
-		if (foo[i] != bar[i]) {
-			trigger = 1;
-			break;
-		}
+		std::cout << ' ' << foo[i];
 	}
+	std::cout << std::endl;
 
-	if (trigger) {
-		std::cout << "[values] KO" << std::endl;
-	} else {
-		std::cout << "[values] OK" << std::endl;
-	}
 	std::cout << "[size] " << foo.size() << std::endl;
 	std::cout << "[capacity] " << foo.capacity() << std::endl;
 
@@ -43,7 +37,7 @@ void	test_resize( size_type initial_size, size_type to_resize, int val ) {
 
 int main ()
 {
-	size_t	number_of_tests = 10;
+	size_t	number_of_tests = 10000;
 	size_t	max_range = 100;
 	size_t	seed = 42;
 
