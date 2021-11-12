@@ -6,7 +6,7 @@
 /*   By: dcavalei <dcavalei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:42:55 by dcavalei          #+#    #+#             */
-/*   Updated: 2021/11/11 18:40:24 by dcavalei         ###   ########.fr       */
+/*   Updated: 2021/11/12 21:27:19 by dcavalei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <memory>
 #include <iostream>
 #include <stdexcept>
+#include "iterator.hpp"
 
 namespace ft {
 
@@ -28,17 +29,18 @@ namespace ft {
 
 		public:
 
-		typedef Alloc										allocator_type;		//	Alloc
-		typedef T											value_type;			//	T
-		typedef typename allocator_type::reference			reference;			//	T&
-		typedef typename allocator_type::const_reference	const_reference;	//	const T&
-		typedef typename allocator_type::pointer			pointer;			//	T*
-		typedef typename allocator_type::const_pointer		const_pointer;		//	const T*
-		typedef typename allocator_type::size_type			size_type;			//	std::size_t
-		typedef typename allocator_type::difference_type	difference_type;	//	std::ptrdiff_t
+		typedef T											value_type;			// T
+		typedef Alloc										allocator_type;		// Alloc
+		typedef typename allocator_type::reference			reference;			// T&
+		typedef typename allocator_type::const_reference	const_reference;	// const T&
+		typedef typename allocator_type::pointer			pointer;			// T*
+		typedef typename allocator_type::const_pointer		const_pointer;		// const T*
+		typedef typename allocator_type::size_type			size_type;			// std::size_t
+		typedef typename allocator_type::difference_type	difference_type;	// std::ptrdiff_t
 
-		class 												iterator;
-		typedef iterator const								const_iterator;
+		// LegacyRandomAccessIterators
+		typedef ft::iterator<value_type>					iterator;
+		typedef ft::iterator<const value_type>				const_iterator;
 
 	/* ********************************** Private data members ********************************** */
 
@@ -61,9 +63,7 @@ namespace ft {
 			_alloc(alloc),
 			_size(0),
 			_start(NULL),
-			_capacity(0) {
-			// std::cout << "Default C/tor" << std::endl;
-			}
+			_capacity(0) {}
 
 		/*
 			(2)	fill constructor
@@ -75,7 +75,6 @@ namespace ft {
 			_size(n),
 			_start(_alloc.allocate(n)),
 			_capacity(n) {
-			// std::cout << "Fill C/tor" << std::endl;
 			for (size_type i = 0; i < n; i++) {
 				_alloc.construct(_start + i, val);
 			}
@@ -93,7 +92,6 @@ namespace ft {
 			_size(last - first),
 			_start(_alloc.allocate(last - first)),
 			_capacity(last - first) {
-			// std::cout << "Range C/tor" << std::endl;
 			for (size_type i = 0; i < _size; i++) {
 				_alloc.construct(_start + i, first[i]);
 			}
@@ -108,12 +106,10 @@ namespace ft {
 			_size(0),
 			_start(NULL),
 			_capacity(0) {
-			// std::cout << "Copy C/tor" << std::endl;
 			*this = other;
 		}
 
 		~vector() {
-			// std::cout << "Default D/tor" << std::endl;
 			destroy();
 			deallocate();
 		}
@@ -131,205 +127,12 @@ namespace ft {
 			} else {
 				destroy();
 			}
-
-			_size = other._size;
 			copy(other);
+			_size = other._size;
 			return (*this);
 		}
 
 	/* **************************************** Iterator **************************************** */
-
-		class iterator {
-
-			private:
-
-			pointer	_ptr;
-
-			public:
-
-			// Default constructor
-			iterator() : _ptr(NULL) {}
-
-			// Copy constructor
-			iterator( const iterator& other ) {
-				*this = other;
-			}
-
-			// Pointer constructor
-			iterator( const pointer& ptr ) : _ptr(ptr) {}
-
-			// Destructor
-			~iterator() {}
-
-			// Assignment operator
-			iterator&			operator=( const iterator& rhs ) {
-				_ptr = rhs._ptr;
-				return (*this);
-			}
-
-			// Comparison operator, const compatible
-			bool				operator==( const iterator& rhs ) const {
-				return (_ptr == rhs._ptr);
-			}
-
-			// Comparison operator, const compatible
-			bool				operator!=( const iterator& rhs ) const {
-				return (!(*this == rhs));
-			}
-
-			// Comparison operator, const compatible
-			bool				operator<( const iterator& rhs ) const {
-				return (_ptr < rhs._ptr);
-			}
-
-			// Comparison operator, const compatible
-			bool				operator>( const iterator& rhs ) const {
-				return (rhs < *this);
-			}
-
-			// Comparison operator, const compatible
-			bool				operator<=( const iterator& rhs ) const {
-				return (!(*this > rhs));
-			}
-
-			// Comparison operator, const compatible
-			bool				operator>=( const iterator& rhs ) const {
-				return (!(*this < rhs));
-			}
-
-			// Dereference operator
-			reference			operator*() {
-				return (*_ptr);
-			}
-
-			// Dereference operator, const only
-			const_reference		operator*() const {
-				return (*_ptr);
-			}
-
-			// Member access operator
-			pointer				operator->() {
-				return (_ptr);
-			}
-
-			// Member access operator, const only
-			const_pointer		operator->() const {
-				return (_ptr);
-			}
-
-			// Prefix increment
-			iterator&			operator++() {
-				_ptr++;
-				return (*this);
-			}
-
-			// Prefix increment, const only
-			const_iterator&		operator++() const {
-				const_cast<iterator*>(this)->_ptr++;
-				return (*this);
-			}
-
-			// Postfix increment
-			iterator			operator++( int ) {
-				iterator old = *this;
-				operator++();
-				return (old);
-			}
-
-			// Postfix increment, const only
-			const_iterator		operator++( int ) const {
-				iterator old = *this;
-				operator++();
-				return (old);
-				const iterator "ola";
-				> tmp echo ola
-				ola++;
-			}
-
-			// Prefix decrement
-			iterator&			operator--() {
-				_ptr--;
-				return (*this);
-			}
-
-			// Prefix decrement, const only
-			const_iterator&		operator--() const {
-				const_cast<iterator*>(this)->_ptr--;
-				return (*this);
-			}
-
-			// Postfix decrement
-			iterator			operator--( int ) {
-				iterator old = *this;
-				operator--();
-				return (old);
-			}
-
-			// Postfix decrement, const only
-			const_iterator		operator--( int ) const {
-				iterator old = *this;
-				operator--();
-				return (old);
-			}
-
-			iterator			operator+( int n ) {
-				return (_ptr + n);
-			}
-
-			// Addition operator, const only
-			const_iterator		operator+( int n ) const {
-				return (_ptr + n);
-			}
-
-			// Subtraction operator
-			iterator			operator-( int n ) {
-				return (_ptr - n);
-			}
-
-			// Subtraction operator, const only
-			const_iterator		operator-( int n ) const {
-				return (_ptr - n);
-			}
-
-			// Difference operator, const compatible
-			difference_type		operator-( const iterator& rhs ) const {
-				return (_ptr - rhs._ptr);
-			}
-
-			// Addition assignment operator
-			iterator&			operator+=( int n ) {
-				_ptr += n;
-				return (*this);
-			}
-
-			// Addition assignment operator, const only
-			const_iterator&		operator+=( int n ) const {
-				const_cast<iterator*>(this)->_ptr += n;
-				return (*this);
-			}
-
-			// Subtraction assignment operator
-			iterator&			operator-=( int n ) {
-				_ptr -= n;
-				return (*this);
-			}
-
-			// Subtraction assignment operator, const only
-			const_iterator&		operator-=( int n ) const {
-				const_cast<iterator*>(this)->_ptr -= n;
-				return (*this);
-			}
-
-			// Member access operator
-			reference			operator[]( size_type n ) {
-				return (_ptr[n]);
-			}
-
-			// Member access operator, const only
-			const_reference		operator[]( size_type n ) const {
-				return (_ptr[n]);
-			}
-		};
 
 		// Returns an iterator pointing to the first element in the vector.
 		iterator	begin() {
@@ -340,8 +143,7 @@ namespace ft {
 		iterator	end() {
 			return (_start + _size);
 		}
-		// iterator 				LegacyRandomAccessIterator to value_type
-		// const_iterator 			LegacyRandomAccessIterator to const value_type
+
 		// reverse_iterator 		std::reverse_iterator<iterator>
 		// const_reverse_iterator 	std::reverse_iterator<const_iterator>
 
@@ -406,11 +208,7 @@ namespace ft {
 					_alloc.destroy(_start + i);
 				}
 			} else if (n > _capacity) {
-				if (n / 2 < _size) {
-					reserve(_size * 2);
-				} else {
-					reserve(n);
-				}
+				(n / 2 < _size) ? reserve(_size * 2) : reserve(n);
 				for (size_type i = _size; i < n; i++) {
 					_alloc.construct(_start + i, val);
 				}
@@ -430,11 +228,7 @@ namespace ft {
 			return (_size == 0);
 		};
 
-		// void		reserve (size_type n);
-
-		// ###---------------- Capacity ----------------###
-		// ###------------------------------------------###
-		// ###------------- Element access -------------###
+	/* ************************************* Element access ************************************* */
 
 		// Element access
 		reference		operator[](size_type n) {
@@ -495,6 +289,7 @@ namespace ft {
 		}
 
 	};
+
 };
 
-#endif
+#endif // VECTOR_HPP

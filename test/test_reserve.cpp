@@ -8,6 +8,10 @@ namespace ft = std;
 # include <iostream>
 # include <cstdlib>
 
+# define MAX_RANGE 1000
+# define NUMBER_OF_TESTS 1000
+# define SEED 42
+
 typedef	ft::vector<int>::size_type	size_type;
 
 void	test_reserve( size_type initial_size, size_type to_reserve ) {
@@ -15,27 +19,25 @@ void	test_reserve( size_type initial_size, size_type to_reserve ) {
 
 	std::cout << "[##### Test " << ++n << " #####]" << std::endl;
 
-	ft::vector<int>				foo(initial_size);
-	ft::vector<int>				bar(foo);
-	ft::vector<int>::size_type	size;
+	ft::vector<int>	foo(initial_size);
+	ft::vector<int>	bar(foo);
+	size_type		size;
+
+	size = foo.size();
+	for (size_type	i = 0; i < size; i++) {
+		foo[i] = rand() % MAX_RANGE;
+	}
 
 
 	foo.reserve(to_reserve);
 	size = foo.size();
 
-	int	trigger = 0;
-	for (ft::vector<int>::size_type	i = 0; i < size; i++) {
-		if (foo[i] != bar[i]) {
-			trigger = 1;
-			break;
-		}
+	std::cout << "[values]";
+	for (size_type	i = 0; i < size; i++) {
+		std::cout << ' ' << foo[i];
 	}
+	std::cout << std::endl;
 
-	if (trigger) {
-		std::cout << "[values] KO" << std::endl;
-	} else {
-		std::cout << "[values] OK" << std::endl;
-	}
 	std::cout << "[size] " << foo.size() << std::endl;
 	std::cout << "[capacity] " << foo.capacity() << std::endl;
 
@@ -50,13 +52,9 @@ int main ()
 	test_reserve(10, 11);
 	test_reserve(10, 20);
 
-	size_t	number_of_tests = 1000;
-	size_t	max_range = 10000;
-	size_t	seed = 42;
-
-	srand(seed);
-	for (size_t i = 0; i < number_of_tests; i++) {
-		test_reserve(rand() % max_range, rand() % max_range);
+	srand(SEED);
+	for (size_t i = 0; i < NUMBER_OF_TESTS; i++) {
+		test_reserve(rand() % MAX_RANGE, rand() % MAX_RANGE);
 	}
 
 	return (0);
