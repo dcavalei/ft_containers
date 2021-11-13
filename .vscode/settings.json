@@ -89,6 +89,11 @@
 			"cwd": "/Users/dcavalei/Desktop/ft_containers/obj/test",
 			"binaryPath": "/Users/dcavalei/Desktop/ft_containers/obj/test/test_fill_ctor_ft",
 			"binaryArgs": []
+		},
+		{
+			"cwd": "/home/dcavalei/Desktop/ft_containers/obj/test",
+			"binaryPath": "/home/dcavalei/Desktop/ft_containers/obj/test/test_enable_if_ft",
+			"binaryArgs": []
 		}
 	],
 	"makefile.extensionOutputFolder": "./.vscode"

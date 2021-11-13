@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Nov 12 16:24:55 2021
+# Make data base, printed on Sat Nov 13 10:58:24 2021
 
 # Variables
 
@@ -67,13 +67,13 @@ GNUMAKEFLAGS :=
 # environment
 XDG_DATA_DIRS = /usr/share/xfce4:/home/dcavalei/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/usr/share
 # environment
-DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-zKSPIaEDVz,guid=99795fa8262ea03d8816d90b618e4b84
+DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-lQ8g4M6Fmb,guid=7d6dbfe31a44a0a762b43292618f9815
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
 QT_SCALE_FACTOR = 1
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-7b07c83f-0b22-4388-a6fe-c94e743a5d94.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-94c9a875-bea2-4ee2-97bb-6f1a12452ae2.sock
 # environment
 VSCODE_CWD = /home/dcavalei/Desktop/ft_containers
 # environment
@@ -85,11 +85,11 @@ PATH = /usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-SESSION_MANAGER = local/mx:@/tmp/.ICE-unix/4636,unix/mx:/tmp/.ICE-unix/4636
+SESSION_MANAGER = local/mx:@/tmp/.ICE-unix/3896,unix/mx:/tmp/.ICE-unix/3896
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
-WINDOWID = 132120579
+WINDOWID = 130023427
 # makefile (from 'Makefile', line 14)
 TEST_DIR = test
 # environment
@@ -113,7 +113,7 @@ LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 # environment
 XDG_SESSION_DESKTOP = xfce
 # environment
-SSH_AUTH_SOCK = /tmp/ssh-EPiZaF8L4IC9/agent.4636
+SSH_AUTH_SOCK = /tmp/ssh-sVSOC1BvqCDq/agent.3896
 # automatic
 %F = $(notdir $%)
 # environment
@@ -129,7 +129,7 @@ QT_QPA_PLATFORMTHEME = gtk2
 # environment
 XDG_SEAT = seat0
 # environment
-SSH_AGENT_PID = 4707
+SSH_AGENT_PID = 3967
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = XFCE
 # makefile (from 'Makefile', line 19)
@@ -251,7 +251,7 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 11523
+VSCODE_PID = 12589
 # variable set hash-table stats:
 # Load=121/1024=12%, Rehash=0, Collisions=15/179=8%
 
@@ -261,21 +261,21 @@ VSCODE_PID = 11523
 
 # Directories
 
-# . (device 66309, inode 1345528): 14 files, no impossibilities.
+# . (device 66309, inode 1345528): 13 files, no impossibilities.
 # test (device 66309, inode 1357072): No files, no impossibilities so far.
 # src (device 66309, inode 1345662): 1 files, no impossibilities so far.
-# inc (device 66309, inode 1345656): 5 files, no impossibilities so far.
+# inc (device 66309, inode 1345656): 7 files, no impossibilities so far.
 
-# 20 files, no impossibilities in 4 directories.
+# 21 files, no impossibilities in 4 directories.
 
 # Implicit Rules
 
-obj/src/%.o: src/%.cpp inc/vector.hpp inc/iterator.hpp inc/test.hpp inc/color.hpp Makefile
+obj/src/%.o: src/%.cpp inc/vector.hpp inc/iterator.hpp inc/reverse_iterator.hpp inc/test.hpp inc/iterator_traits.hpp inc/color.hpp Makefile
 #  recipe to execute (from 'Makefile', line 31):
 				@mkdir -pv $(dir $@)
 				$(CCPP) $(CPPFLAGS) -I$(INC_DIR) -c $< -o $@
 
-obj/test/%.o: test/%.cpp inc/vector.hpp inc/iterator.hpp inc/test.hpp inc/color.hpp Makefile
+obj/test/%.o: test/%.cpp inc/vector.hpp inc/iterator.hpp inc/reverse_iterator.hpp inc/test.hpp inc/iterator_traits.hpp inc/color.hpp Makefile
 #  recipe to execute (from 'Makefile', line 36):
 				$(eval FILE_NAME=$(subst .o,,$@))
 				@mkdir -pv $(dir $@)
@@ -302,14 +302,14 @@ obj/test/test_copy_ctor.o:
 # Not a target:
 inc/iterator.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-12 16:13:55.599635921
+#  Last modified 2021-11-12 23:28:14.361139119
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 inc/vector.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-12 15:22:31.539148719
+#  Last modified 2021-11-13 10:58:23.162952225
 #  File has been updated.
 #  Successfully updated.
 
@@ -337,7 +337,7 @@ all: main.out
 
 main.out: obj/src/vector.o obj/src/main.o
 #  Implicit rule search has not been done.
-#  Last modified 2021-11-12 15:44:22.862859928
+#  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
@@ -349,6 +349,13 @@ main.out: obj/src/vector.o obj/src/main.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+
+# Not a target:
+inc/iterator_traits.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-11-12 23:12:06.174448119
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 Makefile:
@@ -405,10 +412,17 @@ inc/test.hpp:
 #  File has been updated.
 #  Successfully updated.
 
-obj/src/vector.o: src/vector.cpp inc/vector.hpp inc/iterator.hpp inc/test.hpp inc/color.hpp Makefile
+# Not a target:
+inc/reverse_iterator.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-11-12 22:08:49.792070989
+#  File has been updated.
+#  Successfully updated.
+
+obj/src/vector.o: src/vector.cpp inc/vector.hpp inc/iterator.hpp inc/reverse_iterator.hpp inc/test.hpp inc/iterator_traits.hpp inc/color.hpp Makefile
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'vector'
-#  Last modified 2021-11-12 15:42:51.338608961
+#  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # automatic
@@ -418,15 +432,15 @@ obj/src/vector.o: src/vector.cpp inc/vector.hpp inc/iterator.hpp inc/test.hpp in
 # automatic
 # * := vector
 # automatic
-# + := src/vector.cpp inc/vector.hpp inc/iterator.hpp inc/test.hpp inc/color.hpp Makefile
+# + := src/vector.cpp inc/vector.hpp inc/iterator.hpp inc/reverse_iterator.hpp inc/test.hpp inc/iterator_traits.hpp inc/color.hpp Makefile
 # automatic
 # | := 
 # automatic
 # < := src/vector.cpp
 # automatic
-# ^ := src/vector.cpp inc/vector.hpp inc/iterator.hpp inc/test.hpp inc/color.hpp Makefile
+# ^ := src/vector.cpp inc/vector.hpp inc/iterator.hpp inc/reverse_iterator.hpp inc/test.hpp inc/iterator_traits.hpp inc/color.hpp Makefile
 # automatic
-# ? := inc/iterator.hpp
+# ? := src/vector.cpp inc/vector.hpp inc/iterator.hpp inc/reverse_iterator.hpp inc/test.hpp inc/iterator_traits.hpp inc/color.hpp Makefile
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/17=6%
 #  recipe to execute (from 'Makefile', line 31):
@@ -487,19 +501,19 @@ obj/test/test_default_ctor.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=26/1024=3%, Rehash=0, Collisions=1/70=1%
+# Load=28/1024=3%, Rehash=0, Collisions=1/76=1%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 49 / storage = 571 B / avg = 11 B
-# current buf: size = 8162 B / used = 571 B / count = 49 / avg = 11 B
+# strcache buffers: 1 (0) / strings = 53 / storage = 661 B / avg = 12 B
+# current buf: size = 8162 B / used = 661 B / count = 53 / avg = 12 B
 
-# strcache performance: lookups = 96 / hit rate = 48%
+# strcache performance: lookups = 105 / hit rate = 49%
 # hash-table stats:
-# Load=49/8192=1%, Rehash=0, Collisions=1/96=1%
-# Finished Make data base on Fri Nov 12 16:24:55 2021
+# Load=53/8192=1%, Rehash=0, Collisions=1/105=1%
+# Finished Make data base on Sat Nov 13 10:58:24 2021
 
  

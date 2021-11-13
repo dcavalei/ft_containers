@@ -7,7 +7,7 @@ class reverse_iterator {
 	public:
 
 	typedef Iter	iterator_type;
-	
-}
+
+};
 
 #endif // REVERSE_ITERATOR_HPP

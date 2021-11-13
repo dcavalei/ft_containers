@@ -6,7 +6,7 @@
 /*   By: dcavalei <dcavalei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:42:55 by dcavalei          #+#    #+#             */
-/*   Updated: 2021/11/12 21:27:19 by dcavalei         ###   ########.fr       */
+/*   Updated: 2021/11/13 13:09:03 by dcavalei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ namespace ft {
 		// LegacyRandomAccessIterators
 		typedef ft::iterator<value_type>					iterator;
 		typedef ft::iterator<const value_type>				const_iterator;
+
 
 	/* ********************************** Private data members ********************************** */
 
@@ -82,7 +83,7 @@ namespace ft {
 
 		/*
 			(3)	range constructor
-			Constructs a container with as many elements as the range (first,last),
+			Constructs a container with as many elements as the range [ first, last [
 			with each element constructed from its corresponding element in that range,
 			in the same order.
 		*/
