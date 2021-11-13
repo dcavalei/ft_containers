@@ -1,4 +1,11 @@
+
+#ifndef _IS_TEST
+#include <type_traits>
+namespace ft = std;
+#else
 #include "type_traits.hpp"
+#endif
+
 #include <iostream>
 
 template <class T>
@@ -12,11 +19,6 @@ int main() {
 
 	std::cout << std::boolalpha;
  	std::cout << "i is odd: " << is_odd(i) << std::endl;
-
-	// float i = 1;
-
-	// std::cout << std::boolalpha;
- 	// std::cout << "i is odd: " << is_odd(i) << std::endl;
 
 
 	return 0;

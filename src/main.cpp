@@ -12,34 +12,19 @@ typename ft::enable_if< ft::is_integral<T>::value, bool >::type	is_odd (T i) {
 
 int main () {
 
-	ft::vector<int> foo (2,100);
-	std::vector<int> bar (5,0);
+	std::cout << std::boolalpha;
 
-	std::vector<int> tmp(bar);
-		// std::cout << "wow" << std::endl;
-	bar.resize(2);
+	ft::is_integral<float>::value_type value = ft::is_integral<float>::value;
 
-	for (std::vector<int>::iterator it = bar.begin(); it != bar.end(); ++it)
-		std::cout << *it << '\n';
-
-	std::cout << "Size of foo: " << int(foo.size()) << '\n';
-	std::cout << "Capacity of foo: " << int(foo.capacity()) << '\n';
-	std::cout << "-----------------------" << '\n';
-	std::cout << "Size of bar: " << int(bar.size()) << '\n';
-	std::cout << "Capacity of bar: " << int(bar.capacity()) << '\n';
-	std::cout << "-----------------------" << '\n';
-	std::cout << "Size of tmp: " << int(tmp.size()) << '\n';
-	std::cout << "Capacity of tmp: " << int(tmp.capacity()) << '\n';
-
-	ft::iterator<int> it(&tmp[0]);
-
-	std::cout << ft::is_integral<int>::value << std::endl;
+	std::cout << value << std::endl;
 
 	short int i = 1;
 
-	std::cout << std::boolalpha;
  	std::cout << "i is odd: " << is_odd(i) << std::endl;
-	// std::cout << "i is even: " << is_even(i) << std::endl;
+
+	ft::integral_constant<int, false>::value_type name = ft::integral_constant<int, true>();
+
+ 	std::cout << name << std::endl;
 
 	return 0;
 }

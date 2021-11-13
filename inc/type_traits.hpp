@@ -32,46 +32,46 @@ namespace ft {
 	// https://www.cplusplus.com/reference/type_traits/is_integral/
 
 	template< class T >
-	struct is_integral : integral_constant< T, false > {};
+	struct is_integral : false_type {};
 
 	template<>
-	struct is_integral< bool > : integral_constant< bool, true > {};
+	struct is_integral< bool > : true_type {};
 
 	template<>
-	struct is_integral< char > : integral_constant< char, true > {};
+	struct is_integral< char > : true_type {};
 
 	template<>
-	struct is_integral< wchar_t > : integral_constant< wchar_t, true > {};
+	struct is_integral< wchar_t > : true_type {};
 
 	template<>
-	struct is_integral< signed char > : integral_constant< signed char, true > {};
+	struct is_integral< signed char > : true_type {};
 
 	template<>
-	struct is_integral< short int > : integral_constant< short int, true > {};
+	struct is_integral< short int > : true_type {};
 
 	template<>
-	struct is_integral< int > : integral_constant< int, true > {};
+	struct is_integral< int > : true_type {};
 
 	template<>
-	struct is_integral< long int > : integral_constant< long int, true > {};
+	struct is_integral< long int > : true_type {};
 
 	template<>
-	struct is_integral< long long int > : integral_constant< long long int, true > {};
+	struct is_integral< long long int > : true_type {};
 
 	template<>
-	struct is_integral< unsigned char > : integral_constant< unsigned char, true > {};
+	struct is_integral< unsigned char > : true_type {};
 
 	template<>
-	struct is_integral< unsigned short int > : integral_constant< unsigned short int, true > {};
+	struct is_integral< unsigned short int > : true_type {};
 
 	template<>
-	struct is_integral< unsigned int > : integral_constant< unsigned int, true > {};
+	struct is_integral< unsigned int > : true_type {};
 
 	template<>
-	struct is_integral< unsigned long int > : integral_constant< unsigned long int, true > {};
+	struct is_integral< unsigned long int > : true_type {};
 
 	template<>
-	struct is_integral< unsigned long long int > : integral_constant< unsigned long long int, true > {};
+	struct is_integral< unsigned long long int > : true_type {};
 
 	// https://www.cplusplus.com/reference/type_traits/enable_if/
 

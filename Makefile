@@ -19,11 +19,9 @@ RED			= \033[0;31m
 GREEN		= \033[0;32m
 NC			= \033[0m
 # Rules
+VAR			= Hello
 
 all:		$(NAME)
-
-d:
-		@echo $(SRC)
 
 test:		$(OBJ_TEST)
 
@@ -35,12 +33,17 @@ obj/test/%.o:	test/%.cpp $(INC) Makefile
 
 				$(eval FILE_NAME=$(subst .o,,$@))
 				@mkdir -pv $(dir $@)
+
+				$(eval CPPFLAGS=$(subst -std=c++11,-std=c++98,$(CPPFLAGS)))
 				@$(CCPP) $(CPPFLAGS) -D_IS_TEST -I$(INC_DIR) -c $< -o $@
 				@$(CCPP) $(CPPFLAGS) $@ -o $(FILE_NAME)_ft
 				@./$(FILE_NAME)_ft > $(FILE_NAME)_ft.log
+
+				$(eval CPPFLAGS=$(subst -std=c++98,-std=c++11,$(CPPFLAGS)))
 				@$(CCPP) $(CPPFLAGS) -I$(INC_DIR) -c $< -o $@
 				@$(CCPP) $(CPPFLAGS) $@ -o $(FILE_NAME)_std
 				@./$(FILE_NAME)_std > $(FILE_NAME)_std.log
+
 				@(diff $(FILE_NAME)_std.log $(FILE_NAME)_ft.log > $(FILE_NAME).diff && echo "$(GREEN)$(FILE_NAME).diff$(NC)" && rm $(FILE_NAME).diff) \
 				|| (echo "$(RED)$(FILE_NAME).diff$(NC)" && cat $(FILE_NAME).diff)
 

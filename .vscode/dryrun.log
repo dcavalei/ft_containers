@@ -1,77 +1,14 @@
-make test --dry-run --keep-going --print-directory
+make run --dry-run --keep-going --print-directory
 make: Entering directory '/home/dcavalei/Desktop/ft_containers'
  
-mkdir -pv obj/test/
-clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_iterator.cpp -o obj/test/test_iterator.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_iterator.o -o obj/test/test_iterator_ft
-./obj/test/test_iterator_ft > obj/test/test_iterator_ft.log
-clang++ -Wall -Wextra -Werror -std=c++98 -Iinc -c test/test_iterator.cpp -o obj/test/test_iterator.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_iterator.o -o obj/test/test_iterator_std
-./obj/test/test_iterator_std > obj/test/test_iterator_std.log
-(diff obj/test/test_iterator_std.log obj/test/test_iterator_ft.log > obj/test/test_iterator.diff && echo "\033[0;32mobj/test/test_iterator.diff\033[0m" && rm obj/test/test_iterator.diff) \
-			|| (echo "\033[0;31mobj/test/test_iterator.diff\033[0m" && cat obj/test/test_iterator.diff)
-mkdir -pv obj/test/
-clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_enable_if.cpp -o obj/test/test_enable_if.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_enable_if.o -o obj/test/test_enable_if_ft
-./obj/test/test_enable_if_ft > obj/test/test_enable_if_ft.log
-clang++ -Wall -Wextra -Werror -std=c++98 -Iinc -c test/test_enable_if.cpp -o obj/test/test_enable_if.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_enable_if.o -o obj/test/test_enable_if_std
-./obj/test/test_enable_if_std > obj/test/test_enable_if_std.log
-(diff obj/test/test_enable_if_std.log obj/test/test_enable_if_ft.log > obj/test/test_enable_if.diff && echo "\033[0;32mobj/test/test_enable_if.diff\033[0m" && rm obj/test/test_enable_if.diff) \
-			|| (echo "\033[0;31mobj/test/test_enable_if.diff\033[0m" && cat obj/test/test_enable_if.diff)
-mkdir -pv obj/test/
-clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_resize.cpp -o obj/test/test_resize.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_resize.o -o obj/test/test_resize_ft
-./obj/test/test_resize_ft > obj/test/test_resize_ft.log
-clang++ -Wall -Wextra -Werror -std=c++98 -Iinc -c test/test_resize.cpp -o obj/test/test_resize.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_resize.o -o obj/test/test_resize_std
-./obj/test/test_resize_std > obj/test/test_resize_std.log
-(diff obj/test/test_resize_std.log obj/test/test_resize_ft.log > obj/test/test_resize.diff && echo "\033[0;32mobj/test/test_resize.diff\033[0m" && rm obj/test/test_resize.diff) \
-			|| (echo "\033[0;31mobj/test/test_resize.diff\033[0m" && cat obj/test/test_resize.diff)
-mkdir -pv obj/test/
-clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_default_ctor.cpp -o obj/test/test_default_ctor.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_default_ctor.o -o obj/test/test_default_ctor_ft
-./obj/test/test_default_ctor_ft > obj/test/test_default_ctor_ft.log
-clang++ -Wall -Wextra -Werror -std=c++98 -Iinc -c test/test_default_ctor.cpp -o obj/test/test_default_ctor.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_default_ctor.o -o obj/test/test_default_ctor_std
-./obj/test/test_default_ctor_std > obj/test/test_default_ctor_std.log
-(diff obj/test/test_default_ctor_std.log obj/test/test_default_ctor_ft.log > obj/test/test_default_ctor.diff && echo "\033[0;32mobj/test/test_default_ctor.diff\033[0m" && rm obj/test/test_default_ctor.diff) \
-			|| (echo "\033[0;31mobj/test/test_default_ctor.diff\033[0m" && cat obj/test/test_default_ctor.diff)
-mkdir -pv obj/test/
-clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_reserve.cpp -o obj/test/test_reserve.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_reserve.o -o obj/test/test_reserve_ft
-./obj/test/test_reserve_ft > obj/test/test_reserve_ft.log
-clang++ -Wall -Wextra -Werror -std=c++98 -Iinc -c test/test_reserve.cpp -o obj/test/test_reserve.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_reserve.o -o obj/test/test_reserve_std
-./obj/test/test_reserve_std > obj/test/test_reserve_std.log
-(diff obj/test/test_reserve_std.log obj/test/test_reserve_ft.log > obj/test/test_reserve.diff && echo "\033[0;32mobj/test/test_reserve.diff\033[0m" && rm obj/test/test_reserve.diff) \
-			|| (echo "\033[0;31mobj/test/test_reserve.diff\033[0m" && cat obj/test/test_reserve.diff)
-mkdir -pv obj/test/
-clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_range_ctor.cpp -o obj/test/test_range_ctor.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_range_ctor.o -o obj/test/test_range_ctor_ft
-./obj/test/test_range_ctor_ft > obj/test/test_range_ctor_ft.log
-clang++ -Wall -Wextra -Werror -std=c++98 -Iinc -c test/test_range_ctor.cpp -o obj/test/test_range_ctor.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_range_ctor.o -o obj/test/test_range_ctor_std
-./obj/test/test_range_ctor_std > obj/test/test_range_ctor_std.log
-(diff obj/test/test_range_ctor_std.log obj/test/test_range_ctor_ft.log > obj/test/test_range_ctor.diff && echo "\033[0;32mobj/test/test_range_ctor.diff\033[0m" && rm obj/test/test_range_ctor.diff) \
-			|| (echo "\033[0;31mobj/test/test_range_ctor.diff\033[0m" && cat obj/test/test_range_ctor.diff)
-mkdir -pv obj/test/
-clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_copy_ctor.cpp -o obj/test/test_copy_ctor.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_copy_ctor.o -o obj/test/test_copy_ctor_ft
-./obj/test/test_copy_ctor_ft > obj/test/test_copy_ctor_ft.log
-clang++ -Wall -Wextra -Werror -std=c++98 -Iinc -c test/test_copy_ctor.cpp -o obj/test/test_copy_ctor.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_copy_ctor.o -o obj/test/test_copy_ctor_std
-./obj/test/test_copy_ctor_std > obj/test/test_copy_ctor_std.log
-(diff obj/test/test_copy_ctor_std.log obj/test/test_copy_ctor_ft.log > obj/test/test_copy_ctor.diff && echo "\033[0;32mobj/test/test_copy_ctor.diff\033[0m" && rm obj/test/test_copy_ctor.diff) \
-			|| (echo "\033[0;31mobj/test/test_copy_ctor.diff\033[0m" && cat obj/test/test_copy_ctor.diff)
-mkdir -pv obj/test/
-clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_fill_ctor.cpp -o obj/test/test_fill_ctor.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_fill_ctor.o -o obj/test/test_fill_ctor_ft
-./obj/test/test_fill_ctor_ft > obj/test/test_fill_ctor_ft.log
-clang++ -Wall -Wextra -Werror -std=c++98 -Iinc -c test/test_fill_ctor.cpp -o obj/test/test_fill_ctor.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_fill_ctor.o -o obj/test/test_fill_ctor_std
-./obj/test/test_fill_ctor_std > obj/test/test_fill_ctor_std.log
-(diff obj/test/test_fill_ctor_std.log obj/test/test_fill_ctor_ft.log > obj/test/test_fill_ctor.diff && echo "\033[0;32mobj/test/test_fill_ctor.diff\033[0m" && rm obj/test/test_fill_ctor.diff) \
-			|| (echo "\033[0;31mobj/test/test_fill_ctor.diff\033[0m" && cat obj/test/test_fill_ctor.diff)
+mkdir -pv obj/src/
+clang++ -Wall -Wextra -Werror -std=c++98 -Iinc -c src/vector.cpp -o obj/src/vector.o
+ 
+mkdir -pv obj/src/
+clang++ -Wall -Wextra -Werror -std=c++98 -Iinc -c src/main.cpp -o obj/src/main.o
+ 
+clang++ -Wall -Wextra -Werror -std=c++98 obj/src/vector.o obj/src/main.o -o main.out
+./main.out
+ 
 make: Leaving directory '/home/dcavalei/Desktop/ft_containers'
  
