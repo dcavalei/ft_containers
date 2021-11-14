@@ -1,9 +1,8 @@
-
 #ifndef _IS_TEST
-#include <type_traits>
+# include <type_traits>
 namespace ft = std;
 #else
-#include "type_traits.hpp"
+# include "type_traits.hpp"
 #endif
 
 #include <iostream>

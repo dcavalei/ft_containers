@@ -14,9 +14,11 @@ int main () {
 
 	std::cout << std::boolalpha;
 
-	ft::is_integral<float>::value_type value = ft::is_integral<float>::value;
+	std::cout << "ft::is_integral<float>::value_type value = ft::is_integral<float>::value;" << std::endl;
+	
 
-	std::cout << value << std::endl;
+	std::cout << (ft::is_integral<int>::type() == ft::true_type()) << std::endl;
+
 
 	short int i = 1;
 

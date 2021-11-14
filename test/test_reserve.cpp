@@ -28,7 +28,6 @@ void	test_reserve( size_type initial_size, size_type to_reserve ) {
 		foo[i] = rand() % MAX_RANGE;
 	}
 
-
 	foo.reserve(to_reserve);
 	size = foo.size();
 

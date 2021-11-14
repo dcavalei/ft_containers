@@ -1,11 +1,12 @@
-// #ifndef _IS_TEST
-// # include <vector>
-// namespace ft = std;
-// #else
+#ifndef _IS_TEST
+# include <vector>
+namespace ft = std;
+#else
 # include "vector.hpp"
-// #endif // _IS_TEST
+#endif // _IS_TEST
 
 # include "test.hpp"
+
 # define SIZE 42
 
 typedef ft::vector<int>::iterator 			iterator;
