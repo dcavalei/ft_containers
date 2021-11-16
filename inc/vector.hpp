@@ -6,7 +6,7 @@
 /*   By: dcavalei <dcavalei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:42:55 by dcavalei          #+#    #+#             */
-/*   Updated: 2021/11/14 13:08:45 by dcavalei         ###   ########.fr       */
+/*   Updated: 2021/11/16 18:15:53 by dcavalei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <iostream>
 #include <stdexcept>
 #include "iterator.hpp"
+#include "type_traits.hpp"
 
 namespace ft {
 
@@ -27,7 +28,15 @@ namespace ft {
 
 	/* ************************************** Member types ************************************** */
 
+		// template< typename Type >
+		// struct NonIntegral {
+		// 	typedef typename ft::enable_if<ft::is_integral<Type>::value == false, Type>::type	type;
+		// };
+
+
 		public:
+
+		// https://www.cplusplus.com/reference/vector/vector/?kw=vector
 
 		typedef T											value_type;			// T
 		typedef Alloc										allocator_type;		// Alloc
@@ -35,12 +44,12 @@ namespace ft {
 		typedef typename allocator_type::const_reference	const_reference;	// const T&
 		typedef typename allocator_type::pointer			pointer;			// T*
 		typedef typename allocator_type::const_pointer		const_pointer;		// const T*
-		typedef typename allocator_type::size_type			size_type;			// std::size_t
-		typedef typename allocator_type::difference_type	difference_type;	// std::ptrdiff_t
-
-		// LegacyRandomAccessIterators
 		typedef ft::iterator<value_type>					iterator;
 		typedef ft::iterator<const value_type>				const_iterator;
+		typedef ft::reverse_iterator<iterator>				reverse_iterator;
+		typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
+		typedef typename allocator_type::difference_type	difference_type;	// std::ptrdiff_t
+		typedef typename allocator_type::size_type			size_type;			// std::size_t
 
 
 	/* ********************************** Private data members ********************************** */
@@ -87,14 +96,19 @@ namespace ft {
 			with each element constructed from its corresponding element in that range,
 			in the same order.
 		*/
-		vector( const iterator& first, const iterator& last,
-			const allocator_type& alloc = allocator_type() ) :
+		// vector( const iterator& first, const iterator& last,
+		// 	const allocator_type& alloc = allocator_type() ) :
+
+		template< class InputIterator >
+		vector( const InputIterator& first, const InputIterator& last,
+			const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type t = true ) :
 			_alloc(alloc),
 			_size(last - first),
 			_start(_alloc.allocate(last - first)),
 			_capacity(last - first) {
+			(void)t;
 			for (size_type i = 0; i < _size; i++) {
-				_alloc.construct(_start + i, first[i]);
+				_alloc.construct(_start + i, *(first + i));
 			}
 		}
 

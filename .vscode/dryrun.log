@@ -1,5 +1,70 @@
 make test --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/dcavalei/Desktop/ft_containers'
+make: Entering directory `/Users/dcavalei/Desktop/ft_containers'
+mkdir -pv obj/test/
+clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_copy_ctor.cpp -o obj/test/test_copy_ctor.o
+clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_copy_ctor.o -o obj/test/test_copy_ctor_ft
+./obj/test/test_copy_ctor_ft > obj/test/test_copy_ctor_ft.log
+clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_copy_ctor.cpp -o obj/test/test_copy_ctor.o
+clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_copy_ctor.o -o obj/test/test_copy_ctor_std
+./obj/test/test_copy_ctor_std > obj/test/test_copy_ctor_std.log
+(diff obj/test/test_copy_ctor_std.log obj/test/test_copy_ctor_ft.log > obj/test/test_copy_ctor.diff \
+				&& printf "\033[0;32mobj/test/test_copy_ctor.diff\033[0m\n" && rm obj/test/test_copy_ctor.diff) \
+				|| (printf "\033[0;31mobj/test/test_copy_ctor.diff\033[0m\n" && cat obj/test/test_copy_ctor.diff)
+printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
+(time ./obj/test/test_copy_ctor_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
+(time ./obj/test/test_copy_ctor_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
+mkdir -pv obj/test/
+clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_default_ctor.cpp -o obj/test/test_default_ctor.o
+clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_default_ctor.o -o obj/test/test_default_ctor_ft
+./obj/test/test_default_ctor_ft > obj/test/test_default_ctor_ft.log
+clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_default_ctor.cpp -o obj/test/test_default_ctor.o
+clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_default_ctor.o -o obj/test/test_default_ctor_std
+./obj/test/test_default_ctor_std > obj/test/test_default_ctor_std.log
+(diff obj/test/test_default_ctor_std.log obj/test/test_default_ctor_ft.log > obj/test/test_default_ctor.diff \
+				&& printf "\033[0;32mobj/test/test_default_ctor.diff\033[0m\n" && rm obj/test/test_default_ctor.diff) \
+				|| (printf "\033[0;31mobj/test/test_default_ctor.diff\033[0m\n" && cat obj/test/test_default_ctor.diff)
+printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
+(time ./obj/test/test_default_ctor_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
+(time ./obj/test/test_default_ctor_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
+mkdir -pv obj/test/
+clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_enable_if.cpp -o obj/test/test_enable_if.o
+clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_enable_if.o -o obj/test/test_enable_if_ft
+./obj/test/test_enable_if_ft > obj/test/test_enable_if_ft.log
+clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_enable_if.cpp -o obj/test/test_enable_if.o
+clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_enable_if.o -o obj/test/test_enable_if_std
+./obj/test/test_enable_if_std > obj/test/test_enable_if_std.log
+(diff obj/test/test_enable_if_std.log obj/test/test_enable_if_ft.log > obj/test/test_enable_if.diff \
+				&& printf "\033[0;32mobj/test/test_enable_if.diff\033[0m\n" && rm obj/test/test_enable_if.diff) \
+				|| (printf "\033[0;31mobj/test/test_enable_if.diff\033[0m\n" && cat obj/test/test_enable_if.diff)
+printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
+(time ./obj/test/test_enable_if_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
+(time ./obj/test/test_enable_if_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
+mkdir -pv obj/test/
+clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_equal.cpp -o obj/test/test_equal.o
+clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_equal.o -o obj/test/test_equal_ft
+./obj/test/test_equal_ft > obj/test/test_equal_ft.log
+clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_equal.cpp -o obj/test/test_equal.o
+clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_equal.o -o obj/test/test_equal_std
+./obj/test/test_equal_std > obj/test/test_equal_std.log
+(diff obj/test/test_equal_std.log obj/test/test_equal_ft.log > obj/test/test_equal.diff \
+				&& printf "\033[0;32mobj/test/test_equal.diff\033[0m\n" && rm obj/test/test_equal.diff) \
+				|| (printf "\033[0;31mobj/test/test_equal.diff\033[0m\n" && cat obj/test/test_equal.diff)
+printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
+(time ./obj/test/test_equal_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
+(time ./obj/test/test_equal_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
+mkdir -pv obj/test/
+clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_fill_ctor.cpp -o obj/test/test_fill_ctor.o
+clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_fill_ctor.o -o obj/test/test_fill_ctor_ft
+./obj/test/test_fill_ctor_ft > obj/test/test_fill_ctor_ft.log
+clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_fill_ctor.cpp -o obj/test/test_fill_ctor.o
+clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_fill_ctor.o -o obj/test/test_fill_ctor_std
+./obj/test/test_fill_ctor_std > obj/test/test_fill_ctor_std.log
+(diff obj/test/test_fill_ctor_std.log obj/test/test_fill_ctor_ft.log > obj/test/test_fill_ctor.diff \
+				&& printf "\033[0;32mobj/test/test_fill_ctor.diff\033[0m\n" && rm obj/test/test_fill_ctor.diff) \
+				|| (printf "\033[0;31mobj/test/test_fill_ctor.diff\033[0m\n" && cat obj/test/test_fill_ctor.diff)
+printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
+(time ./obj/test/test_fill_ctor_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
+(time ./obj/test/test_fill_ctor_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
 mkdir -pv obj/test/
 clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_is_integral.cpp -o obj/test/test_is_integral.o
 clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_is_integral.o -o obj/test/test_is_integral_ft
@@ -7,8 +72,9 @@ clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_is_integral.o -o obj/test
 clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_is_integral.cpp -o obj/test/test_is_integral.o
 clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_is_integral.o -o obj/test/test_is_integral_std
 ./obj/test/test_is_integral_std > obj/test/test_is_integral_std.log
-(diff obj/test/test_is_integral_std.log obj/test/test_is_integral_ft.log > obj/test/test_is_integral.diff && printf "\033[0;32mobj/test/test_is_integral.diff\033[0m\n" && rm obj/test/test_is_integral.diff) \
-			|| (printf "\033[0;31mobj/test/test_is_integral.diff\033[0m\n" && cat obj/test/test_is_integral.diff)
+(diff obj/test/test_is_integral_std.log obj/test/test_is_integral_ft.log > obj/test/test_is_integral.diff \
+				&& printf "\033[0;32mobj/test/test_is_integral.diff\033[0m\n" && rm obj/test/test_is_integral.diff) \
+				|| (printf "\033[0;31mobj/test/test_is_integral.diff\033[0m\n" && cat obj/test/test_is_integral.diff)
 printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
 (time ./obj/test/test_is_integral_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
 (time ./obj/test/test_is_integral_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
@@ -19,71 +85,52 @@ clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_iterator.o -o obj/test/te
 clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_iterator.cpp -o obj/test/test_iterator.o
 clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_iterator.o -o obj/test/test_iterator_std
 ./obj/test/test_iterator_std > obj/test/test_iterator_std.log
-(diff obj/test/test_iterator_std.log obj/test/test_iterator_ft.log > obj/test/test_iterator.diff && printf "\033[0;32mobj/test/test_iterator.diff\033[0m\n" && rm obj/test/test_iterator.diff) \
-			|| (printf "\033[0;31mobj/test/test_iterator.diff\033[0m\n" && cat obj/test/test_iterator.diff)
+(diff obj/test/test_iterator_std.log obj/test/test_iterator_ft.log > obj/test/test_iterator.diff \
+				&& printf "\033[0;32mobj/test/test_iterator.diff\033[0m\n" && rm obj/test/test_iterator.diff) \
+				|| (printf "\033[0;31mobj/test/test_iterator.diff\033[0m\n" && cat obj/test/test_iterator.diff)
 printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
 (time ./obj/test/test_iterator_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
 (time ./obj/test/test_iterator_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
 mkdir -pv obj/test/
-clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_enable_if.cpp -o obj/test/test_enable_if.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_enable_if.o -o obj/test/test_enable_if_ft
-./obj/test/test_enable_if_ft > obj/test/test_enable_if_ft.log
-clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_enable_if.cpp -o obj/test/test_enable_if.o
-clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_enable_if.o -o obj/test/test_enable_if_std
-./obj/test/test_enable_if_std > obj/test/test_enable_if_std.log
-(diff obj/test/test_enable_if_std.log obj/test/test_enable_if_ft.log > obj/test/test_enable_if.diff && printf "\033[0;32mobj/test/test_enable_if.diff\033[0m\n" && rm obj/test/test_enable_if.diff) \
-			|| (printf "\033[0;31mobj/test/test_enable_if.diff\033[0m\n" && cat obj/test/test_enable_if.diff)
-printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
-(time ./obj/test/test_enable_if_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
-(time ./obj/test/test_enable_if_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
-mkdir -pv obj/test/
-clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_resize.cpp -o obj/test/test_resize.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_resize.o -o obj/test/test_resize_ft
-./obj/test/test_resize_ft > obj/test/test_resize_ft.log
-clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_resize.cpp -o obj/test/test_resize.o
-clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_resize.o -o obj/test/test_resize_std
-./obj/test/test_resize_std > obj/test/test_resize_std.log
-(diff obj/test/test_resize_std.log obj/test/test_resize_ft.log > obj/test/test_resize.diff && printf "\033[0;32mobj/test/test_resize.diff\033[0m\n" && rm obj/test/test_resize.diff) \
-			|| (printf "\033[0;31mobj/test/test_resize.diff\033[0m\n" && cat obj/test/test_resize.diff)
-printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
-(time ./obj/test/test_resize_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
-(time ./obj/test/test_resize_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
-mkdir -pv obj/test/
-clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_default_ctor.cpp -o obj/test/test_default_ctor.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_default_ctor.o -o obj/test/test_default_ctor_ft
-./obj/test/test_default_ctor_ft > obj/test/test_default_ctor_ft.log
-clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_default_ctor.cpp -o obj/test/test_default_ctor.o
-clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_default_ctor.o -o obj/test/test_default_ctor_std
-./obj/test/test_default_ctor_std > obj/test/test_default_ctor_std.log
-(diff obj/test/test_default_ctor_std.log obj/test/test_default_ctor_ft.log > obj/test/test_default_ctor.diff && printf "\033[0;32mobj/test/test_default_ctor.diff\033[0m\n" && rm obj/test/test_default_ctor.diff) \
-			|| (printf "\033[0;31mobj/test/test_default_ctor.diff\033[0m\n" && cat obj/test/test_default_ctor.diff)
-printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
-(time ./obj/test/test_default_ctor_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
-(time ./obj/test/test_default_ctor_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
-mkdir -pv obj/test/
-clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_reserve.cpp -o obj/test/test_reserve.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_reserve.o -o obj/test/test_reserve_ft
-./obj/test/test_reserve_ft > obj/test/test_reserve_ft.log
-clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_reserve.cpp -o obj/test/test_reserve.o
-clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_reserve.o -o obj/test/test_reserve_std
-./obj/test/test_reserve_std > obj/test/test_reserve_std.log
-(diff obj/test/test_reserve_std.log obj/test/test_reserve_ft.log > obj/test/test_reserve.diff && printf "\033[0;32mobj/test/test_reserve.diff\033[0m\n" && rm obj/test/test_reserve.diff) \
-			|| (printf "\033[0;31mobj/test/test_reserve.diff\033[0m\n" && cat obj/test/test_reserve.diff)
-printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
-(time ./obj/test/test_reserve_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
-(time ./obj/test/test_reserve_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
-mkdir -pv obj/test/
 clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_lexicographical_compare.cpp -o obj/test/test_lexicographical_compare.o
 clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_lexicographical_compare.o -o obj/test/test_lexicographical_compare_ft
 ./obj/test/test_lexicographical_compare_ft > obj/test/test_lexicographical_compare_ft.log
+ 
 clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_lexicographical_compare.cpp -o obj/test/test_lexicographical_compare.o
 clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_lexicographical_compare.o -o obj/test/test_lexicographical_compare_std
 ./obj/test/test_lexicographical_compare_std > obj/test/test_lexicographical_compare_std.log
-(diff obj/test/test_lexicographical_compare_std.log obj/test/test_lexicographical_compare_ft.log > obj/test/test_lexicographical_compare.diff && printf "\033[0;32mobj/test/test_lexicographical_compare.diff\033[0m\n" && rm obj/test/test_lexicographical_compare.diff) \
-			|| (printf "\033[0;31mobj/test/test_lexicographical_compare.diff\033[0m\n" && cat obj/test/test_lexicographical_compare.diff)
+(diff obj/test/test_lexicographical_compare_std.log obj/test/test_lexicographical_compare_ft.log > obj/test/test_lexicographical_compare.diff \
+				&& printf "\033[0;32mobj/test/test_lexicographical_compare.diff\033[0m\n" && rm obj/test/test_lexicographical_compare.diff) \
+				|| (printf "\033[0;31mobj/test/test_lexicographical_compare.diff\033[0m\n" && cat obj/test/test_lexicographical_compare.diff)
 printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
 (time ./obj/test/test_lexicographical_compare_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
 (time ./obj/test/test_lexicographical_compare_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
+mkdir -pv obj/test/
+clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_make_pair.cpp -o obj/test/test_make_pair.o
+clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_make_pair.o -o obj/test/test_make_pair_ft
+./obj/test/test_make_pair_ft > obj/test/test_make_pair_ft.log
+clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_make_pair.cpp -o obj/test/test_make_pair.o
+clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_make_pair.o -o obj/test/test_make_pair_std
+./obj/test/test_make_pair_std > obj/test/test_make_pair_std.log
+(diff obj/test/test_make_pair_std.log obj/test/test_make_pair_ft.log > obj/test/test_make_pair.diff \
+				&& printf "\033[0;32mobj/test/test_make_pair.diff\033[0m\n" && rm obj/test/test_make_pair.diff) \
+				|| (printf "\033[0;31mobj/test/test_make_pair.diff\033[0m\n" && cat obj/test/test_make_pair.diff)
+printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
+(time ./obj/test/test_make_pair_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
+(time ./obj/test/test_make_pair_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
+mkdir -pv obj/test/
+clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_pair.cpp -o obj/test/test_pair.o
+clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_pair.o -o obj/test/test_pair_ft
+./obj/test/test_pair_ft > obj/test/test_pair_ft.log
+clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_pair.cpp -o obj/test/test_pair.o
+clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_pair.o -o obj/test/test_pair_std
+./obj/test/test_pair_std > obj/test/test_pair_std.log
+(diff obj/test/test_pair_std.log obj/test/test_pair_ft.log > obj/test/test_pair.diff \
+				&& printf "\033[0;32mobj/test/test_pair.diff\033[0m\n" && rm obj/test/test_pair.diff) \
+				|| (printf "\033[0;31mobj/test/test_pair.diff\033[0m\n" && cat obj/test/test_pair.diff)
+printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
+(time ./obj/test/test_pair_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
+(time ./obj/test/test_pair_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
 mkdir -pv obj/test/
 clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_range_ctor.cpp -o obj/test/test_range_ctor.o
 clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_range_ctor.o -o obj/test/test_range_ctor_ft
@@ -91,46 +138,37 @@ clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_range_ctor.o -o obj/test/
 clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_range_ctor.cpp -o obj/test/test_range_ctor.o
 clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_range_ctor.o -o obj/test/test_range_ctor_std
 ./obj/test/test_range_ctor_std > obj/test/test_range_ctor_std.log
-(diff obj/test/test_range_ctor_std.log obj/test/test_range_ctor_ft.log > obj/test/test_range_ctor.diff && printf "\033[0;32mobj/test/test_range_ctor.diff\033[0m\n" && rm obj/test/test_range_ctor.diff) \
-			|| (printf "\033[0;31mobj/test/test_range_ctor.diff\033[0m\n" && cat obj/test/test_range_ctor.diff)
+(diff obj/test/test_range_ctor_std.log obj/test/test_range_ctor_ft.log > obj/test/test_range_ctor.diff \
+				&& printf "\033[0;32mobj/test/test_range_ctor.diff\033[0m\n" && rm obj/test/test_range_ctor.diff) \
+				|| (printf "\033[0;31mobj/test/test_range_ctor.diff\033[0m\n" && cat obj/test/test_range_ctor.diff)
 printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
 (time ./obj/test/test_range_ctor_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
 (time ./obj/test/test_range_ctor_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
 mkdir -pv obj/test/
-clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_equal.cpp -o obj/test/test_equal.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_equal.o -o obj/test/test_equal_ft
-./obj/test/test_equal_ft > obj/test/test_equal_ft.log
-clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_equal.cpp -o obj/test/test_equal.o
-clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_equal.o -o obj/test/test_equal_std
-./obj/test/test_equal_std > obj/test/test_equal_std.log
-(diff obj/test/test_equal_std.log obj/test/test_equal_ft.log > obj/test/test_equal.diff && printf "\033[0;32mobj/test/test_equal.diff\033[0m\n" && rm obj/test/test_equal.diff) \
-			|| (printf "\033[0;31mobj/test/test_equal.diff\033[0m\n" && cat obj/test/test_equal.diff)
+clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_reserve.cpp -o obj/test/test_reserve.o
+clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_reserve.o -o obj/test/test_reserve_ft
+./obj/test/test_reserve_ft > obj/test/test_reserve_ft.log
+clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_reserve.cpp -o obj/test/test_reserve.o
+clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_reserve.o -o obj/test/test_reserve_std
+./obj/test/test_reserve_std > obj/test/test_reserve_std.log
+(diff obj/test/test_reserve_std.log obj/test/test_reserve_ft.log > obj/test/test_reserve.diff \
+				&& printf "\033[0;32mobj/test/test_reserve.diff\033[0m\n" && rm obj/test/test_reserve.diff) \
+				|| (printf "\033[0;31mobj/test/test_reserve.diff\033[0m\n" && cat obj/test/test_reserve.diff)
 printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
-(time ./obj/test/test_equal_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
-(time ./obj/test/test_equal_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
+(time ./obj/test/test_reserve_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
+(time ./obj/test/test_reserve_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
 mkdir -pv obj/test/
-clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_copy_ctor.cpp -o obj/test/test_copy_ctor.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_copy_ctor.o -o obj/test/test_copy_ctor_ft
-./obj/test/test_copy_ctor_ft > obj/test/test_copy_ctor_ft.log
-clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_copy_ctor.cpp -o obj/test/test_copy_ctor.o
-clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_copy_ctor.o -o obj/test/test_copy_ctor_std
-./obj/test/test_copy_ctor_std > obj/test/test_copy_ctor_std.log
-(diff obj/test/test_copy_ctor_std.log obj/test/test_copy_ctor_ft.log > obj/test/test_copy_ctor.diff && printf "\033[0;32mobj/test/test_copy_ctor.diff\033[0m\n" && rm obj/test/test_copy_ctor.diff) \
-			|| (printf "\033[0;31mobj/test/test_copy_ctor.diff\033[0m\n" && cat obj/test/test_copy_ctor.diff)
+clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_resize.cpp -o obj/test/test_resize.o
+clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_resize.o -o obj/test/test_resize_ft
+./obj/test/test_resize_ft > obj/test/test_resize_ft.log
+clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_resize.cpp -o obj/test/test_resize.o
+clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_resize.o -o obj/test/test_resize_std
+./obj/test/test_resize_std > obj/test/test_resize_std.log
+(diff obj/test/test_resize_std.log obj/test/test_resize_ft.log > obj/test/test_resize.diff \
+				&& printf "\033[0;32mobj/test/test_resize.diff\033[0m\n" && rm obj/test/test_resize.diff) \
+				|| (printf "\033[0;31mobj/test/test_resize.diff\033[0m\n" && cat obj/test/test_resize.diff)
 printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
-(time ./obj/test/test_copy_ctor_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
-(time ./obj/test/test_copy_ctor_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
-mkdir -pv obj/test/
-clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_fill_ctor.cpp -o obj/test/test_fill_ctor.o
-clang++ -Wall -Wextra -Werror -std=c++98 obj/test/test_fill_ctor.o -o obj/test/test_fill_ctor_ft
-./obj/test/test_fill_ctor_ft > obj/test/test_fill_ctor_ft.log
-clang++ -Wall -Wextra -Werror -std=c++11 -Iinc -c test/test_fill_ctor.cpp -o obj/test/test_fill_ctor.o
-clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_fill_ctor.o -o obj/test/test_fill_ctor_std
-./obj/test/test_fill_ctor_std > obj/test/test_fill_ctor_std.log
-(diff obj/test/test_fill_ctor_std.log obj/test/test_fill_ctor_ft.log > obj/test/test_fill_ctor.diff && printf "\033[0;32mobj/test/test_fill_ctor.diff\033[0m\n" && rm obj/test/test_fill_ctor.diff) \
-			|| (printf "\033[0;31mobj/test/test_fill_ctor.diff\033[0m\n" && cat obj/test/test_fill_ctor.diff)
-printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
-(time ./obj/test/test_fill_ctor_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
-(time ./obj/test/test_fill_ctor_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
-make: Leaving directory '/home/dcavalei/Desktop/ft_containers'
+(time ./obj/test/test_resize_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
+(time ./obj/test/test_resize_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
+make: Leaving directory `/Users/dcavalei/Desktop/ft_containers'
  

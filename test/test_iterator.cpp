@@ -5,7 +5,7 @@ namespace ft = std;
 # include "vector.hpp"
 #endif // _IS_TEST
 
-# include "test.hpp"
+#include <iostream>
 
 # define SIZE 42
 

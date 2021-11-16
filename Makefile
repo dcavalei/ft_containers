@@ -45,7 +45,8 @@ obj/test/%.o:	test/%.cpp $(INC) Makefile
 				@$(CCPP) $(CPPFLAGS) $@ -o $(FNAME)_std
 				@./$(FNAME)_std > $(FNAME)_std.log
 
-				@(diff $(FNAME)_std.log $(FNAME)_ft.log > $(FNAME).diff && printf "$(GREEN)$(FNAME).diff$(NC)\n" && rm $(FNAME).diff) \
+				@(diff $(FNAME)_std.log $(FNAME)_ft.log > $(FNAME).diff \
+				&& printf "$(GREEN)$(FNAME).diff$(NC)\n" && rm $(FNAME).diff) \
 				|| (printf "$(RED)$(FNAME).diff$(NC)\n" && cat $(FNAME).diff)
 
 				@printf "$(BYELLOW)[ ----- Time ----- ]$(NC)\n"
