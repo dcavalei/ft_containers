@@ -71,7 +71,9 @@
 		"fstream": "cpp",
 		"__tree": "cpp",
 		"map": "cpp",
-		"stack": "cpp"
+		"stack": "cpp",
+		"cerrno": "cpp",
+		"queue": "cpp"
 	},
 	"C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
 	"makefile.launchConfigurations": [

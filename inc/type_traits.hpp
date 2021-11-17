@@ -85,6 +85,14 @@ namespace ft {
 
 	};
 
+	// https://www.cplusplus.com/reference/type_traits/is_same/
+
+	template< class T, class U >
+	struct is_same : false_type {};
+
+	template< class T >
+	struct is_same<T, T> : true_type {};
+
 }
 
 

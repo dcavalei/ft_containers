@@ -36,6 +36,7 @@ int main() {
 		reverse_iterator	rit_begin(vec.end());
 		reverse_iterator	rit_end(vec.begin());
 
+		rit_end = vec.rend();
 		std::cout << "[original values]";
 		for (reverse_iterator it(vec.end()); it != rit_end; it++) {
 			std::cout << ' ' << *it;
@@ -96,7 +97,7 @@ int main() {
 		std::cout << "[ Test " << ++n << " ] " << (rit_begin[-1] = 42) << std::endl;
 
 		std::cout << "[values]";
-		for (reverse_iterator it(vec.end()); it != rit_end; it++) {
+		for (reverse_iterator it(vec.rbegin()); it != vec.rend(); it++) {
 			std::cout << ' ' << *it;
 		}
 		std::cout << std::endl;

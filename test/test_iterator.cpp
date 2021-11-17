@@ -97,6 +97,11 @@ int main() {
 		std::cout << std::endl << "[#### Testing const_iterator ####]" << std::endl;
 
 		const_iterator	iter_const(vec.begin());
+
+		const ft::vector<int> name(vec);
+
+		ft::vector<int>::const_iterator i = name.begin();
+		i = name.end();
 		iter_const = vec.begin();
 
 		std::cout << "[original values]";

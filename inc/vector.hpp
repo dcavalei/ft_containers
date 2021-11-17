@@ -6,7 +6,7 @@
 /*   By: dcavalei <dcavalei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:42:55 by dcavalei          #+#    #+#             */
-/*   Updated: 2021/11/16 18:15:53 by dcavalei         ###   ########.fr       */
+/*   Updated: 2021/11/17 18:59:25 by dcavalei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 #include <memory>
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
+#include <stdlib.h>
 #include "iterator.hpp"
 #include "type_traits.hpp"
 
@@ -27,12 +29,6 @@ namespace ft {
 	> class vector {
 
 	/* ************************************** Member types ************************************** */
-
-		// template< typename Type >
-		// struct NonIntegral {
-		// 	typedef typename ft::enable_if<ft::is_integral<Type>::value == false, Type>::type	type;
-		// };
-
 
 		public:
 
@@ -50,7 +46,6 @@ namespace ft {
 		typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
 		typedef typename allocator_type::difference_type	difference_type;	// std::ptrdiff_t
 		typedef typename allocator_type::size_type			size_type;			// std::size_t
-
 
 	/* ********************************** Private data members ********************************** */
 
@@ -95,18 +90,21 @@ namespace ft {
 			Constructs a container with as many elements as the range [ first, last [
 			with each element constructed from its corresponding element in that range,
 			in the same order.
-		*/
-		// vector( const iterator& first, const iterator& last,
-		// 	const allocator_type& alloc = allocator_type() ) :
 
-		template< class InputIterator >
-		vector( const InputIterator& first, const InputIterator& last,
-			const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type t = true ) :
+			If Cond is true, enable_if has a public member typedef type, equal to T;
+			otherwise, there is no member typedef
+		*/
+	   	template< class InputIterator >
+		vector( InputIterator first,
+				typename ft::enable_if<
+					!ft::is_integral<InputIterator>::value,	// Cond
+					InputIterator							// T
+				>::type last,
+		 		const allocator_type& alloc = allocator_type() ) :
 			_alloc(alloc),
 			_size(last - first),
 			_start(_alloc.allocate(last - first)),
 			_capacity(last - first) {
-			(void)t;
 			for (size_type i = 0; i < _size; i++) {
 				_alloc.construct(_start + i, *(first + i));
 			}
@@ -126,7 +124,7 @@ namespace ft {
 
 		~vector() {
 			destroy();
-			deallocate();
+			_alloc.deallocate(_start, _capacity);
 		}
 
 		// Assignment operator
@@ -142,7 +140,9 @@ namespace ft {
 			} else {
 				destroy();
 			}
-			copy(other);
+			for (size_type i = 0; i < other._size; i++) {
+				_alloc.construct(_start + i, other[i]);
+			}
 			_size = other._size;
 			return (*this);
 		}
@@ -151,16 +151,37 @@ namespace ft {
 
 		// Returns an iterator pointing to the first element in the vector.
 		iterator	begin() {
-			return (_start);
+			return (iterator(_start));
+		}
+
+		const_iterator	begin() const {
+			return (const_iterator(_start));
 		}
 
 		// Returns an iterator referring to the past-the-end element in the vector container.
 		iterator	end() {
-			return (_start + _size);
+			return (iterator(_start + _size));
 		}
 
-		// reverse_iterator 		std::reverse_iterator<iterator>
-		// const_reverse_iterator 	std::reverse_iterator<const_iterator>
+		const_iterator	end() const {
+			return (const_iterator(_start + _size));
+		}
+
+		reverse_iterator	rbegin() {
+			return (reverse_iterator(end()));
+		}
+
+		const_reverse_iterator	rbegin() const {
+			return (const_reverse_iterator(end()));
+		}
+
+		reverse_iterator	rend() {
+			return (reverse_iterator(begin()));
+		}
+
+		const_reverse_iterator	rend() const {
+			return (const_reverse_iterator(begin()));
+		}
 
 	/* **************************************** Capacity **************************************** */
 
@@ -189,14 +210,14 @@ namespace ft {
 			if (n <= _capacity) {
 				return;
 			} else if (n > max_size()) {
-				throw std::length_error("can't reserve more than max_size()");
+				throw std::length_error("vector::reserve");
 			}
 
 			pointer	tmp = _alloc.allocate(n);
 			for (size_type i = 0; i < _size; i++) {
 				_alloc.construct(tmp + i, _start[i]);
 			}
-			this->destroy();
+			this->~vector();
 			_start = tmp;
 			_capacity = n;
 		}
@@ -245,22 +266,42 @@ namespace ft {
 
 	/* ************************************* Element access ************************************* */
 
-		// Element access
-		reference		operator[](size_type n) {
-			return _start[n];
+		// Element access (no-throw guarantee)
+		reference		operator[]( size_type n ) {
+			return (_start[n]);
 		}
 
-		// Element access, const only
-		const_reference	operator[](size_type n) const {
-			return _start[n];
+		// Element access, const only (no-throw guarantee)
+		const_reference	operator[]( size_type n ) const {
+			return (_start[n]);
 		}
 
 
-		//     Access element (public member function )
+		// Access element (public member function )
+		reference		at( size_type n ) {
+			_M_range_check(n);
+			return (_start[n]);
+		}
 
-		// at
-		//     Access element (public member function )
+		const_reference	at( size_type n ) const {
+			_M_range_check(n);
+			return (_start[n]);
+		}
 
+		reference		front() {
+			return (*_start);
+		}
+		const_reference	front() const{
+			return (*_start);
+		}
+
+		reference		back() {
+			return (*(start + _size - 1));
+		}
+
+		const_reference	back() const {
+			return (*(start + _size - 1));
+		}
 		// front
 		//     Access first element (public member function )
 
@@ -284,22 +325,29 @@ namespace ft {
 			}
 		}
 
-		// Free allocated memory
-		void	deallocate() {
-			_alloc.deallocate(_start, _capacity);
-		}
+		std::string	atol( size_type rhs ) {
+			std::string		str;
+			int				n = 0;
 
-		void	copy( const vector& other ) {
-			size_type	size = other._size;
-			for (size_type i = 0; i < size; i++) {
-				_alloc.construct(_start + i, other[i]);
+			for (size_type i = rhs; i != 0; i /= 10) {
+				n++;
 			}
+
+			for (; rhs != 0; rhs /= 10) {
+				str.insert(0, 1, (rhs % 10) + '0');
+			}
+			return (str);
 		}
 
-		// Range, copy val from range (start, end)
-		void	copy( size_type start, size_type end, const value_type& val = value_type() ) {
-			for (size_type i = start; i < end; i++) {
-				_alloc.construct(_start + i, val);
+		void	_M_range_check( size_type __n ) {
+
+			if ( __n >= _size ) {
+			std::string		buffer;
+
+			buffer = "vector::_M_range_check: __n (which is " + atol(__n)
+					+ ") >= this->size() (which is " + atol(_size) + ")";
+
+			throw std::out_of_range(buffer);
 			}
 		}
 
