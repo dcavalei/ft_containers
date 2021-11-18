@@ -96,6 +96,16 @@
 			"cwd": "/home/dcavalei/Desktop/ft_containers/obj/test",
 			"binaryPath": "/home/dcavalei/Desktop/ft_containers/obj/test/test_enable_if_ft",
 			"binaryArgs": []
+		},
+		{
+			"cwd": "/Users/dcavalei/Desktop/ft_containers/obj/test",
+			"binaryPath": "/Users/dcavalei/Desktop/ft_containers/obj/test/test_pair_ft",
+			"binaryArgs": []
+		},
+		{
+			"cwd": "/Users/dcavalei/Desktop/ft_containers/obj/test",
+			"binaryPath": "/Users/dcavalei/Desktop/ft_containers/obj/test/test_assign_std",
+			"binaryArgs": []
 		}
 	],
 	"makefile.extensionOutputFolder": "./.vscode"

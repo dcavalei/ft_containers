@@ -6,7 +6,7 @@
 /*   By: dcavalei <dcavalei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:42:55 by dcavalei          #+#    #+#             */
-/*   Updated: 2021/11/17 18:59:25 by dcavalei         ###   ########.fr       */
+/*   Updated: 2021/11/18 18:13:40 by dcavalei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ namespace ft {
 			If Cond is true, enable_if has a public member typedef type, equal to T;
 			otherwise, there is no member typedef
 		*/
-	   	template< class InputIterator >
+		template< class InputIterator >
 		vector( InputIterator first,
 				typename ft::enable_if<
 					!ft::is_integral<InputIterator>::value,	// Cond
@@ -140,6 +140,7 @@ namespace ft {
 			} else {
 				destroy();
 			}
+
 			for (size_type i = 0; i < other._size; i++) {
 				_alloc.construct(_start + i, other[i]);
 			}
@@ -182,6 +183,79 @@ namespace ft {
 		const_reverse_iterator	rend() const {
 			return (const_reverse_iterator(begin()));
 		}
+
+
+
+	/* *************************************** Modifiers **************************************** */
+
+		// Assign vector content
+		template< class InputIterator >
+		void	assign( InputIterator first,
+						typename ft::enable_if<
+							!ft::is_integral<InputIterator>::value,	// Cond
+							InputIterator							// T
+						>::type last ) {
+			destroy();
+			_size = last - first;
+			reserve(_size);
+			for (size_type i = 0; i < _size; i++) {
+				_alloc.construct(_start + i, *(first + i));
+			}
+		}
+
+		// Add element at the end
+		void	push_back( const value_type& val ) {
+			if (empty()) {
+				reserve(1);
+			} else if (_size == _capacity) {
+				(_size * 2 < max_size()) ? reserve(_size * 2) : reserve(max_size());
+			}
+			_alloc.construct(_start + _size++, val);
+		}
+
+		// Delete last element
+		void	pop_back() {
+			_alloc.destroy(_start + --_size);
+		}
+
+		// single element (1)
+		iterator	insert( iterator position, const value_type& val ) {
+			if (_size == _capacity) {
+				pointer		tmp;
+				(_size * 2 < max_size()) ? tmp = _alloc.allocate(_size * 2) : tmp = _alloc.allocate(max_size());
+				
+			}
+
+			iterator	begin(position);
+			iterator	end(this->end());
+			do
+			{
+				_start[_size] = _start[_size - 1];
+			} while (begin != --end);
+			_alloc.construct(_start + (position - this->begin()), val);
+			return (position);
+		}
+
+		// fill (2)
+		void	insert( iterator position, size_type n, const value_type& val );
+
+		// range (3)
+		template< class InputIterator >
+			void	insert( iterator position, InputIterator first, InputIterator last );
+
+
+// insert
+//     Insert elements (public member function )
+
+// erase
+//     Erase elements (public member function )
+
+// swap
+//     Swap content (public member function )
+
+// clear
+//     Clear content (public member function )
+
 
 	/* **************************************** Capacity **************************************** */
 
@@ -276,8 +350,7 @@ namespace ft {
 			return (_start[n]);
 		}
 
-
-		// Access element (public member function )
+		// Access element (public member function)
 		reference		at( size_type n ) {
 			_M_range_check(n);
 			return (_start[n]);
@@ -291,28 +364,18 @@ namespace ft {
 		reference		front() {
 			return (*_start);
 		}
-		const_reference	front() const{
+
+		const_reference	front() const {
 			return (*_start);
 		}
 
 		reference		back() {
-			return (*(start + _size - 1));
+			return (*(_start + _size - 1));
 		}
 
 		const_reference	back() const {
-			return (*(start + _size - 1));
+			return (*(_start + _size - 1));
 		}
-		// front
-		//     Access first element (public member function )
-
-		// back
-		//     Access last element (public member function )
-
-		// data
-		//     Access data (public member function )
-
-		// ###------------- Element access -------------###
-		// ###------------------------------------------###
 
 	/* ************************************ Helper functions ************************************ */
 
