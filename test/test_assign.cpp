@@ -42,6 +42,20 @@ void	test_assign( vector& vec, size_type initial_size, size_type range_size ) {
 	std::cout << "[size] " << foo.size() << std::endl;
 	std::cout << "[capacity] " << foo.capacity() << std::endl;
 
+	foo.assign(rand() % 100, rand() % 1000);
+
+	std::cout << "[##### Test " << ++n << " #####]" << std::endl;
+
+	std::cout << "[values]";
+	ite = foo.end();
+	for (iterator	it = foo.begin(); it != ite; ++it) {
+		std::cout << ' ' << *it;
+	}
+	std::cout << std::endl;
+
+	std::cout << "[size] " << foo.size() << std::endl;
+	std::cout << "[capacity] " << foo.capacity() << std::endl;
+
 }
 
 int main ()

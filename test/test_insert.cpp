@@ -31,7 +31,7 @@ void	display( vector& vec ) {
 int main() {
 
 	vector		vec;
-	vector		vec_full;
+	vector		vec_full(3);
 
 	for (size_type i = 0; i < SIZE; i++) {
 		vec_full.push_back(rand() % 100);
@@ -47,23 +47,14 @@ int main() {
 	}
 	display(vec);
 
-	it = vec.insert(vec.begin(), 10);
-	display(vec);
-	it = vec.insert(vec.begin(), 20);
-	display(vec);
-	it = vec.insert(it, 30);
-	display(vec);
-	it = vec.insert(it, 40);
-	display(vec);
-	it = vec.insert(it, 50);
-	display(vec);
+	it = vec_full.begin();
+	for (size_type i = 0; i < 100; i++) {
+		display(vec_full);
+		it = vec_full.insert(it, rand() % 100);
+		display(vec_full);
+		it = vec_full.insert(vec_full.begin() + (rand() % vec_full.size()), rand() % 100);
+	}
+	display(vec_full);
 
-
-	
-	// std::cout << "[#### Testing insert() ####]" << std::endl;
-	// display(vec);
-	// it = vec.insert(it, 42);
-	// it = vec.insert(it, 42);
-	// it = vec.insert(it, 42);
 	return 0;
 }

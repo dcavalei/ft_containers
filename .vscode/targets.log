@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Nov 18 22:54:59 2021
+# Make data base, printed on Fri Nov 19 14:01:56 2021
 
 # Variables
 
@@ -65,13 +65,13 @@ GNUMAKEFLAGS :=
 # environment
 XDG_DATA_DIRS = /usr/share/xfce4:/home/dcavalei/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/usr/share
 # environment
-DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-0m5bElW3Ob,guid=9155887e80405d73e95bfa196196cc1f
+DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-jqlKrRJHXS,guid=78ffb83042245389d294fb7e6197a756
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
 QT_SCALE_FACTOR = 1
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-67419db4-19b1-4d5e-a1c9-63124b47c7de.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-248fc4d9-040c-45db-a99c-fb96507f753d.sock
 # environment
 VSCODE_CWD = /home/dcavalei/Desktop/ft_containers
 # environment
@@ -83,11 +83,11 @@ PATH = /usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-SESSION_MANAGER = local/mx:@/tmp/.ICE-unix/3491,unix/mx:/tmp/.ICE-unix/3491
+SESSION_MANAGER = local/mx:@/tmp/.ICE-unix/3653,unix/mx:/tmp/.ICE-unix/3653
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
-WINDOWID = 130023427
+WINDOWID = 132120579
 # makefile (from 'Makefile', line 16)
 TEST_DIR = test
 # environment
@@ -111,9 +111,10 @@ LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 # environment
 XDG_SESSION_DESKTOP = xfce
 # environment
-SSH_AUTH_SOCK = /tmp/ssh-W05n04U979Vi/agent.3491
+SSH_AUTH_SOCK = /tmp/ssh-sBivW9Aq82i4/agent.3653
 # automatic
 %F = $(notdir $%)
+ 
 # environment
 DISPLAY = :0.0
 # environment
@@ -127,7 +128,7 @@ QT_QPA_PLATFORMTHEME = gtk2
 # environment
 XDG_SEAT = seat0
 # environment
-SSH_AGENT_PID = 3562
+SSH_AGENT_PID = 3736
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = XFCE
 # makefile (from 'Makefile', line 19)
@@ -143,7 +144,7 @@ HOME = /home/dcavalei
 # environment
 VSCODE_CLI = 1
 # environment
-VSCODE_CODE_CACHE_PATH = /home/dcavalei/.config/Code/CachedData/3a6960b964327f0e3882ce18fcebd07ed191b316
+VSCODE_CODE_CACHE_PATH = /home/dcavalei/.config/Code/CachedData/ccbaa2d27e38e5afa3e5c21c1c7bef4657064247
 # environment
 LOGNAME = dcavalei
 # environment
@@ -195,7 +196,7 @@ OLDPWD = /home/dcavalei
 # environment
 XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-2a99230f-1.62.2-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-2a99230f-1.62.3-main.sock
 # environment
 PANEL_GDK_CORE_DEVICE_EVENTS = 0
 # makefile (from 'Makefile', line 18)
@@ -251,7 +252,7 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 4763
+VSCODE_PID = 31209
 # variable set hash-table stats:
 # Load=121/1024=12%, Rehash=0, Collisions=15/180=8%
 
@@ -261,13 +262,12 @@ VSCODE_PID = 4763
 
 # Directories
 
- 
-# . (device 66309, inode 1345528): 13 files, no impossibilities.
+# . (device 66309, inode 1345528): 12 files, no impossibilities.
 # test (device 66309, inode 1357072): No files, no impossibilities so far.
 # src (device 66309, inode 1345662): 1 files, no impossibilities so far.
 # inc (device 66309, inode 1345656): 9 files, no impossibilities so far.
 
-# 23 files, no impossibilities in 4 directories.
+# 22 files, no impossibilities in 4 directories.
 
 # Implicit Rules
 
@@ -321,7 +321,7 @@ inc/iterator.hpp:
 # Not a target:
 inc/vector.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-18 22:47:11.698725431
+#  Last modified 2021-11-19 14:01:45.40385921
 #  File has been updated.
 #  Successfully updated.
 
@@ -336,6 +336,7 @@ all: main.out
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
+ 
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/6=0%
@@ -370,7 +371,7 @@ obj/test/test_make_pair.o:
 # Not a target:
 inc/iterator_traits.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-13 12:04:25.321794388
+#  Last modified 2021-11-19 00:46:35.716213948
 #  File has been updated.
 #  Successfully updated.
 
@@ -384,7 +385,7 @@ inc/type_traits.hpp:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-17 10:18:49.013246212
+#  Last modified 2021-11-19 11:12:35.391840942
 #  File has been updated.
 #  Successfully updated.
 
@@ -480,6 +481,7 @@ inc/test.hpp:
 #  File has been updated.
 #  Successfully updated.
 
+ 
 obj/src/vector.o: src/vector.cpp inc/vector.hpp inc/algorithm.hpp inc/iterator.hpp inc/type_traits.hpp inc/test.hpp inc/iterator_traits.hpp inc/utility.hpp inc/color.hpp Makefile
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'vector'
@@ -563,7 +565,6 @@ obj/test/test_assign.o:
 
 # Not a target:
 obj/test/test_pop_back.o:
- 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -594,12 +595,12 @@ obj/test/test_default_ctor.o:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 68 / storage = 1021 B / avg = 15 B
-# current buf: size = 8162 B / used = 1021 B / count = 68 / avg = 15 B
+# strcache buffers: 1 (0) / strings = 67 / storage = 1011 B / avg = 15 B
+# current buf: size = 8162 B / used = 1011 B / count = 67 / avg = 15 B
 
-# strcache performance: lookups = 125 / hit rate = 45%
+# strcache performance: lookups = 124 / hit rate = 45%
 # hash-table stats:
-# Load=68/8192=1%, Rehash=0, Collisions=1/125=1%
-# Finished Make data base on Thu Nov 18 22:54:59 2021
+# Load=67/8192=1%, Rehash=0, Collisions=1/124=1%
+# Finished Make data base on Fri Nov 19 14:01:56 2021
 
  

@@ -20,8 +20,6 @@ int main () {
 
 	std::allocator<int>	alloc;
 
-	int *ptr = alloc.allocate(alloc.max_size() / 2);
-	alloc.deallocate(ptr, alloc.max_size() / 2);
 	short int i = 1;
 
  	std::cout << "i is odd: " << is_odd(i) << std::endl;

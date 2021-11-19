@@ -234,7 +234,6 @@ clang++ -Wall -Wextra -Werror -std=c++11 obj/test/test_copy_ctor.o -o obj/test/t
 			|| (printf "\033[0;31mobj/test/test_copy_ctor.diff\033[0m\n" && cat obj/test/test_copy_ctor.diff)
 printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
 (time ./obj/test/test_copy_ctor_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
- 
 (time ./obj/test/test_copy_ctor_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
 mkdir -pv obj/test/
 clang++ -Wall -Wextra -Werror -std=c++98 -D_IS_TEST -Iinc -c test/test_fill_ctor.cpp -o obj/test/test_fill_ctor.o

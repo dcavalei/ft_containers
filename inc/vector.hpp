@@ -6,7 +6,7 @@
 /*   By: dcavalei <dcavalei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:42:55 by dcavalei          #+#    #+#             */
-/*   Updated: 2021/11/19 01:40:40 by dcavalei         ###   ########.fr       */
+/*   Updated: 2021/11/19 15:44:26 by dcavalei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,11 @@ namespace ft {
 			otherwise, there is no member typedef
 		*/
 		template< class InputIterator >
-		vector( InputIterator first,
-				typename ft::enable_if<
+		vector( typename ft::enable_if<
 					!ft::is_integral<InputIterator>::value,	// Cond
 					InputIterator							// T
-				>::type last,
+				>::type first,
+				InputIterator last,
 		 		const allocator_type& alloc = allocator_type() ) :
 			_alloc(alloc),
 			_size(last - first),
@@ -123,7 +123,7 @@ namespace ft {
 		}
 
 		~vector() {
-			destroy();
+			destruct_all();
 			_alloc.deallocate(_start, _capacity);
 		}
 
@@ -138,11 +138,11 @@ namespace ft {
 				_start = _alloc.allocate(other._size);
 				_capacity = other._size;
 			} else {
-				destroy();
+				destruct_all();
 			}
 
 			for (size_type i = 0; i < other._size; i++) {
-				_alloc.construct(_start + i, other[i]);
+				copy_construct(_start, other[i], i);
 			}
 			_size = other._size;
 			return (*this);
@@ -190,17 +190,27 @@ namespace ft {
 
 		// Assign vector content
 		template< class InputIterator >
-		void	assign( InputIterator first,
-						typename ft::enable_if<
+		void	assign( typename ft::enable_if<
 							!ft::is_integral<InputIterator>::value,	// Cond
 							InputIterator							// T
-						>::type last ) {
-			destroy();
+						>::type first,
+						InputIterator last ) {
+			destruct_all();
+			_size = 0;
+			reserve(last - first);
+			copy_construct(_start, first, last);
 			_size = last - first;
-			reserve(_size);
-			for (size_type i = 0; i < _size; i++) {
-				_alloc.construct(_start + i, *(first + i));
+		}
+
+		// Assign vector content
+		void	assign( size_type n, const value_type& val ) {
+			destruct_all();
+			_size = 0;
+			reserve(n);
+			for (size_type i = 0; i < n; i++) {
+				copy_construct(_start, val, i);
 			}
+			_size = n;
 		}
 
 		// Add element at the end
@@ -210,12 +220,12 @@ namespace ft {
 			} else if (_size == _capacity) {
 				(_size * 2 < max_size()) ? reserve(_size * 2) : reserve(max_size());
 			}
-			_alloc.construct(_start + _size++, val);
+			copy_construct(_start, val, _size++);
 		}
 
 		// Delete last element
 		void	pop_back() {
-			_alloc.destroy(_start + --_size);
+			destruct(_start, --_size);
 		}
 
 		// single element (1)
@@ -223,28 +233,22 @@ namespace ft {
 			if (empty()) {
 				if (position == begin()) {
 					reserve(1);
-					_alloc.construct(_start, val);
+					copy_construct(_start, val);
 					position = iterator(_start);
 				}
 			} else if (_size == _capacity) {
 				size_type		new_cap;
 				pointer			tmp;
-				difference_type	pos;
-
+				size_type		pos;
 
 				(_size * 2 < max_size()) ? (new_cap = _size * 2) : (new_cap = max_size());
 				tmp = _alloc.allocate(new_cap);
 				pos = position - begin();
 
-				for (difference_type i = pos - 1;  i >= 0; i--) {
-					_alloc.construct(tmp + i, _start[i]);
-				}
+				copy_construct(tmp, begin(), position);
+				copy_construct(tmp + pos, val);
+				copy_construct(tmp + pos + 1, position, end());
 
-				for (difference_type i = end() - begin(); i > pos; i--) {
-					_alloc.construct(tmp + i, _start[i - 1]);
-				}
-
-				_alloc.construct(tmp + pos, val);
 				this->~vector();
 				_capacity = new_cap;
 				_start = tmp;
@@ -252,19 +256,73 @@ namespace ft {
 			} else {
 				iterator	end(this->end());
 				size_type	i = _size;
+
 				do
 				{
-					_start[i] = _start[i - 1];
-					i--;
+					copy_construct(_start + i, _start[i - 1]);
+					destruct(_start, --i);
 				} while (position != --end);
-				_alloc.construct(_start + (position - this->begin()), val);
+				copy_construct(_start + (position - begin()), val);
 			}
 			_size++;
 			return (position);
 		}
 
 		// fill (2)
-		void	insert( iterator position, size_type n, const value_type& val );
+		void	insert( iterator position, size_type n, const value_type& val ) {
+			if (empty()) {
+				if (position == begin()) {
+					reserve(n);
+					for (size_type i = 0; i < n; i++) {
+						copy_construct(_start, val, i);
+					}
+					position = iterator(_start);
+				}
+			} else if (_size + n > _capacity) {
+				size_type	pos = position - begin();
+				size_type	new_cap;
+				pointer		tmp;
+
+				if (_size * 2 > max_size() && _size + n <= max_size()) {
+					new_cap = max_size();
+				} else {
+					(_size + n < _size * 2) ? (new_cap = _size * 2) : (new_cap = _size + n);
+				}
+				tmp = _alloc.allocate(new_cap);
+
+				copy_construct(tmp, begin(), position);
+				for (size_type i = 0; i < n; i++) {
+					copy_construct(tmp, val, pos + i);
+				}
+				copy_construct(tmp + pos + n, position, end());
+
+				this->~vector();
+				_capacity = new_cap;
+				_start = tmp;
+				position = iterator(_start + pos);
+			} else {
+				iterator	end(this->end());
+				size_type	i = _size - 1 + n;
+
+				// for (iterator it = end() - 1; it != position; --i) {
+				// 	copy_construct(_start, *it, _size + n - 1);
+				// }
+				// for (size_type i = pos; i < count; i++) {
+				// 	/* code */
+				// }
+				
+				// copy_construct(_start,))
+
+				do
+				{
+					copy_construct(_start + i, _start[i - 1]);
+					destruct(_start, --i);
+				} while (position != --end);
+				copy_construct(_start + (position - begin()), val);
+
+			}
+			_size += n;
+		}
 
 		// range (3)
 		template< class InputIterator >
@@ -406,13 +464,27 @@ namespace ft {
 		private:
 
 		// Destroy objects in range (0, size), doesn't free memory
-		void	destroy() {
+		void	destruct_all() {
 			for (size_type i = 0; i < _size; i++) {
-				_alloc.destroy(_start + i);
+				destruct(_start, i);
 			}
 		}
 
-		std::string	atol( size_type rhs ) {
+		void	destruct( pointer ptr, size_type index ) {
+				_alloc.destroy(ptr + index);
+		}
+
+		void	copy_construct( pointer dst, iterator start, iterator end ) {
+			for (; start != end; ++start) {
+				_alloc.construct(dst++ , *start);
+			}
+		}
+
+		void	copy_construct( pointer dst, const value_type& val, size_type i = 0 ) {
+				_alloc.construct(dst + i, val);
+		}
+
+		static std::string	atol( size_type rhs ) {
 			std::string		str;
 			int				n = 0;
 
