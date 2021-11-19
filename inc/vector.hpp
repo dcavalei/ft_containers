@@ -6,7 +6,7 @@
 /*   By: dcavalei <dcavalei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:42:55 by dcavalei          #+#    #+#             */
-/*   Updated: 2021/11/18 18:13:40 by dcavalei         ###   ########.fr       */
+/*   Updated: 2021/11/19 01:40:40 by dcavalei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,19 +220,46 @@ namespace ft {
 
 		// single element (1)
 		iterator	insert( iterator position, const value_type& val ) {
-			if (_size == _capacity) {
-				pointer		tmp;
-				(_size * 2 < max_size()) ? tmp = _alloc.allocate(_size * 2) : tmp = _alloc.allocate(max_size());
-				
-			}
+			if (empty()) {
+				if (position == begin()) {
+					reserve(1);
+					_alloc.construct(_start, val);
+					position = iterator(_start);
+				}
+			} else if (_size == _capacity) {
+				size_type		new_cap;
+				pointer			tmp;
+				difference_type	pos;
 
-			iterator	begin(position);
-			iterator	end(this->end());
-			do
-			{
-				_start[_size] = _start[_size - 1];
-			} while (begin != --end);
-			_alloc.construct(_start + (position - this->begin()), val);
+
+				(_size * 2 < max_size()) ? (new_cap = _size * 2) : (new_cap = max_size());
+				tmp = _alloc.allocate(new_cap);
+				pos = position - begin();
+
+				for (difference_type i = pos - 1;  i >= 0; i--) {
+					_alloc.construct(tmp + i, _start[i]);
+				}
+
+				for (difference_type i = end() - begin(); i > pos; i--) {
+					_alloc.construct(tmp + i, _start[i - 1]);
+				}
+
+				_alloc.construct(tmp + pos, val);
+				this->~vector();
+				_capacity = new_cap;
+				_start = tmp;
+				position = iterator(_start + pos);
+			} else {
+				iterator	end(this->end());
+				size_type	i = _size;
+				do
+				{
+					_start[i] = _start[i - 1];
+					i--;
+				} while (position != --end);
+				_alloc.construct(_start + (position - this->begin()), val);
+			}
+			_size++;
 			return (position);
 		}
 
@@ -319,13 +346,10 @@ namespace ft {
 				}
 			} else if (n > _capacity) {
 				(n / 2 < _size) ? reserve(_size * 2) : reserve(n);
-				for (size_type i = _size; i < n; i++) {
-					_alloc.construct(_start + i, val);
-				}
-			} else {
-				for (size_type i = _size; i < n; i++) {
-					_alloc.construct(_start + i, val);
-				}
+			}
+
+			for (size_type i = _size; i < n; i++) {
+				_alloc.construct(_start + i, val);
 			}
 			_size = n;
 		}

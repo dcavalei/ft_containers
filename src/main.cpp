@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <iterator>
+#include <memory>
+
 #include "vector.hpp"
 #include "iterator_traits.hpp"
 #include "type_traits.hpp"
@@ -16,12 +18,17 @@ int main () {
 
 	std::cout << (ft::is_integral<int>::type() == ft::true_type()) << std::endl;
 
+	std::allocator<int>	alloc;
 
+	int *ptr = alloc.allocate(alloc.max_size() / 2);
+	alloc.deallocate(ptr, alloc.max_size() / 2);
 	short int i = 1;
 
  	std::cout << "i is odd: " << is_odd(i) << std::endl;
 
 	ft::integral_constant<int, false>::value_type name = ft::integral_constant<int, true>();
+
+
 
  	std::cout << name << std::endl;
 

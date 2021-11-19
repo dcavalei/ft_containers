@@ -6,16 +6,17 @@ namespace ft = std;
 #endif // _IS_TEST
 
 #include <iostream>
-# include <vector>
 
 # define SIZE 42
 
-typedef	std::vector<int>::size_type	size_type;
-typedef	std::vector<int>				vector;
-typedef	std::vector<int>::iterator	iterator;
+typedef	ft::vector<int>::size_type	size_type;
+typedef	ft::vector<int>				vector;
+typedef	ft::vector<int>::iterator	iterator;
 
 void	display( vector& vec ) {
-	std::cout << "[# Display #]" << std::endl;
+	static int n;
+
+	std::cout << "[##### Test " << ++n << " #####]" << std::endl;
 	std::cout << "[values]";
 	for (iterator i = vec.begin(); i != vec.end(); ++i) {
 		std::cout << ' ' << *i;
@@ -29,27 +30,34 @@ void	display( vector& vec ) {
 
 int main() {
 
-	vector		vec(3);
+	vector		vec;
 	vector		vec_full;
 
-	for (size_type i = 0; i < SIZE; i++)
-	{
+	for (size_type i = 0; i < SIZE; i++) {
 		vec_full.push_back(rand() % 100);
 	}
 
-	iterator itB(vec_full.begin());
-	iterator itE(vec_full.begin() + 7);
+	iterator it(vec.begin());
 
-	vec.insert(vec.begin(), itB, itE);
+	for (size_type i = 0; i < 100; i++) {
+		display(vec);
+		it = vec.insert(it, rand() % 100);
+		display(vec);
+		it = vec.insert(vec.begin() + (rand() % vec.size()), rand() % 100);
+	}
+	display(vec);
 
-	display(vec_full);
+	it = vec.insert(vec.begin(), 10);
 	display(vec);
-	iterator	it = vec.insert(vec.begin(), 42);
+	it = vec.insert(vec.begin(), 20);
 	display(vec);
-	it = vec.insert(it, 43);
+	it = vec.insert(it, 30);
 	display(vec);
-	it = vec.insert(it, 44);
+	it = vec.insert(it, 40);
 	display(vec);
+	it = vec.insert(it, 50);
+	display(vec);
+
 
 	
 	// std::cout << "[#### Testing insert() ####]" << std::endl;
