@@ -6,6 +6,7 @@ namespace ft = std;
 #endif // _IS_TEST
 
 #include <iostream>
+#include <stdlib.h>
 
 # define SIZE 42
 
@@ -24,7 +25,6 @@ void	display( vector& vec ) {
 	std::cout << std::endl;
 	std::cout << "[size] "<< vec.size() << std::endl;
 	std::cout << "[capacity] "<< vec.capacity() << std::endl;
-
 
 }
 
@@ -55,6 +55,19 @@ int main() {
 		it = vec_full.insert(vec_full.begin() + (rand() % vec_full.size()), rand() % 100);
 	}
 	display(vec_full);
+
+	vec.insert(vec.begin(), 2, 1);
+	for (size_type i = 0; i < 100; i++) {
+		display(vec);
+		vec.insert(vec.begin(), static_cast<size_type>(rand() % 10), rand() % 100);
+		display(vec);
+		vec.insert(vec.begin() + (rand() % vec.size()), static_cast<size_type>(rand() % 10), rand() % 100);
+	}
+	display(vec);
+
+	vector vec2;
+	vec2.insert(vec2.begin(), vec_full.begin(), vec_full.end());
+	display(vec2);
 
 	return 0;
 }

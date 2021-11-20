@@ -7,7 +7,7 @@
 namespace ft {
 
 	template< class T >
-	class iterator {
+	class random_access_iterator {
 
 		public:
 
@@ -20,57 +20,57 @@ namespace ft {
 		typedef std::random_access_iterator_tag	iterator_category;
 
 		// Default constructor
-		iterator() : _ptr(NULL) {}
+		random_access_iterator() : _ptr(NULL) {}
 
 		// Copy constructor
-		iterator( const iterator& other ) {
+		random_access_iterator( const random_access_iterator& other ) {
 			*this = other;
 		}
 
 		// Pointer constructor
-		iterator( pointer ptr ) : _ptr(ptr) {}
+		random_access_iterator( pointer ptr ) : _ptr(ptr) {}
 
 		// Destructor
-		~iterator() {}
+		~random_access_iterator() {}
 
 		// Assignment operator
-		iterator&			operator=( const iterator& rhs ) {
+		random_access_iterator&			operator=( const random_access_iterator& rhs ) {
 			_ptr = rhs._ptr;
 			return (*this);
 		}
 
 		// Conversion operator to const_iterator
-		operator	iterator<const value_type>() const {
+		operator	random_access_iterator<const value_type>() const {
 			return (_ptr);
 		}
 
 		// Comparison operator, const compatible
-		bool				operator==( const iterator& rhs ) const {
+		bool				operator==( const random_access_iterator& rhs ) const {
 			return (_ptr == rhs._ptr);
 		}
 
 		// Comparison operator, const compatible
-		bool				operator!=( const iterator& rhs ) const {
+		bool				operator!=( const random_access_iterator& rhs ) const {
 			return (!(*this == rhs));
 		}
 
 		// Comparison operator, const compatible
-		bool				operator<( const iterator& rhs ) const {
+		bool				operator<( const random_access_iterator& rhs ) const {
 			return (_ptr < rhs._ptr);
 		}
 
 		// Comparison operator, const compatible
-		bool				operator>( const iterator& rhs ) const {
+		bool				operator>( const random_access_iterator& rhs ) const {
 			return (rhs < *this);
 		}
 
 		// Comparison operator, const compatible
-		bool				operator<=( const iterator& rhs ) const {
+		bool				operator<=( const random_access_iterator& rhs ) const {
 			return (!(*this > rhs));
 		}
 
 		// Comparison operator, const compatible
-		bool				operator>=( const iterator& rhs ) const {
+		bool				operator>=( const random_access_iterator& rhs ) const {
 			return (!(*this < rhs));
 		}
 
@@ -85,54 +85,54 @@ namespace ft {
 		}
 
 		// Prefix increment
-		iterator&			operator++() {
+		random_access_iterator&			operator++() {
 			_ptr++;
 			return (*this);
 		}
 
 		// Postfix increment
-		iterator			operator++( int ) {
-			iterator old = *this;
+		random_access_iterator			operator++( int ) {
+			random_access_iterator old = *this;
 			operator++();
 			return (old);
 		}
 
 		// Prefix decrement
-		iterator&			operator--() {
+		random_access_iterator&			operator--() {
 			_ptr--;
 			return (*this);
 		}
 
 		// Postfix decrement
-		iterator			operator--( int ) {
-			iterator old = *this;
+		random_access_iterator			operator--( int ) {
+			random_access_iterator old = *this;
 			operator--();
 			return (old);
 		}
 
 		// Addition operator, const compatible
-		iterator			operator+( difference_type n ) const {
-			return (iterator(_ptr + n));
+		random_access_iterator			operator+( difference_type n ) const {
+			return (random_access_iterator(_ptr + n));
 		}
 
 		// Subtraction operator, const compatible
-		iterator			operator-( difference_type n ) const {
-			return (iterator(_ptr - n));
+		random_access_iterator			operator-( difference_type n ) const {
+			return (random_access_iterator(_ptr - n));
 		}
 
 		// Difference operator, const compatible
-		difference_type		operator-( const iterator& rhs ) const {
+		difference_type		operator-( const random_access_iterator& rhs ) const {
 			return (_ptr - rhs._ptr);
 		}
 
 		// Addition assignment operator
-		iterator&			operator+=( int n ) {
+		random_access_iterator&			operator+=( int n ) {
 			_ptr += n;
 			return (*this);
 		}
 
 		// Subtraction assignment operator
-		iterator&			operator-=( int n ) {
+		random_access_iterator&			operator-=( int n ) {
 			_ptr -= n;
 			return (*this);
 		}
