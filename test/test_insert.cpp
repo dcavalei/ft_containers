@@ -17,14 +17,13 @@ typedef	ft::vector<int>::iterator	iterator;
 void	display( vector& vec ) {
 	static int n;
 
-	std::cout << "[##### Test " << ++n << " #####]" << std::endl;
-	std::cout << "[values]";
+	std::cout << "[# Test " << ++n << " #]" << "[values]";
 	for (iterator i = vec.begin(); i != vec.end(); ++i) {
 		std::cout << ' ' << *i;
 	}
 	std::cout << std::endl;
-	std::cout << "[size] "<< vec.size() << std::endl;
-	std::cout << "[capacity] "<< vec.capacity() << std::endl;
+	std::cout << "[# Test " << ++n << " #]" << "[size] "<< vec.size() << std::endl;
+	std::cout << "[# Test " << ++n << " #]" << "[capacity] "<< vec.capacity() << std::endl;
 
 }
 
@@ -59,15 +58,21 @@ int main() {
 	vec.insert(vec.begin(), 2, 1);
 	for (size_type i = 0; i < 100; i++) {
 		display(vec);
-		vec.insert(vec.begin(), static_cast<size_type>(rand() % 10), rand() % 100);
+		vec.insert(vec.begin(), rand() % 10, rand() % 100);
 		display(vec);
-		vec.insert(vec.begin() + (rand() % vec.size()), static_cast<size_type>(rand() % 10), rand() % 100);
+		vec.insert(vec.begin() + (rand() % vec.size()), rand() % 10, rand() % 100);
 	}
 	display(vec);
 
 	vector vec2;
 	vec2.insert(vec2.begin(), vec_full.begin(), vec_full.end());
-	display(vec2);
+	for (size_type i = 0; i < 100; i++) {
+		display(vec2);
+		vec2.insert(vec2.begin() , vec_full.begin(), vec_full.begin() + 10);
+		display(vec2);
+		vec2.insert(vec2.begin() + (rand() % vec2.size()), vec_full.begin(), vec_full.begin() + 10);
+	}
+	display(vec);
 
 	return 0;
 }

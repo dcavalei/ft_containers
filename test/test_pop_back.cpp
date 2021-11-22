@@ -6,6 +6,7 @@ namespace ft = std;
 #endif // _IS_TEST
 
 #include <iostream>
+#include <stdlib.h>
 
 # define SIZE 42
 

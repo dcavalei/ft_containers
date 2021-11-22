@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Nov 20 15:08:38 2021
+# Make data base, printed on Mon Nov 22 09:08:18 2021
 
 # Variables
 
@@ -47,7 +47,6 @@ MAKE_VERSION := 4.2.1
 # makefile
 CURDIR := /home/dcavalei/Desktop/ft_containers
 # makefile (from 'Makefile', line 1)
- 
 SHELL := /bin/bash
 # environment
 VTE_VERSION = 5402
@@ -66,14 +65,15 @@ GNUMAKEFLAGS :=
 # environment
 XDG_DATA_DIRS = /usr/share/xfce4:/home/dcavalei/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/usr/share
 # environment
-DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-IfEVIsiSS5,guid=8ab90dbb18d4ecb88c68760c6198c814
+DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-l4Q6nyc7gU,guid=7b55975c1d1ec194c8b24bf0619b5cd2
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
 QT_SCALE_FACTOR = 1
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-527357c7-143d-4617-bdce-8ef5fec69b17.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-bcfeb5f9-af9e-4b59-9579-1654ddfba435.sock
 # environment
+ 
 VSCODE_CWD = /home/dcavalei/Desktop/ft_containers
 # environment
 XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session0
@@ -84,7 +84,7 @@ PATH = /usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-SESSION_MANAGER = local/mx:@/tmp/.ICE-unix/4194,unix/mx:/tmp/.ICE-unix/4194
+SESSION_MANAGER = local/mx:@/tmp/.ICE-unix/3603,unix/mx:/tmp/.ICE-unix/3603
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -112,7 +112,7 @@ LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 # environment
 XDG_SESSION_DESKTOP = xfce
 # environment
-SSH_AUTH_SOCK = /tmp/ssh-5tejezibuGrv/agent.4194
+SSH_AUTH_SOCK = /tmp/ssh-I9yo3hNyCtxl/agent.3603
 # automatic
 %F = $(notdir $%)
 # environment
@@ -128,7 +128,7 @@ QT_QPA_PLATFORMTHEME = gtk2
 # environment
 XDG_SEAT = seat0
 # environment
-SSH_AGENT_PID = 4277
+SSH_AGENT_PID = 3674
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = XFCE
 # makefile (from 'Makefile', line 19)
@@ -252,7 +252,7 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 8521
+VSCODE_PID = 32159
 # variable set hash-table stats:
 # Load=121/1024=12%, Rehash=0, Collisions=15/180=8%
 
@@ -321,12 +321,11 @@ inc/iterator.hpp:
 # Not a target:
 inc/vector.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-20 15:08:27.940328217
+#  Last modified 2021-11-20 15:20:28.03879997
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
- 
 obj/test/test_fill_ctor.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -335,6 +334,7 @@ obj/test/test_fill_ctor.o:
 all: main.out
 #  Command line target.
 #  Implicit rule search has been done.
+ 
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
@@ -488,6 +488,7 @@ obj/src/vector.o: src/vector.cpp inc/vector.hpp inc/algorithm.hpp inc/iterator.h
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # automatic
+ 
 # @ := obj/src/vector.o
 # automatic
 # % := 
@@ -600,6 +601,6 @@ obj/test/test_default_ctor.o:
 # strcache performance: lookups = 124 / hit rate = 45%
 # hash-table stats:
 # Load=67/8192=1%, Rehash=0, Collisions=1/124=1%
-# Finished Make data base on Sat Nov 20 15:08:38 2021
+# Finished Make data base on Mon Nov 22 09:08:18 2021
 
  
