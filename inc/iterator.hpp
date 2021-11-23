@@ -147,6 +147,34 @@ namespace ft {
 		pointer	_ptr;
 
 	};
+// this is bad please change me, do not inherit privatly, just create an instance of random_access_iterator ok???????????????????????
+	template< class T >
+	class bidirectional_iterator : random_access_iterator<T> {
+
+		public:
+
+		typedef typename random_access_iterator<T>::value_type		value_type;
+		typedef typename random_access_iterator<T>::reference		reference;
+		typedef typename random_access_iterator<T>::const_reference	const_reference;
+		typedef typename random_access_iterator<T>::pointer			pointer;
+		typedef typename random_access_iterator<T>::const_pointer	const_pointer;
+		typedef typename random_access_iterator<T>::difference_type	difference_type;
+		typedef std::bidirectional_iterator_tag						iterator_category;
+
+		bidirectional_iterator() {}
+
+		// Copy constructor
+		bidirectional_iterator( const bidirectional_iterator& other ) {
+			*this = other;
+		}
+
+		// Pointer constructor
+		bidirectional_iterator( pointer ptr ) : random_access_iterator<T>(ptr) {}
+
+		// Destructor
+		~bidirectional_iterator() {}
+
+	};
 
 	template< class Iterator >
 	class reverse_iterator {
