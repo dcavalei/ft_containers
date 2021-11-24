@@ -9,6 +9,8 @@ namespace ft {
 	template< class T >
 	class random_access_iterator {
 
+	/* ************************************** Member types ************************************** */
+
 		public:
 
 		typedef T								value_type;
@@ -18,6 +20,16 @@ namespace ft {
 		typedef const value_type*				const_pointer;
 		typedef std::ptrdiff_t					difference_type;
 		typedef std::random_access_iterator_tag	iterator_category;
+
+	/* ********************************** Private data members ********************************** */
+
+		private:
+
+		pointer	_ptr;
+
+	/* ************************************** Constructors ************************************** */
+
+		public:
 
 		// Default constructor
 		random_access_iterator() : _ptr(NULL) {}
@@ -34,7 +46,7 @@ namespace ft {
 		~random_access_iterator() {}
 
 		// Assignment operator
-		random_access_iterator&			operator=( const random_access_iterator& rhs ) {
+		random_access_iterator&	operator=( const random_access_iterator& rhs ) {
 			_ptr = rhs._ptr;
 			return (*this);
 		}
@@ -45,111 +57,109 @@ namespace ft {
 		}
 
 		// Comparison operator, const compatible
-		bool				operator==( const random_access_iterator& rhs ) const {
+		bool	operator==( const random_access_iterator& rhs ) const {
 			return (_ptr == rhs._ptr);
 		}
 
 		// Comparison operator, const compatible
-		bool				operator!=( const random_access_iterator& rhs ) const {
+		bool	operator!=( const random_access_iterator& rhs ) const {
 			return (!(*this == rhs));
 		}
 
 		// Comparison operator, const compatible
-		bool				operator<( const random_access_iterator& rhs ) const {
+		bool	operator<( const random_access_iterator& rhs ) const {
 			return (_ptr < rhs._ptr);
 		}
 
 		// Comparison operator, const compatible
-		bool				operator>( const random_access_iterator& rhs ) const {
+		bool	operator>( const random_access_iterator& rhs ) const {
 			return (rhs < *this);
 		}
 
 		// Comparison operator, const compatible
-		bool				operator<=( const random_access_iterator& rhs ) const {
+		bool	operator<=( const random_access_iterator& rhs ) const {
 			return (!(*this > rhs));
 		}
 
 		// Comparison operator, const compatible
-		bool				operator>=( const random_access_iterator& rhs ) const {
+		bool	operator>=( const random_access_iterator& rhs ) const {
 			return (!(*this < rhs));
 		}
 
 		// Dereference operator, const compatible
-		reference			operator*() const {
+		reference	operator*() const {
 			return (*_ptr);
 		}
 
 		// Member access operator, const compatible
-		pointer				operator->() const {
+		pointer	operator->() const {
 			return (_ptr);
 		}
 
 		// Prefix increment
-		random_access_iterator&			operator++() {
+		random_access_iterator&	operator++() {
 			_ptr++;
 			return (*this);
 		}
 
 		// Postfix increment
-		random_access_iterator			operator++( int ) {
+		random_access_iterator	operator++( int ) {
 			random_access_iterator old = *this;
 			operator++();
 			return (old);
 		}
 
 		// Prefix decrement
-		random_access_iterator&			operator--() {
+		random_access_iterator&	operator--() {
 			_ptr--;
 			return (*this);
 		}
 
 		// Postfix decrement
-		random_access_iterator			operator--( int ) {
+		random_access_iterator	operator--( int ) {
 			random_access_iterator old = *this;
 			operator--();
 			return (old);
 		}
 
 		// Addition operator, const compatible
-		random_access_iterator			operator+( difference_type n ) const {
+		random_access_iterator	operator+( difference_type n ) const {
 			return (random_access_iterator(_ptr + n));
 		}
 
 		// Subtraction operator, const compatible
-		random_access_iterator			operator-( difference_type n ) const {
+		random_access_iterator	operator-( difference_type n ) const {
 			return (random_access_iterator(_ptr - n));
 		}
 
 		// Difference operator, const compatible
-		difference_type		operator-( const random_access_iterator& rhs ) const {
+		difference_type	operator-( const random_access_iterator& rhs ) const {
 			return (_ptr - rhs._ptr);
 		}
 
 		// Addition assignment operator
-		random_access_iterator&			operator+=( int n ) {
+		random_access_iterator&	operator+=( int n ) {
 			_ptr += n;
 			return (*this);
 		}
 
 		// Subtraction assignment operator
-		random_access_iterator&			operator-=( int n ) {
+		random_access_iterator&	operator-=( int n ) {
 			_ptr -= n;
 			return (*this);
 		}
 
 		// Member access operator, const compatible
-		reference			operator[]( difference_type n ) const {
+		reference	operator[]( difference_type n ) const {
 			return (_ptr[n]);
 		}
 
-		private:
-
-		pointer	_ptr;
-
 	};
-// this is bad please change me, do not inherit privatly, just create an instance of random_access_iterator ok???????????????????????
+
 	template< class T >
-	class bidirectional_iterator : random_access_iterator<T> {
+	class bidirectional_iterator {
+
+	/* ************************************** Member types ************************************** */
 
 		public:
 
@@ -161,6 +171,17 @@ namespace ft {
 		typedef typename random_access_iterator<T>::difference_type	difference_type;
 		typedef std::bidirectional_iterator_tag						iterator_category;
 
+	/* ********************************** Private data members ********************************** */
+
+		private:
+
+		random_access_iterator<T>	_it;
+
+	/* ************************************** Constructors ************************************** */
+
+		public:
+
+		// Default constructor
 		bidirectional_iterator() {}
 
 		// Copy constructor
@@ -169,10 +190,70 @@ namespace ft {
 		}
 
 		// Pointer constructor
-		bidirectional_iterator( pointer ptr ) : random_access_iterator<T>(ptr) {}
+		bidirectional_iterator( pointer ptr ) : _it(ptr) {}
 
 		// Destructor
 		~bidirectional_iterator() {}
+
+		// Assignment operator
+		bidirectional_iterator&	operator=( const bidirectional_iterator& other ) {
+			_it = other._it;
+
+			return (*this);
+		}
+
+	/* ************************************ Member functions ************************************ */
+
+		// Conversion operator to const_iterator
+		operator	bidirectional_iterator<const value_type>() const {
+			return (_it);
+		}
+
+		// Comparison operator, const compatible
+		bool	operator==( const bidirectional_iterator& rhs ) const {
+			return (_it == rhs._it);
+		}
+
+		// Comparison operator, const compatible
+		bool	operator!=( const bidirectional_iterator& rhs ) const {
+			return (!(*this == rhs));
+		}
+
+		// Dereference operator, const compatible
+		reference	operator*() const {
+			return (*_it);
+		}
+
+		// Member access operator, const compatible
+		pointer	operator->() const {
+			return (_it.operator->());
+		}
+
+		// Prefix increment
+		bidirectional_iterator&	operator++() {
+			_it++;
+			return (*this);
+		}
+
+		// Postfix increment
+		bidirectional_iterator	operator++( int ) {
+			bidirectional_iterator old = *this;
+			operator++();
+			return (old);
+		}
+
+		// Prefix decrement
+		bidirectional_iterator&	operator--() {
+			_it--;
+			return (*this);
+		}
+
+		// Postfix decrement
+		bidirectional_iterator	operator--( int ) {
+			bidirectional_iterator old = *this;
+			operator--();
+			return (old);
+		}
 
 	};
 

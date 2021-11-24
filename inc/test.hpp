@@ -27,6 +27,9 @@ namespace test {
 			base_leak--;
 			delete base_ptr;
 		}
+
+		static void announce() { std::cout << "Hello World" << std::endl; }
+
 	};
 
 	struct Derived : public Base {

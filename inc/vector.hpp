@@ -81,7 +81,7 @@ namespace ft {
 					InputIterator							// T
 				>::type first,
 				InputIterator last,
-		 		const allocator_type& alloc = allocator_type() ) :
+				const allocator_type& alloc = allocator_type() ) :
 			_alloc(alloc),
 			_size(last - first),
 			_start(_alloc.allocate(last - first)),
@@ -498,7 +498,7 @@ namespace ft {
 				return (equal(lhs.begin(), lhs.end(), rhs.begin()));
 			}
 			return (false);
-		}
+	}
 
 	template< class T, class Alloc >
 	bool	operator!=( const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs ) {
