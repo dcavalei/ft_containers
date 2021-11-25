@@ -6,7 +6,7 @@
 #include "vector.hpp"
 #include "iterator.hpp"
 #include "test.hpp"
-
+#include "red_black_tree.hpp"
 
 int main () {
 
@@ -21,6 +21,7 @@ int main () {
 	ft::bidirectional_iterator<test::Base> yo;
 
 	yo->announce();
+	ft::node<int> asdadname;
 
 	return 0;
 }

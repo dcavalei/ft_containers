@@ -24,7 +24,6 @@ namespace ft {
 		typedef T													mapped_type;
 		typedef Compare												key_compare;
 		typedef pair<const key_type,mapped_type>					value_type;
-		// typedef blablalbla										value_compare;
 		typedef Alloc												allocator_type;
 		typedef typename allocator_type::reference					reference;
 		typedef typename allocator_type::const_reference			const_reference;
