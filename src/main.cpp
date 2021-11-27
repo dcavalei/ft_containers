@@ -7,7 +7,10 @@
 #include "iterator.hpp"
 #include "test.hpp"
 #include "red_black_tree.hpp"
+#include "map.hpp"
 
+typedef ft::pair<std::string, int> pair;
+typedef ft::map<std::string, int> map;
 int main () {
 
 	ft::RedBlackTree<int>	rbt;
@@ -19,6 +22,13 @@ for (size_t i = 0; i < 20; i++)
 }
 
 	rbt.prettyPrint();
+
+	rbt.clear();
+
+	rbt.prettyPrint();
+
+	map map;
+	map.insert(pair("ola", 42));
 
 	// rbt.insert(12);
 	// rbt.insert(15);

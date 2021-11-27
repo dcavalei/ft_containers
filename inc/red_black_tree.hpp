@@ -18,6 +18,12 @@ namespace ft
 		typedef T value_type;
 		typedef T *pointer;
 
+		RBTcolor color;
+		pointer data;
+		RBTnode *parent;
+		RBTnode *left;
+		RBTnode *right;
+
 		explicit RBTnode(RBTcolor c = red) : color(c),
 											 data(0),
 											 parent(0),
@@ -31,49 +37,39 @@ namespace ft
 									  right(0) {}
 
 		~RBTnode() {}
-
-		RBTcolor color;
-		pointer data;
-		RBTnode *parent;
-		RBTnode *left;
-		RBTnode *right;
 	};
-
-	// (1)	Every node in T is either red or black.
-	// (2)	The root node of T is black.
-	// (3)	Every NULL node is black. (NULL nodes are the leaf nodes. They do not contain any keys. When we search for a key that is not present in the tree, we reach the NULL node.)
-	// (4)	If a node is red, both of its children are black. This means no two nodes on a path can be red nodes.
-	// (5)	Every path from a root node to a NULL node has the same number of black nodes.
 
 	template <
 		class T,
-		class CompSort = std::less<T>,
-		class CompEqual = std::equal_to<T>,
+		class Compare = std::less<T>,
+		class Equal = std::equal_to<T>,
 		class Alloc = std::allocator<T> >
 	class RedBlackTree
 	{
 
-		/* ************************************** Member types ************************************** */
+		/* ************************************ Member types ************************************ */
 
 	public:
 		typedef T value_type;
 		typedef Alloc allocator_type;
+		typedef Compare key_compare;
+		typedef Equal key_equal;
 		typedef RBTnode<T> node;
 		typedef node *node_pointer;
 
-	private:
-		allocator_type _alloc;
-		node_pointer _nil;
-		node_pointer _root;
-
 	public:
-		explicit RedBlackTree(const allocator_type &alloc = allocator_type()) : _alloc(alloc),
-																				_nil(new node(black)),
-																				_root(_nil) {}
+		explicit RedBlackTree(
+			const key_compare &comp = key_compare(),
+			const allocator_type &alloc = allocator_type(),
+			const key_equal &equal = key_equal()) : _alloc(alloc),
+													_equal(equal),
+													_comp(comp),
+													_nil(new node(black)),
+													_root(_nil) {}
 
 		~RedBlackTree()
 		{
-			// later do some tree clear function;
+			clear();
 			delete (_nil);
 		}
 
@@ -86,21 +82,18 @@ namespace ft
 			fixInsert(n);
 		}
 
-		node_pointer findKey(const value_type &key)
+		node_pointer findKey(node_pointer x, const value_type &key)
 		{
-			node_pointer x = _root;
 			node_pointer z = _nil;
-			CompEqual equal;
-			CompSort comp;
 
 			while (x != _nil)
 			{
-				if (equal(*x->data, key))
+				if (_equal(*x->data, key))
 				{
 					z = x;
 				}
 
-				if (comp(*x->data, key))
+				if (_comp(*x->data, key))
 				{
 					x = x->right;
 				}
@@ -112,74 +105,196 @@ namespace ft
 			return (z);
 		}
 
+		void remove(const value_type &key)
+		{
+			node_pointer node = findKey(_root, key);
+
+			if (node == _nil)
+			{
+				return;
+			}
+
+			rbtDelete(node);
+		}
+
+		void clear()
+		{
+			for (node_pointer x = _root; x != _nil; x = _root)
+			{
+				rbtDelete(x);
+			}
+		}
+
+		/* ************************************ Helper functions ************************************ */
+
+	private:
+		node_pointer min(node_pointer x)
+		{
+			while (x->left != _nil)
+			{
+				x = x->left;
+			}
+			return x;
+		}
+
+		node_pointer max(node_pointer x)
+		{
+			while (x->right != _nil)
+			{
+				x = x->right;
+			}
+			return x;
+		}
+
+		node_pointer successor(node_pointer x)
+		{
+			if (x->right != _nil)
+			{
+				return min(x->right);
+			}
+
+			node_pointer y = x->parent;
+			while (y != _nil && x == y->right)
+			{
+				x = y;
+				y = y->parent;
+			}
+			return y;
+		}
+
+		node_pointer predecessor(node_pointer x)
+		{
+			if (x->left != _nil)
+			{
+				return max(x->left);
+			}
+
+			node_pointer y = x->parent;
+			while (y != _nil && x == y->left)
+			{
+				x = y;
+				y = y->parent;
+			}
+
+			return y;
+		}
+
+	public:
+		void printHelper(node_pointer _root, std::string indent, bool last)
+		{
+			// print the tree structure on the screen
+			if (_root != _nil)
+			{
+				std::cout << indent;
+				if (last)
+				{
+					std::cout << "R----";
+					indent += "     ";
+				}
+				else
+				{
+					std::cout << "L----";
+					indent += "|    ";
+				}
+
+				std::string sColor = (_root->color == red) ? "RED" : "BLACK";
+				std::cout << *_root->data << "(" << sColor << ")" << std::endl;
+				printHelper(_root->left, indent, false);
+				printHelper(_root->right, indent, true);
+			}
+			// std::cout<<root->left->data<<std::endl;
+		}
+		void prettyPrint()
+		{
+			if (_root != _nil)
+			{
+				printHelper(_root, "", true);
+			}
+		}
+
+	private:
+		void freeNode(node_pointer n)
+		{
+			_alloc.destroy(n->data);
+			_alloc.deallocate(n->data, 1);
+			delete n;
+		}
+
 		void fixDelete(node_pointer x)
 		{
-			node_pointer w;
-
+			node_pointer s;
 			while (x != _root && x->color == black)
 			{
 				if (x == x->parent->left)
 				{
-					w = x->parent->right;
-					if (w->color == red)
+					s = x->parent->right;
+					if (s->color == red)
 					{
-						w->color = black;
+						// case 3.1
+						s->color = black;
 						x->parent->color = red;
 						leftRotate(x->parent);
-						w = x->parent->right;
+						s = x->parent->right;
 					}
 
-					if (w->left->color == black && w->right->color == black)
+					if (s->left->color == black && s->right->color == black)
 					{
-						w->color = red;
+						// case 3.2
+						s->color = red;
 						x = x->parent;
 					}
 					else
 					{
-						if (w->right->color == black)
+						if (s->right->color == black)
 						{
-							w->left->color = black;
-							w->color = red;
-							rightRotate(w);
-							w = x->parent->right;
+							// case 3.3
+							s->left->color = black;
+							s->color = red;
+							rightRotate(s);
+							s = x->parent->right;
 						}
 
-						w->color = x->parent->color;
+						// case 3.4
+						s->color = x->parent->color;
 						x->parent->color = black;
-						w->right->color = black;
+						s->right->color = black;
 						leftRotate(x->parent);
 						x = _root;
 					}
 				}
 				else
 				{
-					w = x->parent->left;
-					if (w->color == red)
+					s = x->parent->left;
+					if (s->color == red)
 					{
-						w->color = black;
+						// case 3.1
+						s->color = black;
 						x->parent->color = red;
 						rightRotate(x->parent);
-						w = x->parent->left;
+						s = x->parent->left;
 					}
 
-					if (w->right->color == black && w->right->color == black)
+					if (s->right->color == black && s->right->color == black)
 					{
-						w->color = red;
+						// case 3.2
+						s->color = red;
 						x = x->parent;
 					}
 					else
 					{
-						if (w->left->color == black)
+						if (s->left->color == black)
 						{
-							w->right->color = black;
-							w->color = red;
-							leftRotate(w);
-							w = x->parent->left;
+							// case 3.3
+							s->right->color = black;
+							s->color = red;
+							leftRotate(s);
+							s = x->parent->left;
 						}
 
-						w->color = x->parent->color;
+						// case 3.4
+						s->color = x->parent->color;
 						x->parent->color = black;
-						w->left->color = black;
+						s->left->color = black;
 						rightRotate(x->parent);
 						x = _root;
 					}
@@ -188,132 +303,48 @@ namespace ft
 			x->color = black;
 		}
 
-		void freeNode(node_pointer n)
+		void rbtDelete(node_pointer z)
 		{
-			_alloc.destroy(n->data);
-			_alloc.deallocate(n->data, 1);
-			delete n;
-		}
+			RBTcolor ori;
+			node_pointer x, y;
 
-		void rbtDelete(node_pointer node)
-		{
-			RBTcolor orig = node->color;
-			node_pointer x;
-			node_pointer y;
-
-			if (node == _nil)
+			y = z;
+			ori = y->color;
+			if (z->left == _nil)
 			{
-				return;
+				x = z->right;
+				transplant(z, z->right);
 			}
-
-			if (node->left == _nil)
+			else if (z->right == _nil)
 			{
-				x = node->right;
-				transplant(node, x);
-			}
-			else if (node->right == _nil)
-			{
-				x = node->left;
-				transplant(node, x);
+				x = z->left;
+				transplant(z, z->left);
 			}
 			else
 			{
-				y = min(node);
-				orig = y->color;
+				y = min(z->right);
+				ori = y->color;
 				x = y->right;
-				if (y->parent == node)
+				if (y->parent == z)
 				{
 					x->parent = y;
 				}
 				else
 				{
 					transplant(y, y->right);
-					y->right = node->right;
+					y->right = z->right;
 					y->right->parent = y;
 				}
-				transplant(node, y);
-				y->left = node->left;
+
+				transplant(z, y);
+				y->left = z->left;
 				y->left->parent = y;
-				y->color = orig;
+				y->color = z->color;
 			}
-			freeNode(node);
-			if (orig == black)
+			freeNode(z);
+			if (ori == black)
 			{
 				fixDelete(x);
-			}
-		}
-
-		void remove(const value_type &key)
-		{
-
-			node_pointer node = findKey(key);
-
-			if (node == _nil)
-			{
-				std::cout << "nil" << std::endl;
-			}
-			else
-			{
-				std::cout << *node->data << std::endl;
-			}
-
-			rbtDelete(node);
-		}
-
-		void clear()
-		{
-			node_pointer x = _root;
-			while (x != _nil)
-			{
-				rbtDelete(x);
-				x = _root;
-			}
-		}
-
-		/* ************************************ Helper functions ************************************ */
-
-	private:
-		node_pointer newNode(const value_type &key)
-		{
-			node_pointer n = new node(_alloc.allocate(1));
-
-			_alloc.construct(n->data, key);
-			n->parent = 0;
-			n->left = _nil;
-			n->right = _nil;
-			return (n);
-		}
-
-		void rbtInsert(node_pointer n)
-		{
-			node_pointer y = 0;
-			node_pointer x = _root;
-
-			while (x != _nil)
-			{
-				y = x;
-				if (CompSort()(*n->data, *x->data))
-				{
-					x = x->left;
-				}
-				else
-				{
-					x = x->right;
-				}
-			}
-
-			n->parent = y;
-			if (!y)
-			{
-				_root = n;
-			}
-			else if (CompSort()(*n->data, *y->data))
-			{
-				y->left = n;
-			}
-			else
-			{
-				y->right = n;
 			}
 		}
 
@@ -386,6 +417,39 @@ namespace ft
 			_root->color = black;
 		}
 
+		void rbtInsert(node_pointer n)
+		{
+			node_pointer y = 0;
+			node_pointer x = _root;
+
+			while (x != _nil)
+			{
+				y = x;
+				if (_comp(*n->data, *x->data))
+				{
+					x = x->left;
+				}
+				else
+				{
+					x = x->right;
+				}
+			}
+
+			n->parent = y;
+			if (!y)
+			{
+				_root = n;
+			}
+			else if (_comp(*n->data, *y->data))
+			{
+				y->left = n;
+			}
+			else
+			{
+				y->right = n;
+			}
+		}
+
 		void leftRotate(node_pointer x)
 		{
 			node_pointer y = x->right;
@@ -411,7 +475,6 @@ namespace ft
 			x->parent = y;
 		}
 
-		// rotate right at node x
 		void rightRotate(node_pointer x)
 		{
 			node_pointer y = x->left;
@@ -437,83 +500,39 @@ namespace ft
 			x->parent = y;
 		}
 
-		void transplant(node_pointer x, node_pointer y)
+		void transplant(node_pointer u, node_pointer v)
 		{
-			if (x->parent == _nil)
+			if (u->parent == 0)
 			{
-				_root = y;
+				_root = v;
 			}
-			else if (x == x->parent->left)
+			else if (u == u->parent->left)
 			{
-				x->parent->left = y;
+				u->parent->left = v;
 			}
 			else
 			{
-				x->parent->right = y;
+				u->parent->right = v;
 			}
-			y->parent = x->parent;
+			v->parent = u->parent;
 		}
 
-		node_pointer min(node_pointer x)
+		node_pointer newNode(const value_type &key)
 		{
-			if (x == _nil)
-			{
-				return x;
-			}
+			node_pointer n = new node(_alloc.allocate(1));
 
-			while (x->left != _nil)
-			{
-				x = x->left;
-			}
-			return x;
+			_alloc.construct(n->data, key);
+			n->parent = 0;
+			n->left = _nil;
+			n->right = _nil;
+			return (n);
 		}
 
-		node_pointer max(node_pointer x)
-		{
-			if (x == _nil)
-			{
-				return x;
-			}
-
-			while (x->right != _nil)
-			{
-				x = x->right;
-			}
-			return x;
-		}
-
-	public:
-		void printHelper(node_pointer _root, std::string indent, bool last)
-		{
-			// print the tree structure on the screen
-			if (_root != _nil)
-			{
-				std::cout << indent;
-				if (last)
-				{
-					std::cout << "R----";
-					indent += "     ";
-				}
-				else
-				{
-					std::cout << "L----";
-					indent += "|    ";
-				}
-
-				std::string sColor = (_root->color == red) ? "RED" : "BLACK";
-				std::cout << *_root->data << "(" << sColor << ")" << std::endl;
-				printHelper(_root->left, indent, false);
-				printHelper(_root->right, indent, true);
-			}
-			// std::cout<<root->left->data<<std::endl;
-		}
-		void prettyPrint()
-		{
-			if (_root != _nil)
-			{
-				printHelper(_root, "", true);
-			}
-		}
+		allocator_type _alloc;
+		Equal _equal;
+		Compare _comp;
+		node_pointer _nil;
+		node_pointer _root;
 	};
 
 }

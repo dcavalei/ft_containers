@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Nov 26 19:54:58 2021
+# Make data base, printed on Sat Nov 27 11:19:34 2021
 
 # Variables
 
@@ -65,16 +65,15 @@ GNUMAKEFLAGS :=
 # environment
 XDG_DATA_DIRS = /usr/share/xfce4:/home/dcavalei/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/usr/share
 # environment
-DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-zceiMIQemN,guid=e0732b2c5eebe5ec1390b91361a0a9ed
+DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-VWHio8ifS2,guid=928001db15c42559fb8fbf4761a212f1
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
 QT_SCALE_FACTOR = 1
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-4354f458-0015-4820-976b-537e519a51bd.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-35c3a05a-a323-4281-abd4-b30dbe7842e7.sock
 # environment
 VSCODE_CWD = /home/dcavalei/Desktop/ft_containers
- 
 # environment
 XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session0
 # default
@@ -84,11 +83,11 @@ PATH = /usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-SESSION_MANAGER = local/mx:@/tmp/.ICE-unix/3922,unix/mx:/tmp/.ICE-unix/3922
+SESSION_MANAGER = local/mx:@/tmp/.ICE-unix/19178,unix/mx:/tmp/.ICE-unix/19178
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
-WINDOWID = 130023427
+WINDOWID = 132120579
 # makefile (from 'Makefile', line 16)
 TEST_DIR = test
 # environment
@@ -112,7 +111,7 @@ LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 # environment
 XDG_SESSION_DESKTOP = xfce
 # environment
-SSH_AUTH_SOCK = /tmp/ssh-OWglz2kPu58u/agent.3922
+SSH_AUTH_SOCK = /tmp/ssh-TGZpjVA4F55i/agent.19178
 # automatic
 %F = $(notdir $%)
 # environment
@@ -128,7 +127,7 @@ QT_QPA_PLATFORMTHEME = gtk2
 # environment
 XDG_SEAT = seat0
 # environment
-SSH_AGENT_PID = 3994
+SSH_AGENT_PID = 19249
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = XFCE
 # makefile (from 'Makefile', line 19)
@@ -188,7 +187,7 @@ MAKE_COMMAND := make
 # makefile (from 'Makefile', line 4)
 INC = $(shell find $(INC_DIR) -type f -name "*.hpp")
 # environment
-OLDPWD = /home/dcavalei/Desktop/algorithmtutorprograms/data-structures/red-black-trees
+OLDPWD = /home/dcavalei
 # default
 .VARIABLES := 
 # automatic
@@ -252,9 +251,8 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 31744
+VSCODE_PID = 25797
 # variable set hash-table stats:
- 
 # Load=121/1024=12%, Rehash=0, Collisions=15/180=8%
 
 # Pattern-specific Variable Values
@@ -295,6 +293,7 @@ obj/test/%.o: test/%.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp inc/iter
 				@printf "$(BYELLOW)[ ----- Time ----- ]$(NC)\n"
 				@(time ./$(FNAME)_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
 				@(time ./$(FNAME)_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
+ 
 
 # 2 implicit rules, 0 (0.0%) terminal.
 
@@ -303,7 +302,7 @@ obj/test/%.o: test/%.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp inc/iter
 # Not a target:
 inc/red_black_tree.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-26 19:54:57.193337417
+#  Last modified 2021-11-27 00:38:25.618188176
 #  File has been updated.
 #  Successfully updated.
 
@@ -350,7 +349,7 @@ all: main.out
 
 main.out: obj/src/vector.o obj/src/main.o
 #  Implicit rule search has not been done.
-#  Last modified 2021-11-26 19:54:45.349307503
+#  Last modified 2021-11-27 00:33:59.637252003
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
@@ -424,7 +423,6 @@ inc/algorithm.hpp:
 # Not a target:
 obj/test/test_equal.o:
 #  Implicit rule search has not been done.
- 
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -522,7 +520,7 @@ inc/test.hpp:
 obj/src/vector.o: src/vector.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp inc/iterator.hpp inc/type_traits.hpp inc/test.hpp inc/iterator_traits.hpp inc/map.hpp inc/utility.hpp inc/color.hpp inc/red_black_tree.hpp Makefile
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'vector'
-#  Last modified 2021-11-26 19:54:45.105306888
+#  Last modified 2021-11-27 00:33:59.405251182
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # automatic
@@ -591,6 +589,7 @@ obj/test/test_iterator.o:
 # Not a target:
 inc/stack.hpp:
 #  Implicit rule search has been done.
+ 
 #  Last modified 2021-11-22 14:14:38.308352438
 #  File has been updated.
 #  Successfully updated.
@@ -658,6 +657,6 @@ obj/test/test_default_ctor.o:
 # strcache performance: lookups = 148 / hit rate = 45%
 # hash-table stats:
 # Load=81/8192=1%, Rehash=0, Collisions=1/148=1%
-# Finished Make data base on Fri Nov 26 19:54:58 2021
+# Finished Make data base on Sat Nov 27 11:19:34 2021
 
  

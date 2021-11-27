@@ -4,9 +4,7 @@ make: Entering directory '/home/dcavalei/Desktop/ft_containers'
 mkdir -pv obj/src/
 clang++ -Wall -Wextra -Werror -std=c++98 -g -Iinc -c src/vector.cpp -o obj/src/vector.o
 mkdir -pv obj/src/
- 
 clang++ -Wall -Wextra -Werror -std=c++98 -g -Iinc -c src/main.cpp -o obj/src/main.o
- 
 clang++ -Wall -Wextra -Werror -std=c++98 -g obj/src/vector.o obj/src/main.o -o main.out
 make: Leaving directory '/home/dcavalei/Desktop/ft_containers'
  
