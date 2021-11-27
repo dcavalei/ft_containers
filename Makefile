@@ -8,7 +8,7 @@ OBJ			= $(SRC:%.cpp=obj/%.o)
 OBJ_TEST	= $(TEST:%.cpp=obj/%.o)
 
 CCPP		= clang++
-CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
+CPPFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
 NAME		= main.out
 
 INC_DIR		= inc

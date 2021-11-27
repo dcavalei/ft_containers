@@ -10,18 +10,26 @@
 
 int main () {
 
-	std::cout << std::boolalpha;
+	ft::RedBlackTree<int>	rbt;
 
-	ft::bidirectional_iterator<int>::value_type name;
-	name = 1;
 
-	std::cout << name << std::endl;
-	std::cout << ft::is_same< ft::bidirectional_iterator<int>::iterator_category, std::bidirectional_iterator_tag >::value << std::endl;
+for (size_t i = 0; i < 20; i++)
+{
+	rbt.insert(i);
+}
 
-	ft::bidirectional_iterator<test::Base> yo;
+	rbt.prettyPrint();
 
-	yo->announce();
-	ft::node<int> asdadname;
-
+	// rbt.insert(12);
+	// rbt.insert(15);
+	// rbt.insert(13);
+	// rbt.insert(4);
+	// rbt.insert(3);
+	// rbt.insert(2);
+	// rbt.insert(6);
+	// rbt.insert(11);
+	// rbt.insert(5);
+	// rbt.insert(14);
+	// rbt.insert(7);
 	return 0;
 }
