@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Nov 27 11:19:34 2021
+# Make data base, printed on Mon Nov 29 13:02:06 2021
 
 # Variables
 
@@ -52,6 +52,7 @@ SHELL := /bin/bash
 VTE_VERSION = 5402
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+ 
 # environment
 _ = /usr/bin/code
 # environment
@@ -65,13 +66,13 @@ GNUMAKEFLAGS :=
 # environment
 XDG_DATA_DIRS = /usr/share/xfce4:/home/dcavalei/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/usr/share
 # environment
-DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-VWHio8ifS2,guid=928001db15c42559fb8fbf4761a212f1
+DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-DFztYS0Cc4,guid=03e236519b9f44eefeabc41861a4ce8a
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
 QT_SCALE_FACTOR = 1
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-35c3a05a-a323-4281-abd4-b30dbe7842e7.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-eed2c5ee-f01a-4588-9685-b97d245e0c1b.sock
 # environment
 VSCODE_CWD = /home/dcavalei/Desktop/ft_containers
 # environment
@@ -83,11 +84,11 @@ PATH = /usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-SESSION_MANAGER = local/mx:@/tmp/.ICE-unix/19178,unix/mx:/tmp/.ICE-unix/19178
+SESSION_MANAGER = local/mx:@/tmp/.ICE-unix/3444,unix/mx:/tmp/.ICE-unix/3444
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
-WINDOWID = 132120579
+WINDOWID = 130023427
 # makefile (from 'Makefile', line 16)
 TEST_DIR = test
 # environment
@@ -111,7 +112,7 @@ LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 # environment
 XDG_SESSION_DESKTOP = xfce
 # environment
-SSH_AUTH_SOCK = /tmp/ssh-TGZpjVA4F55i/agent.19178
+SSH_AUTH_SOCK = /tmp/ssh-DlWSEp6fKpQa/agent.3444
 # automatic
 %F = $(notdir $%)
 # environment
@@ -127,7 +128,7 @@ QT_QPA_PLATFORMTHEME = gtk2
 # environment
 XDG_SEAT = seat0
 # environment
-SSH_AGENT_PID = 19249
+SSH_AGENT_PID = 3515
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = XFCE
 # makefile (from 'Makefile', line 19)
@@ -251,7 +252,7 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 25797
+VSCODE_PID = 4816
 # variable set hash-table stats:
 # Load=121/1024=12%, Rehash=0, Collisions=15/180=8%
 
@@ -261,6 +262,7 @@ VSCODE_PID = 25797
 
 # Directories
 
+ 
 # . (device 66309, inode 1345528): 15 files, no impossibilities.
 # test (device 66309, inode 1357072): No files, no impossibilities so far.
 # src (device 66309, inode 1345662): 1 files, no impossibilities so far.
@@ -293,7 +295,6 @@ obj/test/%.o: test/%.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp inc/iter
 				@printf "$(BYELLOW)[ ----- Time ----- ]$(NC)\n"
 				@(time ./$(FNAME)_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
 				@(time ./$(FNAME)_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
- 
 
 # 2 implicit rules, 0 (0.0%) terminal.
 
@@ -302,7 +303,7 @@ obj/test/%.o: test/%.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp inc/iter
 # Not a target:
 inc/red_black_tree.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-27 00:38:25.618188176
+#  Last modified 2021-11-27 18:14:33.861966292
 #  File has been updated.
 #  Successfully updated.
 
@@ -321,7 +322,7 @@ obj/test/test_push_back.o:
 # Not a target:
 inc/iterator.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-24 10:08:57.356477889
+#  Last modified 2021-11-28 12:21:17.065315869
 #  File has been updated.
 #  Successfully updated.
 
@@ -349,7 +350,7 @@ all: main.out
 
 main.out: obj/src/vector.o obj/src/main.o
 #  Implicit rule search has not been done.
-#  Last modified 2021-11-27 00:33:59.637252003
+#  Last modified 2021-11-27 21:43:00.974155659
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
@@ -520,7 +521,7 @@ inc/test.hpp:
 obj/src/vector.o: src/vector.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp inc/iterator.hpp inc/type_traits.hpp inc/test.hpp inc/iterator_traits.hpp inc/map.hpp inc/utility.hpp inc/color.hpp inc/red_black_tree.hpp Makefile
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'vector'
-#  Last modified 2021-11-27 00:33:59.405251182
+#  Last modified 2021-11-27 21:43:00.706155278
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # automatic
@@ -538,13 +539,14 @@ obj/src/vector.o: src/vector.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp 
 # automatic
 # ^ := src/vector.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp inc/iterator.hpp inc/type_traits.hpp inc/test.hpp inc/iterator_traits.hpp inc/map.hpp inc/utility.hpp inc/color.hpp inc/red_black_tree.hpp Makefile
 # automatic
-# ? := inc/red_black_tree.hpp
+# ? := inc/iterator.hpp
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/17=6%
 #  recipe to execute (from 'Makefile', line 30):
 				@mkdir -pv $(dir $@)
 				@$(CCPP) $(CPPFLAGS) -I$(INC_DIR) -c $< -o $@
 
+ 
 # Not a target:
 obj/test/test_pair.o:
 #  Implicit rule search has not been done.
@@ -589,7 +591,6 @@ obj/test/test_iterator.o:
 # Not a target:
 inc/stack.hpp:
 #  Implicit rule search has been done.
- 
 #  Last modified 2021-11-22 14:14:38.308352438
 #  File has been updated.
 #  Successfully updated.
@@ -633,7 +634,7 @@ obj/src/main.o:
 # Not a target:
 inc/map.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-26 09:34:49.732654285
+#  Last modified 2021-11-27 21:42:59.474153523
 #  File has been updated.
 #  Successfully updated.
 
@@ -657,6 +658,6 @@ obj/test/test_default_ctor.o:
 # strcache performance: lookups = 148 / hit rate = 45%
 # hash-table stats:
 # Load=81/8192=1%, Rehash=0, Collisions=1/148=1%
-# Finished Make data base on Sat Nov 27 11:19:34 2021
+# Finished Make data base on Mon Nov 29 13:02:06 2021
 
  

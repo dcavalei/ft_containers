@@ -21,14 +21,49 @@ for (size_t i = 0; i < 20; i++)
 	rbt.insert(i);
 }
 
+std::cout << "start " << *rbt.start()->data << std::endl;
+std::cout << "last " << *rbt.last()->data << std::endl;
+
+ft::RedBlackTree<int>::iterator it = rbt.start();
+ft::RedBlackTree<int>::iterator ite = rbt.last();
+for ( ; it != 0; it++)
+{
+	std::cout << "data " << *(it) << std::endl;
+}
+// --it;
+
+
+for (size_t i = 0; i < 20; i++)
+{
+	std::cout << "-----------" << std::endl;
+
+	ft::RBTnode<int> *data;
+	data = rbt.successor(rbt.findKey(rbt._root, i));
+	if (data) {
+		std::cout << "next " << *data->data << std::endl;
+	} else {
+		std::cout << "next " << data << std::endl;
+	}
+	data = rbt.predecessor(rbt.findKey(rbt._root, i));
+	if (data) {
+		std::cout << "prev " << *data->data << std::endl;
+	} else {
+		std::cout << "prev p " << data << std::endl;
+	}
+	rbt.remove(i);
+}
+
+
 	rbt.prettyPrint();
+
+
 
 	rbt.clear();
 
 	rbt.prettyPrint();
 
-	map map;
-	map.insert(pair("ola", 42));
+	// map map;
+	// map.insert(pair("ola", 42));
 
 	// rbt.insert(12);
 	// rbt.insert(15);

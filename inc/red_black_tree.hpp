@@ -125,36 +125,137 @@ namespace ft
 			}
 		}
 
+		class iterator
+		{
+
+		public:
+			typedef RedBlackTree::value_type value_type;
+			typedef value_type &reference;
+			typedef const value_type &const_reference;
+			typedef value_type *pointer;
+			typedef const value_type *const_pointer;
+			typedef std::ptrdiff_t difference_type;
+			typedef std::bidirectional_iterator_tag iterator_category;
+			typedef RBTnode<value_type> *node;
+
+		private:
+			node _node;
+
+		public:
+			// Default constructor
+			iterator() {}
+
+			// Copy constructor
+			iterator(const iterator &other)
+			{
+				*this = other;
+			}
+
+			// Pointer constructor
+			iterator(node ptr) : _node(ptr) {}
+
+			// Destructor
+			~iterator() {}
+
+			// Assignment operator
+			iterator &operator=(const iterator &other)
+			{
+				_node = other._node;
+
+				return (*this);
+			}
+
+			// Conversion operator to const_iterator
+			operator typename RedBlackTree<const T, Compare, Equal, Alloc>::iterator() const
+			{
+				return (_node);
+			}
+
+			// Comparison operator, const compatible
+			bool operator==(const iterator &rhs) const
+			{
+				return (_node == rhs._node);
+			}
+
+			// Comparison operator, const compatible
+			bool operator!=(const iterator &rhs) const
+			{
+				return (!(*this == rhs));
+			}
+
+			// Dereference operator, const compatible
+			reference operator*() const
+			{
+				return (*(_node->data));
+			}
+
+			// Member access operator, const compatible
+			pointer operator->() const
+			{
+				return (_node->data);
+			}
+
+			// Prefix increment
+			iterator &operator++()
+			{
+				_node = successor(_node);
+				return (*this);
+			}
+
+			// Postfix increment
+			iterator operator++(int)
+			{
+				iterator old = *this;
+				operator++();
+				return (old);
+			}
+
+			// Prefix decrement
+			iterator &operator--()
+			{
+				_node = predecessor(_node);
+				return (*this);
+			}
+
+			// Postfix decrement
+			iterator operator--(int)
+			{
+				iterator old = *this;
+				operator--();
+				return (old);
+			}
+		};
+
 		/* ************************************ Helper functions ************************************ */
 
-	private:
-		node_pointer min(node_pointer x)
+	public:
+		static node_pointer min(node_pointer x)
 		{
-			while (x->left != _nil)
+			while (x->left && x->left->parent)
 			{
 				x = x->left;
 			}
 			return x;
 		}
 
-		node_pointer max(node_pointer x)
+		static node_pointer max(node_pointer x)
 		{
-			while (x->right != _nil)
+			while (x->right->parent)
 			{
 				x = x->right;
 			}
 			return x;
 		}
 
-		node_pointer successor(node_pointer x)
+		static node_pointer successor(node_pointer x)
 		{
-			if (x->right != _nil)
+			if (x->right && x->right->parent) // if not _nil
 			{
 				return min(x->right);
 			}
 
 			node_pointer y = x->parent;
-			while (y != _nil && x == y->right)
+			while (y && x == y->right)
 			{
 				x = y;
 				y = y->parent;
@@ -162,21 +263,29 @@ namespace ft
 			return y;
 		}
 
-		node_pointer predecessor(node_pointer x)
+		static node_pointer predecessor(node_pointer x)
 		{
-			if (x->left != _nil)
+			if (x->left && x->left->parent) // if not _nil
 			{
 				return max(x->left);
 			}
 
 			node_pointer y = x->parent;
-			while (y != _nil && x == y->left)
+			while (y && x == y->left)
 			{
 				x = y;
 				y = y->parent;
 			}
 
 			return y;
+		}
+
+		node_pointer start() {
+			return(min(_root));
+		}
+
+		node_pointer last() {
+			return(max(_root));
 		}
 
 	public:
@@ -204,6 +313,7 @@ namespace ft
 			}
 			// std::cout<<root->left->data<<std::endl;
 		}
+
 		void prettyPrint()
 		{
 			if (_root != _nil)
@@ -215,6 +325,7 @@ namespace ft
 	private:
 		void freeNode(node_pointer n)
 		{
+			std::cout << *n->data << std::endl;
 			_alloc.destroy(n->data);
 			_alloc.deallocate(n->data, 1);
 			delete n;
@@ -223,7 +334,7 @@ namespace ft
 		void fixDelete(node_pointer x)
 		{
 			node_pointer s;
-			while (x != _root && x->color == black)
+			while (x != _root && x != _nil && x->color == black)
 			{
 				if (x == x->parent->left)
 				{
@@ -274,7 +385,7 @@ namespace ft
 						s = x->parent->left;
 					}
 
-					if (s->right->color == black && s->right->color == black)
+					if (s->left->color == black && s->right->color == black)
 					{
 						// case 3.2
 						s->color = red;
@@ -325,20 +436,23 @@ namespace ft
 				y = min(z->right);
 				ori = y->color;
 				x = y->right;
-				if (y->parent == z)
+				if (y->parent == z && x != _nil)
 				{
+
 					x->parent = y;
 				}
 				else
 				{
 					transplant(y, y->right);
 					y->right = z->right;
-					y->right->parent = y;
+					if (y->right != _nil)
+						y->right->parent = y;
 				}
 
 				transplant(z, y);
 				y->left = z->left;
-				y->left->parent = y;
+				if (y->left != _nil)
+					y->left->parent = y;
 				y->color = z->color;
 			}
 			freeNode(z);
@@ -500,21 +614,22 @@ namespace ft
 			x->parent = y;
 		}
 
-		void transplant(node_pointer u, node_pointer v)
+		void transplant(node_pointer dst, node_pointer src)
 		{
-			if (u->parent == 0)
+			if (dst->parent == 0)
 			{
-				_root = v;
+				_root = src;
 			}
-			else if (u == u->parent->left)
+			else if (dst == dst->parent->left)
 			{
-				u->parent->left = v;
+				dst->parent->left = src;
 			}
 			else
 			{
-				u->parent->right = v;
+				dst->parent->right = src;
 			}
-			v->parent = u->parent;
+			if (src->parent)
+				src->parent = dst->parent;
 		}
 
 		node_pointer newNode(const value_type &key)
@@ -528,6 +643,7 @@ namespace ft
 			return (n);
 		}
 
+	public:
 		allocator_type _alloc;
 		Equal _equal;
 		Compare _comp;
