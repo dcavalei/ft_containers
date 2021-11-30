@@ -11,60 +11,92 @@
 
 typedef ft::pair<std::string, int> pair;
 typedef ft::map<std::string, int> map;
-int main () {
-
-	ft::RedBlackTree<int>	rbt;
-
-
-for (size_t i = 0; i < 20; i++)
+typedef ft::RedBlackTree<int>::iterator iterator;
+int main()
 {
-	rbt.insert(i);
-}
 
-std::cout << "start " << *rbt.start()->data << std::endl;
-std::cout << "last " << *rbt.last()->data << std::endl;
+	ft::RedBlackTree<int> rbt;
 
-ft::RedBlackTree<int>::iterator it = rbt.start();
-ft::RedBlackTree<int>::iterator ite = rbt.last();
-for ( ; it != 0; it++)
-{
-	std::cout << "data " << *(it) << std::endl;
-}
-// --it;
-
-
-for (size_t i = 0; i < 20; i++)
-{
-	std::cout << "-----------" << std::endl;
-
-	ft::RBTnode<int> *data;
-	data = rbt.successor(rbt.findKey(rbt._root, i));
-	if (data) {
-		std::cout << "next " << *data->data << std::endl;
-	} else {
-		std::cout << "next " << data << std::endl;
+	for (size_t i = 0; i < 20; i++)
+	{
+		rbt.insert(i);
 	}
-	data = rbt.predecessor(rbt.findKey(rbt._root, i));
-	if (data) {
-		std::cout << "prev " << *data->data << std::endl;
-	} else {
-		std::cout << "prev p " << data << std::endl;
+
+	for (size_t i = 0; i < 20; i++)
+	{
+		rbt.remove(i);
 	}
-	rbt.remove(i);
-}
+		for (size_t i = 0; i < 20; i++)
+	{
+		rbt.insert(i);
+	}
 
+{
+	ft::RedBlackTree<int> rbtCopy(rbt);
+	std::cout << "start " << *rbtCopy.start()->data << std::endl;
+	std::cout << "last " << *rbtCopy.last()->data << std::endl;
 
-	rbt.prettyPrint();
+	iterator it = rbtCopy.start();
+	iterator ite = rbtCopy.last();
+	for (; it != 0; it++)
+	{
+		std::cout << "data " << *(it) << std::endl;
+	}
 
+}	std::cout << "start " << *rbt.start()->data << std::endl;
+	std::cout << "last " << *rbt.last()->data << std::endl;
+
+	iterator it = rbt.start();
+	iterator ite = rbt.last();
+	for (; it != 0; it++)
+	{
+		std::cout << "data " << *(it) << std::endl;
+	}
+	// --it;
+
+	for (size_t i = 0; i < 20; i++)
+	{
+		std::cout << "-----------" << std::endl;
+
+		ft::RBTnode<int> *data;
+		data = rbt.successor(rbt.findKey(rbt._root, i));
+		if (data)
+		{
+			std::cout << "next " << *data->data << std::endl;
+		}
+		else
+		{
+			std::cout << "next " << data << std::endl;
+		}
+		data = rbt.predecessor(rbt.findKey(rbt._root, i));
+		if (data)
+		{
+			std::cout << "prev " << *data->data << std::endl;
+		}
+		else
+		{
+			std::cout << "prev p " << data << std::endl;
+		}
+		rbt.remove(i);
+	}
 
 
 	rbt.clear();
 
-	rbt.prettyPrint();
 
-	// map map;
-	// map.insert(pair("ola", 42));
+	map map1;
+	map1.insert(pair("ola", 42));
+	map1.insert(pair("adeus", 21));
 
+	map1["olaaa"] = 123;
+	map1["olaaa"] = 12311;
+
+	std::cout << map1["olaaa"] << std::endl;
+	std::cout << map1["ola"] << std::endl;
+	std::cout << map1["adeus"] << std::endl;
+	std::cout << map1.size() << std::endl;
+
+	map map2(map);
 	// rbt.insert(12);
 	// rbt.insert(15);
 	// rbt.insert(13);

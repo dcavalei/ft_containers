@@ -6,6 +6,9 @@
 namespace ft
 {
 
+	template <class T> class RBTiterator;
+	template <class T> class RBTreverse_iterator;
+
 	enum RBTcolor
 	{
 		red,
@@ -56,6 +59,12 @@ namespace ft
 		typedef Equal key_equal;
 		typedef RBTnode<T> node;
 		typedef node *node_pointer;
+		typedef RBTiterator<value_type> iterator;
+		typedef RBTiterator<const value_type> const_iterator;
+		typedef RBTreverse_iterator<value_type> reverse_iterator;
+		typedef RBTreverse_iterator<const value_type> const_reverse_iterator;
+
+		/* ************************************ Constructors ************************************ */
 
 	public:
 		explicit RedBlackTree(
@@ -67,15 +76,41 @@ namespace ft
 													_nil(new node(black)),
 													_root(_nil) {}
 
+		RedBlackTree(const RedBlackTree &other) : _nil(0), _root(0)
+		{
+			*this = other;
+		}
+
 		~RedBlackTree()
 		{
 			clear();
 			delete (_nil);
 		}
 
+		RedBlackTree &operator=(const RedBlackTree &rhs)
+		{
+			node_pointer last = rhs.last();
+
+			this->~RedBlackTree();
+			_alloc = rhs._alloc;
+			_equal = rhs._equal;
+			_comp = rhs._comp;
+			_nil = new node(black);
+			_root = _nil;
+
+			for (node_pointer i = rhs.start(); i != last; i = successor(i))
+			{
+				insert(*(i->data));
+			}
+			if (last)
+			{
+				insert(*(last->data));
+			}
+			return (*this);
+		}
+
 		void insert(const value_type &key)
 		{
-
 			node_pointer n = newNode(key);
 
 			rbtInsert(n);
@@ -102,6 +137,10 @@ namespace ft
 					x = x->left;
 				}
 			}
+			if (z == _nil)
+			{
+				z = 0;
+			}
 			return (z);
 		}
 
@@ -109,12 +148,11 @@ namespace ft
 		{
 			node_pointer node = findKey(_root, key);
 
-			if (node == _nil)
+			if (node)
 			{
-				return;
+				rbtDelete(node);
 			}
 
-			rbtDelete(node);
 		}
 
 		void clear()
@@ -124,107 +162,6 @@ namespace ft
 				rbtDelete(x);
 			}
 		}
-
-		class iterator
-		{
-
-		public:
-			typedef RedBlackTree::value_type value_type;
-			typedef value_type &reference;
-			typedef const value_type &const_reference;
-			typedef value_type *pointer;
-			typedef const value_type *const_pointer;
-			typedef std::ptrdiff_t difference_type;
-			typedef std::bidirectional_iterator_tag iterator_category;
-			typedef RBTnode<value_type> *node;
-
-		private:
-			node _node;
-
-		public:
-			// Default constructor
-			iterator() {}
-
-			// Copy constructor
-			iterator(const iterator &other)
-			{
-				*this = other;
-			}
-
-			// Pointer constructor
-			iterator(node ptr) : _node(ptr) {}
-
-			// Destructor
-			~iterator() {}
-
-			// Assignment operator
-			iterator &operator=(const iterator &other)
-			{
-				_node = other._node;
-
-				return (*this);
-			}
-
-			// Conversion operator to const_iterator
-			operator typename RedBlackTree<const T, Compare, Equal, Alloc>::iterator() const
-			{
-				return (_node);
-			}
-
-			// Comparison operator, const compatible
-			bool operator==(const iterator &rhs) const
-			{
-				return (_node == rhs._node);
-			}
-
-			// Comparison operator, const compatible
-			bool operator!=(const iterator &rhs) const
-			{
-				return (!(*this == rhs));
-			}
-
-			// Dereference operator, const compatible
-			reference operator*() const
-			{
-				return (*(_node->data));
-			}
-
-			// Member access operator, const compatible
-			pointer operator->() const
-			{
-				return (_node->data);
-			}
-
-			// Prefix increment
-			iterator &operator++()
-			{
-				_node = successor(_node);
-				return (*this);
-			}
-
-			// Postfix increment
-			iterator operator++(int)
-			{
-				iterator old = *this;
-				operator++();
-				return (old);
-			}
-
-			// Prefix decrement
-			iterator &operator--()
-			{
-				_node = predecessor(_node);
-				return (*this);
-			}
-
-			// Postfix decrement
-			iterator operator--(int)
-			{
-				iterator old = *this;
-				operator--();
-				return (old);
-			}
-		};
 
 		/* ************************************ Helper functions ************************************ */
 
@@ -280,52 +217,54 @@ namespace ft
 			return y;
 		}
 
-		node_pointer start() {
-			return(min(_root));
+		node_pointer start() const
+		{
+			return (min(_root));
 		}
 
-		node_pointer last() {
-			return(max(_root));
+		node_pointer last() const
+		{
+			return (max(_root));
 		}
 
 	public:
-		void printHelper(node_pointer _root, std::string indent, bool last)
-		{
-			// print the tree structure on the screen
-			if (_root != _nil)
-			{
-				std::cout << indent;
-				if (last)
-				{
-					std::cout << "R----";
-					indent += "     ";
-				}
-				else
-				{
-					std::cout << "L----";
-					indent += "|    ";
-				}
+		// void printHelper(node_pointer _root, std::string indent, bool last)
+		// {
+		// 	// print the tree structure on the screen
+		// 	if (_root != _nil)
+		// 	{
+		// 		std::cout << indent;
+		// 		if (last)
+		// 		{
+		// 			std::cout << "R----";
+		// 			indent += "     ";
+		// 		}
+		// 		else
+		// 		{
+		// 			std::cout << "L----";
+		// 			indent += "|    ";
+		// 		}
 
-				std::string sColor = (_root->color == red) ? "RED" : "BLACK";
-				std::cout << *_root->data << "(" << sColor << ")" << std::endl;
-				printHelper(_root->left, indent, false);
-				printHelper(_root->right, indent, true);
-			}
-			// std::cout<<root->left->data<<std::endl;
-		}
+		// 		std::string sColor = (_root->color == red) ? "RED" : "BLACK";
+		// 		std::cout << *_root->data << "(" << sColor << ")" << std::endl;
+		// 		printHelper(_root->left, indent, false);
+		// 		printHelper(_root->right, indent, true);
+		// 	}
+		// 	// std::cout<<root->left->data<<std::endl;
+		// }
 
-		void prettyPrint()
-		{
-			if (_root != _nil)
-			{
-				printHelper(_root, "", true);
-			}
-		}
+		// void prettyPrint()
+		// {
+		// 	if (_root != _nil)
+		// 	{
+		// 		printHelper(_root, "", true);
+		// 	}
+		// }
 
 	private:
 		void freeNode(node_pointer n)
 		{
-			std::cout << *n->data << std::endl;
+			// std::cout << *n->data << std::endl;
 			_alloc.destroy(n->data);
 			_alloc.deallocate(n->data, 1);
 			delete n;
@@ -650,6 +589,211 @@ namespace ft
 		node_pointer _nil;
 		node_pointer _root;
 	};
+
+	template <class T>
+	class RBTiterator
+	{
+
+	public:
+		typedef T value_type;
+		typedef value_type &reference;
+		typedef const value_type &const_reference;
+		typedef value_type *pointer;
+		typedef const value_type *const_pointer;
+		typedef std::ptrdiff_t difference_type;
+		typedef std::bidirectional_iterator_tag iterator_category;
+		typedef RBTnode<value_type> *node;
+
+	private:
+		node _node;
+
+	public:
+		// Default constructor
+		RBTiterator() {}
+
+		// Copy constructor
+		RBTiterator(const RBTiterator &other)
+		{
+			*this = other;
+		}
+
+		// Pointer constructor
+		RBTiterator(node ptr) : _node(ptr) {}
+
+		// Destructor
+		~RBTiterator() {}
+
+		// Assignment operator
+		RBTiterator &operator=(const RBTiterator &other)
+		{
+			_node = other._node;
+
+			return (*this);
+		}
+
+		// Conversion operator to const_iterator
+		operator RBTiterator<const value_type>() const
+		{
+			return (_node);
+		}
+
+		// Comparison operator, const compatible
+		bool operator==(const RBTiterator &rhs) const
+		{
+			return (_node == rhs._node);
+		}
+
+		// Comparison operator, const compatible
+		bool operator!=(const RBTiterator &rhs) const
+		{
+			return (!(*this == rhs));
+		}
+
+		// Dereference operator, const compatible
+		reference operator*() const
+		{
+			return (*(_node->data));
+		}
+
+		// Member access operator, const compatible
+		pointer operator->() const
+		{
+			return (_node->data);
+		}
+
+		// Prefix increment
+		RBTiterator &operator++()
+		{
+			_node = RedBlackTree<value_type>::successor(_node);
+			return (*this);
+		}
+
+		// Postfix increment
+		RBTiterator operator++(int)
+		{
+			RBTiterator old = *this;
+			operator++();
+			return (old);
+		}
+
+		// Prefix decrement
+		RBTiterator &operator--()
+		{
+			_node = RedBlackTree<value_type>::predecessor(_node);
+			return (*this);
+		}
+
+		// Postfix decrement
+		RBTiterator operator--(int)
+		{
+			RBTiterator old = *this;
+			operator--();
+			return (old);
+		}
+	};
+
+	template <class T>
+	class RBTreverse_iterator
+	{
+
+	public:
+		typedef T value_type;
+		typedef value_type &reference;
+		typedef const value_type &const_reference;
+		typedef value_type *pointer;
+		typedef const value_type *const_pointer;
+		typedef std::ptrdiff_t difference_type;
+		typedef std::bidirectional_iterator_tag iterator_category;
+		typedef RBTnode<value_type> *node;
+
+	private:
+		node _node;
+
+	public:
+		// Default constructor
+		RBTreverse_iterator() {}
+
+		// Copy constructor
+		RBTreverse_iterator(const RBTreverse_iterator &other)
+		{
+			*this = other;
+		}
+
+		// Pointer constructor
+		RBTreverse_iterator(node ptr) : _node(ptr) {}
+
+		// Destructor
+		~RBTreverse_iterator() {}
+
+		// Assignment operator
+		RBTreverse_iterator &operator=(const RBTreverse_iterator &other)
+		{
+			_node = other._node;
+
+			return (*this);
+		}
+
+		// Conversion operator to const_iterator
+		operator RBTreverse_iterator<const value_type>() const
+		{
+			return (_node);
+		}
+
+		// Comparison operator, const compatible
+		bool operator==(const RBTreverse_iterator &rhs) const
+		{
+			return (_node == rhs._node);
+		}
+
+		// Comparison operator, const compatible
+		bool operator!=(const RBTreverse_iterator &rhs) const
+		{
+			return (!(*this == rhs));
+		}
+
+		// Dereference operator, const compatible
+		reference operator*() const
+		{
+			return (*(_node->data));
+		}
+
+		// Member access operator, const compatible
+		pointer operator->() const
+		{
+			return (_node->data);
+		}
+
+		// Prefix increment
+		RBTreverse_iterator &operator++()
+		{
+			_node = RedBlackTree<value_type>::predecessor(_node);
+			return (*this);
+		}
+
+		// Postfix increment
+		RBTreverse_iterator operator++(int)
+		{
+			RBTreverse_iterator old = *this;
+			operator++();
+			return (old);
+		}
+
+		// Prefix decrement
+		RBTreverse_iterator &operator--()
+		{
+			_node = RedBlackTree<value_type>::successor(_node);
+			return (*this);
+		}
+
+		// Postfix decrement
+		RBTreverse_iterator operator--(int)
+		{
+			RBTreverse_iterator old = *this;
+			operator--();
+			return (old);
+		}
+	};
+
 
 }
 
