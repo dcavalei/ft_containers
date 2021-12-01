@@ -293,7 +293,7 @@ namespace ft
 				pointer tmp;
 				size_type pos;
 
-				(_size * 2 < max_size()) ? (new_cap = _size * 2) : (new_cap = max_size());
+				(_size * 2 < max_size()) ? (new_cap = _capacity * 2) : (new_cap = max_size());
 				tmp = _alloc.allocate(new_cap);
 				pos = position - begin();
 

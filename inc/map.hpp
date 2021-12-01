@@ -140,12 +140,7 @@ namespace ft
 			return (*node->data).second;
 		}
 
-		/* ************************************************************************************** */
-
-		// pair<iterator,bool> insert (const value_type& val)
-		// {
-
-		// }
+		/* ************************************* Modifiers ************************************** */
 
 		pair<iterator, bool> insert(const value_type &val)
 		{
@@ -155,7 +150,6 @@ namespace ft
 			node = _rbt.findKey(_rbt._root, val);
 			if (node)
 			{
-				p.first = iterator(node);
 				p.second = false;
 			}
 			else
@@ -163,18 +157,23 @@ namespace ft
 				_size++;
 				_rbt.insert(val);
 				node = _rbt.findKey(_rbt._root, val);
-				p.first = iterator(node);
 				p.second = true;
 			}
+			p.first = iterator(node);
 			return p;
 		}
 
 		iterator insert(iterator position, const value_type &val)
 		{
-			(void)position;
-			_rbt.insert(val);
+			typename RedBlackTree::node_pointer target, new_node;
+
+			target = position.getNode();
+			new_node = _rbt.newNode(val);
+
+			_rbt.bstInsert(new_node, target);
+			_rbt.fixInsert(new_node);
 			_size++;
-			return (iterator(_rbt.findKey(_rbt._root, val)));
+			return (iterator(new_node));
 		}
 
 		template <class InputIterator>
@@ -186,6 +185,58 @@ namespace ft
 				_size++;
 			}
 		}
+
+		void erase(iterator position)
+		{
+			_rbt.rbtDelete(position.getNode());
+			_size--;
+		}
+
+		size_type erase(const key_type &k)
+		{
+			size_type i = 0;
+
+			while (_rbt.remove(k))
+			{
+				i++;
+			}
+			_size -= i;
+			return (i);
+		}
+
+		void erase(iterator first, iterator last)
+		{
+			while (first != last)
+			{
+				erase(*first++);
+			}
+		}
+
+		void swap(map &other)
+		{
+			size_type tmp_size;
+			typename RedBlackTree::node_pointer tmp_nil, tmp_root;
+
+			tmp_size = this->_size;
+			tmp_nil = this->_rbt._nil;
+			tmp_root = this->_rbt._root;
+
+			this->_size = other._size;
+			this->_rbt._nil = other._rbt._nil;
+			this->_rbt._root = other._rbt._root;
+
+			other._size = tmp_size;
+			other._rbt._nil = tmp_nil;
+			other._rbt._root = tmp_root;
+		}
+
+		void clear()
+		{
+			_rbt.clear();
+			_size = 0;
+		}
+
+		/* ************************************************************************************** */
 
 	private:
 		class value_equal

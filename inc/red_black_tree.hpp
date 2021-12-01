@@ -113,13 +113,13 @@ namespace ft
 		{
 			node_pointer n = newNode(key);
 
-			rbtInsert(n);
+			bstInsert(n, _root);
 			fixInsert(n);
 		}
 
 		node_pointer findKey(node_pointer x, const value_type &key)
 		{
-			node_pointer z = _nil;
+			node_pointer z = NULL;
 
 			while (x != _nil)
 			{
@@ -127,7 +127,6 @@ namespace ft
 				{
 					z = x;
 				}
-
 				if (_comp(*x->data, key))
 				{
 					x = x->right;
@@ -137,38 +136,49 @@ namespace ft
 					x = x->left;
 				}
 			}
-			if (z == _nil)
-			{
-				z = 0;
-			}
 			return (z);
 		}
 
-		void remove(const value_type &key)
+		bool remove(const value_type &key)
 		{
 			node_pointer node = findKey(_root, key);
 
 			if (node)
 			{
 				rbtDelete(node);
+				return true;
 			}
+			return false;
+		}
 
+		void clearHelper(node_pointer n)
+		{
+			if (n == _nil)
+			{
+				return;
+			}
+			clearHelper(n->left);
+			clearHelper(n->right);
+
+			freeNode(n);
 		}
 
 		void clear()
 		{
-			for (node_pointer x = _root; x != _nil; x = _root)
-			{
-				rbtDelete(x);
-			}
+			clearHelper(_root);
+			_root = _nil;
 		}
 
-		/* ************************************ Helper functions ************************************ */
+		/* ********************************** Helper functions ********************************** */
 
 	public:
 		static node_pointer min(node_pointer x)
 		{
-			while (x->left && x->left->parent)
+			if (!x && !x->left)
+			{
+				return (NULL);
+			}
+			while (x->left->parent)
 			{
 				x = x->left;
 			}
@@ -177,7 +187,11 @@ namespace ft
 
 		static node_pointer max(node_pointer x)
 		{
-			while (x->right->parent)
+			if (!x || !x->right)
+			{
+				return (NULL);
+			}
+			while (x->right->parent) // while != _nil
 			{
 				x = x->right;
 			}
@@ -186,7 +200,7 @@ namespace ft
 
 		static node_pointer successor(node_pointer x)
 		{
-			if (x->right && x->right->parent) // if not _nil
+			if (x->right && x->right->parent) // if right != _nil
 			{
 				return min(x->right);
 			}
@@ -202,7 +216,7 @@ namespace ft
 
 		static node_pointer predecessor(node_pointer x)
 		{
-			if (x->left && x->left->parent) // if not _nil
+			if (x->left && x->left->parent) // if left != _nil
 			{
 				return max(x->left);
 			}
@@ -226,40 +240,6 @@ namespace ft
 		{
 			return (max(_root));
 		}
-
-	public:
-		// void printHelper(node_pointer _root, std::string indent, bool last)
-		// {
-		// 	// print the tree structure on the screen
-		// 	if (_root != _nil)
-		// 	{
-		// 		std::cout << indent;
-		// 		if (last)
-		// 		{
-		// 			std::cout << "R----";
-		// 			indent += "     ";
-		// 		}
-		// 		else
-		// 		{
-		// 			std::cout << "L----";
-		// 			indent += "|    ";
-		// 		}
-
-		// 		std::string sColor = (_root->color == red) ? "RED" : "BLACK";
-		// 		std::cout << *_root->data << "(" << sColor << ")" << std::endl;
-		// 		printHelper(_root->left, indent, false);
-		// 		printHelper(_root->right, indent, true);
-		// 	}
-		// 	// std::cout<<root->left->data<<std::endl;
-		// }
-
-		// void prettyPrint()
-		// {
-		// 	if (_root != _nil)
-		// 	{
-		// 		printHelper(_root, "", true);
-		// 	}
-		// }
 
 	private:
 		void freeNode(node_pointer n)
@@ -377,7 +357,6 @@ namespace ft
 				x = y->right;
 				if (y->parent == z && x != _nil)
 				{
-
 					x->parent = y;
 				}
 				else
@@ -470,14 +449,14 @@ namespace ft
 			_root->color = black;
 		}
 
-		void rbtInsert(node_pointer n)
+		void bstInsert(node_pointer n, node_pointer start)
 		{
-			node_pointer y = 0;
-			node_pointer x = _root;
+			node_pointer parent = NULL;
+			node_pointer x = start;
 
 			while (x != _nil)
 			{
-				y = x;
+				parent = x;
 				if (_comp(*n->data, *x->data))
 				{
 					x = x->left;
@@ -488,18 +467,18 @@ namespace ft
 				}
 			}
 
-			n->parent = y;
-			if (!y)
+			n->parent = parent;
+			if (!parent)
 			{
 				_root = n;
 			}
-			else if (_comp(*n->data, *y->data))
+			else if (_comp(*n->data, *parent->data))
 			{
-				y->left = n;
+				parent->left = n;
 			}
 			else
 			{
-				y->right = n;
+				parent->right = n;
 			}
 		}
 
@@ -602,10 +581,10 @@ namespace ft
 		typedef const value_type *const_pointer;
 		typedef std::ptrdiff_t difference_type;
 		typedef std::bidirectional_iterator_tag iterator_category;
-		typedef RBTnode<value_type> *node;
+		typedef RBTnode<value_type> *node_pointer;
 
 	private:
-		node _node;
+		node_pointer _node;
 
 	public:
 		// Default constructor
@@ -618,7 +597,7 @@ namespace ft
 		}
 
 		// Pointer constructor
-		RBTiterator(node ptr) : _node(ptr) {}
+		RBTiterator(node_pointer ptr) : _node(ptr) {}
 
 		// Destructor
 		~RBTiterator() {}
@@ -690,6 +669,11 @@ namespace ft
 			operator--();
 			return (old);
 		}
+
+		node_pointer	getNode()
+		{
+			return (_node);
+		}
 	};
 
 	template <class T>
@@ -704,10 +688,10 @@ namespace ft
 		typedef const value_type *const_pointer;
 		typedef std::ptrdiff_t difference_type;
 		typedef std::bidirectional_iterator_tag iterator_category;
-		typedef RBTnode<value_type> *node;
+		typedef RBTnode<value_type> *node_pointer;
 
 	private:
-		node _node;
+		node_pointer _node;
 
 	public:
 		// Default constructor
@@ -720,7 +704,7 @@ namespace ft
 		}
 
 		// Pointer constructor
-		RBTreverse_iterator(node ptr) : _node(ptr) {}
+		RBTreverse_iterator(node_pointer ptr) : _node(ptr) {}
 
 		// Destructor
 		~RBTreverse_iterator() {}
@@ -792,8 +776,12 @@ namespace ft
 			operator--();
 			return (old);
 		}
-	};
 
+		node_pointer	getNode()
+		{
+			return (_node);
+		}
+	};
 
 }
 
