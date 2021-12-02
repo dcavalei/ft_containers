@@ -21,9 +21,7 @@ namespace ft
 		class value_compare;
 
 	private:
-		class value_equal;
-		typedef std::equal_to<Key> key_equal;
-		typedef RedBlackTree<pair<const Key, T>, value_compare, value_equal, Alloc> RedBlackTree;
+		typedef RedBlackTree<pair<const Key, T>, value_compare, Alloc> RedBlackTree;
 
 	public:
 		// https://www.cplusplus.com/reference/map/map/
@@ -46,17 +44,14 @@ namespace ft
 
 	public:
 		explicit map(const key_compare &comp = key_compare(),
-					 const allocator_type &alloc = allocator_type()) : _rbt(value_compare(comp),
-																			alloc,
-																			value_equal(key_equal())),
+					 const allocator_type &alloc = allocator_type()) : _rbt(value_compare(comp), alloc),
+																	   _comp(comp),
 																	   _size(0) {}
 		template <class InputIterator>
 		map(InputIterator first,
 			InputIterator last,
 			const key_compare &comp = key_compare(),
-			const allocator_type &alloc = allocator_type()) : _rbt(value_compare(comp),
-																   alloc,
-																   value_equal(key_equal())),
+			const allocator_type &alloc = allocator_type()) : _rbt(value_compare(comp), alloc),
 															  _size(0)
 		{
 			while (first != last)
@@ -88,7 +83,6 @@ namespace ft
 			value_compare(Compare c) : comp(c) {}
 
 		public:
-			value_compare(){};
 			typedef bool result_type;
 			typedef value_type first_argument_type;
 			typedef value_type second_argument_type;
@@ -129,12 +123,12 @@ namespace ft
 		mapped_type &operator[](const key_type &k)
 		{
 			value_type pair(k, mapped_type());
-			typename RedBlackTree::node_pointer node = _rbt.findKey(_rbt._root, pair);
+			typename RedBlackTree::node_pointer node = _rbt.findKey(_rbt.root, pair);
 
 			if (!node)
 			{
 				_rbt.insert(pair);
-				node = _rbt.findKey(_rbt._root, pair);
+				node = _rbt.findKey(_rbt.root, pair);
 				_size++;
 			}
 			return (*node->data).second;
@@ -147,7 +141,7 @@ namespace ft
 			pair<iterator, bool> p;
 			typename RedBlackTree::node_pointer node;
 
-			node = _rbt.findKey(_rbt._root, val);
+			node = _rbt.findKey(_rbt.root, val);
 			if (node)
 			{
 				p.second = false;
@@ -156,7 +150,7 @@ namespace ft
 			{
 				_size++;
 				_rbt.insert(val);
-				node = _rbt.findKey(_rbt._root, val);
+				node = _rbt.findKey(_rbt.root, val);
 				p.second = true;
 			}
 			p.first = iterator(node);
@@ -218,16 +212,16 @@ namespace ft
 			typename RedBlackTree::node_pointer tmp_nil, tmp_root;
 
 			tmp_size = this->_size;
-			tmp_nil = this->_rbt._nil;
-			tmp_root = this->_rbt._root;
+			tmp_nil = this->_rbt.nil;
+			tmp_root = this->_rbt.root;
 
 			this->_size = other._size;
-			this->_rbt._nil = other._rbt._nil;
-			this->_rbt._root = other._rbt._root;
+			this->_rbt.nil = other._rbt.nil;
+			this->_rbt.root = other._rbt.root;
 
 			other._size = tmp_size;
-			other._rbt._nil = tmp_nil;
-			other._rbt._root = tmp_root;
+			other._rbt.nil = tmp_nil;
+			other._rbt.root = tmp_root;
 		}
 
 		void clear()
@@ -236,29 +230,166 @@ namespace ft
 			_size = 0;
 		}
 
-		/* ************************************************************************************** */
+		/* ************************************* Observers ************************************** */
 
-	private:
-		class value_equal
+		key_compare key_comp() const
 		{
-			friend class map;
+			return (_comp);
+		}
 
-		protected:
-			std::equal_to<key_type> comp;
-			value_equal(std::equal_to<key_type> c) : comp(c) {}
+		/* ************************************* Operations ************************************* */
 
-		public:
-			value_equal(){};
-			typedef bool result_type;
-			typedef value_type first_argument_type;
-			typedef value_type second_argument_type;
-			bool operator()(const value_type &x, const value_type &y) const
+		iterator find(const key_type &k)
+		{
+			value_type p(k, mapped_type());
+			return (iterator(_rbt.findKey(_rbt.root, p)));
+		}
+
+		const_iterator find(const key_type &k) const
+		{
+			value_type p(k, mapped_type());
+			return (const_iterator(_rbt.findKey(_rbt.root, p)));
+		}
+
+		size_type countHelper(typename RedBlackTree::node_pointer n, const value_type &val) const
+		{
+			size_type ret;
+
+			if (n == _rbt.nil)
 			{
-				return comp(x.first, y.first);
+				return 0;
 			}
-		};
+
+			!(_rbt.comp(val, *n->data) || _rbt.comp(*n->data, val)) == true ? ret = 1 : ret = 0;
+			return (countHelper(n->left, val) + countHelper(n->right, val) + ret);
+		}
+
+		size_type count(const key_type &k) const
+		{
+			value_type p(k, mapped_type());
+
+			return (countHelper(_rbt.root, p));
+		}
+
+		iterator lower_bound(const key_type &key)
+		{
+			typename RedBlackTree::node_pointer n;
+
+			n = _rbt.root;
+
+			while (n != _rbt.nil)
+			{
+				if (comp(*n->data, key) == false)
+				{
+					return (iterator(n));
+				}
+				if (comp(*n->data, key))
+				{
+					n = n->right;
+				}
+				else
+				{
+					n = n->left;
+				}
+			}
+			return (end());
+		}
+
+		const_iterator lower_bound(const key_type &key) const
+		{
+			typename RedBlackTree::node_pointer n;
+
+			n = _rbt.root;
+
+			while (n != _rbt.nil)
+			{
+				if (comp(*n->data, key) == false)
+				{
+					return (iterator(n));
+				}
+				if (comp(*n->data, key))
+				{
+					n = n->right;
+				}
+				else
+				{
+					n = n->left;
+				}
+			}
+			return (end());
+		}
+
+		iterator upper_bound(const key_type &key)
+		{
+			typename RedBlackTree::node_pointer n;
+
+			n = _rbt.root;
+
+			while (n != _rbt.nil)
+			{
+				if (comp(key, *n->data) == true)
+				{
+					return (iterator(n));
+				}
+				if (comp(*n->data, key))
+				{
+					n = n->right;
+				}
+				else
+				{
+					n = n->left;
+				}
+			}
+			return (end());
+		}
+
+		const_iterator upper_bound(const key_type &key) const
+		{
+			typename RedBlackTree::node_pointer n;
+
+			n = _rbt.root;
+
+			while (n != _rbt.nil)
+			{
+				if (comp(key, *n->data) == true)
+				{
+					return (iterator(n));
+				}
+				if (comp(*n->data, key))
+				{
+					n = n->right;
+				}
+				else
+				{
+					n = n->left;
+				}
+			}
+			return (end());
+		}
+
+		pair<iterator, iterator> equal_range(const key_type &k)
+		{
+			return (pair<iterator, iterator>(lower_bound(k), upper_bound(k)));
+		}
+
+		pair<const_iterator, const_iterator> equal_range(const key_type &k) const
+		{
+			return (pair<const_iterator, const_iterator>(lower_bound(k), upper_bound(k)));
+		}
+
+		/* ************************************** Allocator ************************************* */
+
+		allocator_type get_allocator() const
+		{
+			return (_rbt.alloc);
+		}
+
+		/* ********************************** Private data members ****************************** */
+
+		private:
 
 		RedBlackTree _rbt;
+		key_compare _comp;
 		size_type _size;
 	};
 

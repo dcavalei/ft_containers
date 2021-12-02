@@ -59,7 +59,7 @@ int main()
 		std::cout << "-----------" << std::endl;
 
 		ft::RBTnode<int> *data;
-		data = rbt.successor(rbt.findKey(rbt._root, i));
+		data = rbt.successor(rbt.findKey(rbt.root, i));
 		if (data)
 		{
 			std::cout << "next " << *data->data << std::endl;
@@ -68,7 +68,7 @@ int main()
 		{
 			std::cout << "next " << data << std::endl;
 		}
-		data = rbt.predecessor(rbt.findKey(rbt._root, i));
+		data = rbt.predecessor(rbt.findKey(rbt.root, i));
 		if (data)
 		{
 			std::cout << "prev " << *data->data << std::endl;
@@ -85,8 +85,15 @@ int main()
 
 
 	map map1;
-	map1.insert(pair("ola", 42));
-	map1.insert(pair("adeus", 21));
+	map1.begin();
+	map1["ola"];
+	map1.insert(map1.begin(), pair("ola", 1));
+	map1.insert(map1.begin(), pair("ola", 2));
+	map1.insert(map1.begin(), pair("ola", 3));
+	map1.insert(map1.begin(), pair("ola", 4));
+	map1.insert(map1.begin(), pair("ola", 5));
+	map1.insert(map1.begin(), pair("ola", 6));
+	map1.insert(map1.begin(), pair("adeus", 21));
 
 	map1["olaaa"] = 123;
 	map1["olaaa"] = 12311;
@@ -96,7 +103,9 @@ int main()
 	std::cout << map1["adeus"] << std::endl;
 	std::cout << map1.size() << std::endl;
 
-	map map2(map);
+	std::cout << (*(map1.find("ola"))).second << std::endl;
+	std::cout << map1.count("ola") << std::endl;
+
 	// rbt.insert(12);
 	// rbt.insert(15);
 	// rbt.insert(13);

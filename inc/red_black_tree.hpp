@@ -45,7 +45,6 @@ namespace ft
 	template <
 		class T,
 		class Compare = std::less<T>,
-		class Equal = std::equal_to<T>,
 		class Alloc = std::allocator<T> >
 	class RedBlackTree
 	{
@@ -56,7 +55,6 @@ namespace ft
 		typedef T value_type;
 		typedef Alloc allocator_type;
 		typedef Compare key_compare;
-		typedef Equal key_equal;
 		typedef RBTnode<T> node;
 		typedef node *node_pointer;
 		typedef RBTiterator<value_type> iterator;
@@ -69,14 +67,12 @@ namespace ft
 	public:
 		explicit RedBlackTree(
 			const key_compare &comp = key_compare(),
-			const allocator_type &alloc = allocator_type(),
-			const key_equal &equal = key_equal()) : _alloc(alloc),
-													_equal(equal),
-													_comp(comp),
-													_nil(new node(black)),
-													_root(_nil) {}
+			const allocator_type &alloc = allocator_type()) : alloc(alloc),
+													comp(comp),
+													nil(new node(black)),
+													root(nil) {}
 
-		RedBlackTree(const RedBlackTree &other) : _nil(0), _root(0)
+		RedBlackTree(const RedBlackTree &other) : nil(0), root(0)
 		{
 			*this = other;
 		}
@@ -84,7 +80,7 @@ namespace ft
 		~RedBlackTree()
 		{
 			clear();
-			delete (_nil);
+			delete (nil);
 		}
 
 		RedBlackTree &operator=(const RedBlackTree &rhs)
@@ -92,11 +88,10 @@ namespace ft
 			node_pointer last = rhs.last();
 
 			this->~RedBlackTree();
-			_alloc = rhs._alloc;
-			_equal = rhs._equal;
-			_comp = rhs._comp;
-			_nil = new node(black);
-			_root = _nil;
+			alloc = rhs.alloc;
+			comp = rhs.comp;
+			nil = new node(black);
+			root = nil;
 
 			for (node_pointer i = rhs.start(); i != last; i = successor(i))
 			{
@@ -113,7 +108,7 @@ namespace ft
 		{
 			node_pointer n = newNode(key);
 
-			bstInsert(n, _root);
+			bstInsert(n, root);
 			fixInsert(n);
 		}
 
@@ -121,13 +116,13 @@ namespace ft
 		{
 			node_pointer z = NULL;
 
-			while (x != _nil)
+			while (x != nil)
 			{
-				if (_equal(*x->data, key))
+				if (!(comp(*x->data, key) || comp(key, *x->data)))
 				{
 					z = x;
 				}
-				if (_comp(*x->data, key))
+				if (comp(*x->data, key))
 				{
 					x = x->right;
 				}
@@ -141,7 +136,7 @@ namespace ft
 
 		bool remove(const value_type &key)
 		{
-			node_pointer node = findKey(_root, key);
+			node_pointer node = findKey(root, key);
 
 			if (node)
 			{
@@ -153,7 +148,7 @@ namespace ft
 
 		void clearHelper(node_pointer n)
 		{
-			if (n == _nil)
+			if (n == nil)
 			{
 				return;
 			}
@@ -165,8 +160,8 @@ namespace ft
 
 		void clear()
 		{
-			clearHelper(_root);
-			_root = _nil;
+			clearHelper(root);
+			root = nil;
 		}
 
 		/* ********************************** Helper functions ********************************** */
@@ -174,7 +169,7 @@ namespace ft
 	public:
 		static node_pointer min(node_pointer x)
 		{
-			if (!x && !x->left)
+			if (!x || !x->left)
 			{
 				return (NULL);
 			}
@@ -191,7 +186,7 @@ namespace ft
 			{
 				return (NULL);
 			}
-			while (x->right->parent) // while != _nil
+			while (x->right->parent) // while != nil
 			{
 				x = x->right;
 			}
@@ -200,7 +195,7 @@ namespace ft
 
 		static node_pointer successor(node_pointer x)
 		{
-			if (x->right && x->right->parent) // if right != _nil
+			if (x->right && x->right->parent) // if right != nil
 			{
 				return min(x->right);
 			}
@@ -216,7 +211,7 @@ namespace ft
 
 		static node_pointer predecessor(node_pointer x)
 		{
-			if (x->left && x->left->parent) // if left != _nil
+			if (x->left && x->left->parent) // if left != nil
 			{
 				return max(x->left);
 			}
@@ -233,27 +228,26 @@ namespace ft
 
 		node_pointer start() const
 		{
-			return (min(_root));
+			return (min(root));
 		}
 
 		node_pointer last() const
 		{
-			return (max(_root));
+			return (max(root));
 		}
 
-	private:
 		void freeNode(node_pointer n)
 		{
 			// std::cout << *n->data << std::endl;
-			_alloc.destroy(n->data);
-			_alloc.deallocate(n->data, 1);
+			alloc.destroy(n->data);
+			alloc.deallocate(n->data, 1);
 			delete n;
 		}
 
 		void fixDelete(node_pointer x)
 		{
 			node_pointer s;
-			while (x != _root && x != _nil && x->color == black)
+			while (x != root && x != nil && x->color == black)
 			{
 				if (x == x->parent->left)
 				{
@@ -289,7 +283,7 @@ namespace ft
 						x->parent->color = black;
 						s->right->color = black;
 						leftRotate(x->parent);
-						x = _root;
+						x = root;
 					}
 				}
 				else
@@ -326,7 +320,7 @@ namespace ft
 						x->parent->color = black;
 						s->left->color = black;
 						rightRotate(x->parent);
-						x = _root;
+						x = root;
 					}
 				}
 			}
@@ -340,12 +334,12 @@ namespace ft
 
 			y = z;
 			ori = y->color;
-			if (z->left == _nil)
+			if (z->left == nil)
 			{
 				x = z->right;
 				transplant(z, z->right);
 			}
-			else if (z->right == _nil)
+			else if (z->right == nil)
 			{
 				x = z->left;
 				transplant(z, z->left);
@@ -355,7 +349,7 @@ namespace ft
 				y = min(z->right);
 				ori = y->color;
 				x = y->right;
-				if (y->parent == z && x != _nil)
+				if (y->parent == z && x != nil)
 				{
 					x->parent = y;
 				}
@@ -363,13 +357,13 @@ namespace ft
 				{
 					transplant(y, y->right);
 					y->right = z->right;
-					if (y->right != _nil)
+					if (y->right != nil)
 						y->right->parent = y;
 				}
 
 				transplant(z, y);
 				y->left = z->left;
-				if (y->left != _nil)
+				if (y->left != nil)
 					y->left->parent = y;
 				y->color = z->color;
 			}
@@ -441,12 +435,12 @@ namespace ft
 						rightRotate(k->parent->parent);
 					}
 				}
-				if (k == _root)
+				if (k == root)
 				{
 					break;
 				}
 			}
-			_root->color = black;
+			root->color = black;
 		}
 
 		void bstInsert(node_pointer n, node_pointer start)
@@ -454,10 +448,10 @@ namespace ft
 			node_pointer parent = NULL;
 			node_pointer x = start;
 
-			while (x != _nil)
+			while (x != nil)
 			{
 				parent = x;
-				if (_comp(*n->data, *x->data))
+				if (comp(*n->data, *x->data))
 				{
 					x = x->left;
 				}
@@ -470,9 +464,9 @@ namespace ft
 			n->parent = parent;
 			if (!parent)
 			{
-				_root = n;
+				root = n;
 			}
-			else if (_comp(*n->data, *parent->data))
+			else if (comp(*n->data, *parent->data))
 			{
 				parent->left = n;
 			}
@@ -486,14 +480,14 @@ namespace ft
 		{
 			node_pointer y = x->right;
 			x->right = y->left;
-			if (y->left != _nil)
+			if (y->left != nil)
 			{
 				y->left->parent = x;
 			}
 			y->parent = x->parent;
 			if (x->parent == 0)
 			{
-				_root = y;
+				root = y;
 			}
 			else if (x == x->parent->left)
 			{
@@ -511,14 +505,14 @@ namespace ft
 		{
 			node_pointer y = x->left;
 			x->left = y->right;
-			if (y->right != _nil)
+			if (y->right != nil)
 			{
 				y->right->parent = x;
 			}
 			y->parent = x->parent;
 			if (x->parent == 0)
 			{
-				_root = y;
+				root = y;
 			}
 			else if (x == x->parent->right)
 			{
@@ -536,7 +530,7 @@ namespace ft
 		{
 			if (dst->parent == 0)
 			{
-				_root = src;
+				root = src;
 			}
 			else if (dst == dst->parent->left)
 			{
@@ -552,21 +546,20 @@ namespace ft
 
 		node_pointer newNode(const value_type &key)
 		{
-			node_pointer n = new node(_alloc.allocate(1));
+			node_pointer n = new node(alloc.allocate(1));
 
-			_alloc.construct(n->data, key);
+			alloc.construct(n->data, key);
 			n->parent = 0;
-			n->left = _nil;
-			n->right = _nil;
+			n->left = nil;
+			n->right = nil;
 			return (n);
 		}
 
 	public:
-		allocator_type _alloc;
-		Equal _equal;
-		Compare _comp;
-		node_pointer _nil;
-		node_pointer _root;
+		allocator_type alloc;
+		Compare comp;
+		node_pointer nil;
+		node_pointer root;
 	};
 
 	template <class T>

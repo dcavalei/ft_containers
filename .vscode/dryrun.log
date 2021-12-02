@@ -198,6 +198,19 @@ printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
 (time ./obj/test/test_make_pair_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
 (time ./obj/test/test_make_pair_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
 mkdir -pv obj/test/
+clang++ -Wall -Wextra -Werror -std=c++98 -g -D_IS_TEST -Iinc -c test/test_map_ctor.cpp -o obj/test/test_map_ctor.o
+clang++ -Wall -Wextra -Werror -std=c++98 -g obj/test/test_map_ctor.o -o obj/test/test_map_ctor_ft
+./obj/test/test_map_ctor_ft > obj/test/test_map_ctor_ft.log
+clang++ -Wall -Wextra -Werror -std=c++11 -g -Iinc -c test/test_map_ctor.cpp -o obj/test/test_map_ctor.o
+clang++ -Wall -Wextra -Werror -std=c++11 -g obj/test/test_map_ctor.o -o obj/test/test_map_ctor_std
+./obj/test/test_map_ctor_std > obj/test/test_map_ctor_std.log
+(diff obj/test/test_map_ctor_std.log obj/test/test_map_ctor_ft.log > obj/test/test_map_ctor.diff \
+				&& printf "\033[0;32mobj/test/test_map_ctor.diff\033[0m\n" && rm obj/test/test_map_ctor.diff) \
+				|| (printf "\033[0;31mobj/test/test_map_ctor.diff\033[0m\n" && cat obj/test/test_map_ctor.diff)
+printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
+(time ./obj/test/test_map_ctor_std > /dev/null) 2>&1 | grep "real" | sed 's/real/std/'
+(time ./obj/test/test_map_ctor_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
+mkdir -pv obj/test/
 clang++ -Wall -Wextra -Werror -std=c++98 -g -D_IS_TEST -Iinc -c test/test_pair.cpp -o obj/test/test_pair.o
 clang++ -Wall -Wextra -Werror -std=c++98 -g obj/test/test_pair.o -o obj/test/test_pair_ft
 ./obj/test/test_pair_ft > obj/test/test_pair_ft.log
@@ -277,6 +290,7 @@ printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
 (time ./obj/test/test_reserve_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
 mkdir -pv obj/test/
 clang++ -Wall -Wextra -Werror -std=c++98 -g -D_IS_TEST -Iinc -c test/test_resize.cpp -o obj/test/test_resize.o
+ 
 clang++ -Wall -Wextra -Werror -std=c++98 -g obj/test/test_resize.o -o obj/test/test_resize_ft
 ./obj/test/test_resize_ft > obj/test/test_resize_ft.log
 clang++ -Wall -Wextra -Werror -std=c++11 -g -Iinc -c test/test_resize.cpp -o obj/test/test_resize.o
@@ -290,7 +304,6 @@ printf "\033[0;43;30m[ ----- Time ----- ]\033[0m\n"
 (time ./obj/test/test_resize_ft > /dev/null) 2>&1 | grep "real" | sed 's/real/ft /'
 mkdir -pv obj/test/
 clang++ -Wall -Wextra -Werror -std=c++98 -g -D_IS_TEST -Iinc -c test/test_reverse_iterator.cpp -o obj/test/test_reverse_iterator.o
- 
 clang++ -Wall -Wextra -Werror -std=c++98 -g obj/test/test_reverse_iterator.o -o obj/test/test_reverse_iterator_ft
 ./obj/test/test_reverse_iterator_ft > obj/test/test_reverse_iterator_ft.log
 clang++ -Wall -Wextra -Werror -std=c++11 -g -Iinc -c test/test_reverse_iterator.cpp -o obj/test/test_reverse_iterator.o
