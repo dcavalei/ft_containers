@@ -31,8 +31,8 @@ namespace ft
 		typedef Compare key_compare;
 		typedef pair<const Key, T> value_type;
 		typedef Alloc allocator_type;
-		typedef typename RedBlackTree::const_iterator const_iterator;
-		typedef typename RedBlackTree::iterator iterator;
+		typedef RBTiterator<const value_type> const_iterator;
+		typedef RBTiterator<value_type> iterator;
 		typedef typename RedBlackTree::const_reverse_iterator const_reverse_iterator;
 		typedef typename RedBlackTree::reverse_iterator reverse_iterator;
 		typedef typename allocator_type::reference reference;
@@ -76,11 +76,9 @@ namespace ft
 		// in C++98, it is required to inherit binary_function<value_type,value_type,bool>
 		class value_compare : std::binary_function<value_type, value_type, bool>
 		{
-			friend class map;
 
 		protected:
-			Compare comp;
-			value_compare(Compare c) : comp(c) {}
+			key_compare comp;
 
 		public:
 			typedef bool result_type;
@@ -90,6 +88,7 @@ namespace ft
 			{
 				return comp(x.first, y.first);
 			}
+			value_compare(const key_compare& c = key_compare()) : comp(c) {}
 		};
 
 		/* ************************************** Iterator ************************************** */
@@ -116,7 +115,7 @@ namespace ft
 
 		size_type size() const { return (_size); }
 
-		size_type max_size() const { return (_rbt._alloc.max_size()); }
+		size_type max_size() const { return (_rbt.alloc.max_size()); }
 
 		/* *********************************** Element access *********************************** */
 
@@ -175,8 +174,7 @@ namespace ft
 		{
 			while (first != last)
 			{
-				_rbt.insert(*first++);
-				_size++;
+				insert(*first++);
 			}
 		}
 

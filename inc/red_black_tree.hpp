@@ -39,7 +39,33 @@ namespace ft
 									  left(0),
 									  right(0) {}
 
+		RBTnode(const RBTnode& other)
+		{
+			*this = other;
+		}
+
+		RBTnode& operator=(const RBTnode& rhs)
+		{
+			if (this == &rhs)
+			{
+				return *this;
+			}
+
+			color = rhs.color;
+			data = rhs.data;
+			parent = rhs.parent;
+			left = rhs.left;
+			right = rhs.right;
+
+			return *this;
+		}
+
 		~RBTnode() {}
+
+		operator RBTnode<const value_type>() const
+		{
+			return(*this);
+		}
 	};
 
 	template <
@@ -57,8 +83,8 @@ namespace ft
 		typedef Compare key_compare;
 		typedef RBTnode<T> node;
 		typedef node *node_pointer;
-		typedef RBTiterator<value_type> iterator;
 		typedef RBTiterator<const value_type> const_iterator;
+		typedef RBTiterator<value_type> iterator;
 		typedef RBTreverse_iterator<value_type> reverse_iterator;
 		typedef RBTreverse_iterator<const value_type> const_reverse_iterator;
 
@@ -568,20 +594,20 @@ namespace ft
 
 	public:
 		typedef T value_type;
-		typedef value_type &reference;
-		typedef const value_type &const_reference;
-		typedef value_type *pointer;
-		typedef const value_type *const_pointer;
+		typedef T &reference;
+		typedef const T &const_reference;
+		typedef T *pointer;
+		typedef const T *const_pointer;
 		typedef std::ptrdiff_t difference_type;
 		typedef std::bidirectional_iterator_tag iterator_category;
-		typedef RBTnode<value_type> *node_pointer;
+		typedef RBTnode<T> *node_pointer;
 
 	private:
 		node_pointer _node;
 
 	public:
 		// Default constructor
-		RBTiterator() {}
+		RBTiterator() : _node(NULL) {}
 
 		// Copy constructor
 		RBTiterator(const RBTiterator &other)
@@ -590,16 +616,20 @@ namespace ft
 		}
 
 		// Pointer constructor
-		RBTiterator(node_pointer ptr) : _node(ptr) {}
+		RBTiterator( node_pointer ptr) : _node(ptr) {}
 
 		// Destructor
 		~RBTiterator() {}
 
 		// Assignment operator
-		RBTiterator &operator=(const RBTiterator &other)
+		RBTiterator &operator=(const RBTiterator &rhs)
 		{
-			_node = other._node;
+			if (this == &rhs)
+			{
+				return (*this);
+			}
 
+			_node = rhs._node;
 			return (*this);
 		}
 

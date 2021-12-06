@@ -14,6 +14,11 @@ typedef	ft::vector<int>::size_type	size_type;
 typedef	ft::vector<int>				vector;
 typedef	ft::vector<int>::iterator	iterator;
 
+/*
+	This test is done according to macOS version of vector,
+	the capacity will differ from linux to macOS.
+*/
+
 void	display( vector& vec ) {
 	static int n;
 

@@ -1,4 +1,9 @@
+#ifndef _IS_TEST
+#include <map>
+namespace ft = std;
+#else
 #include "map.hpp"
+#endif
 
 #include <iostream>
 
