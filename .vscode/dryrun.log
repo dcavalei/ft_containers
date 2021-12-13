@@ -1,4 +1,4 @@
-make run --dry-run --keep-going --print-directory
+make run --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/dcavalei/Desktop/ft_containers'
  
 mkdir -pv obj/src/

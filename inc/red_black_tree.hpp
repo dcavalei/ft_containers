@@ -66,6 +66,11 @@ namespace ft
 		{
 			return(*this);
 		}
+
+		operator RBTnode<const value_type>()
+		{
+			
+		}
 	};
 
 	template <
