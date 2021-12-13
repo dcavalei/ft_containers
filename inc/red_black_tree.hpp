@@ -6,7 +6,7 @@
 namespace ft
 {
 
-	template <class T> class RBTiterator;
+	template <class T, bool Const> class RBTiterator;
 	template <class T> class RBTreverse_iterator;
 
 	enum RBTcolor
@@ -584,7 +584,7 @@ namespace ft
 		node_pointer root;
 	};
 
-	template <class T>
+	template <class T, bool Const = false>
 	class RBTiterator
 	{
 

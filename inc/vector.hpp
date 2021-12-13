@@ -561,7 +561,6 @@ namespace ft
 
 		void _M_range_check(size_type __n)
 		{
-
 			if (__n >= _size)
 			{
 				std::string buffer;
