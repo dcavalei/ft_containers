@@ -33,8 +33,8 @@ int main()
 	std::cout << "-----" << std::endl;
 
 	std::cout << "[ -from- |const_iterator begin()| -to- |const_iterator end()| -not_included- ]" << std::endl;
-	iterator itb = map.begin();
-	for (const_iterator it = itb; it != map.end(); ++it)
+
+	for (const_iterator it = map.cbegin(); it != map.cend(); ++it)
 	{
 		std::cout << (*it).first << " - " << (*it).second << std::endl;
 	}

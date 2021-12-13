@@ -62,15 +62,6 @@ namespace ft
 
 		~RBTnode() {}
 
-		operator RBTnode<const value_type>() const
-		{
-			return(*this);
-		}
-
-		operator RBTnode<const value_type>()
-		{
-			
-		}
 	};
 
 	template <
