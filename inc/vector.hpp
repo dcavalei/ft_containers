@@ -16,7 +16,6 @@ namespace ft
 		class Alloc = std::allocator<T> >
 	class vector
 	{
-
 		/* ************************************** Member types ********************************** */
 
 	public:
@@ -35,17 +34,8 @@ namespace ft
 		typedef reverse_iterator<const_iterator> const_reverse_iterator;
 		typedef reverse_iterator<iterator> reverse_iterator;
 
-		/* ********************************** Private data members ****************************** */
-
-	private:
-		allocator_type _alloc;
-		size_type _size;
-		pointer _start;
-		size_type _capacity;
-
 		/* ************************************ Constructors ************************************ */
 
-	public:
 		// (1)	empty container constructor (default constructor)
 		// Constructs an empty container, with no elements.
 		explicit vector(const allocator_type &alloc = allocator_type()) : _alloc(alloc),
@@ -210,17 +200,9 @@ namespace ft
 
 		const_reference operator[](size_type n) const { return (_start[n]); }
 
-		reference at(size_type n)
-		{
-			_M_range_check(n);
-			return (_start[n]);
-		}
+		reference at(size_type n) { _M_range_check(n); return (_start[n]); }
 
-		const_reference at(size_type n) const
-		{
-			_M_range_check(n);
-			return (_start[n]);
-		}
+		const_reference at(size_type n) const { _M_range_check(n); return (_start[n]); }
 
 		reference front() { return (*_start); }
 
@@ -570,6 +552,13 @@ namespace ft
 				throw std::out_of_range(buffer);
 			}
 		}
+
+		/* ********************************** Private data members ****************************** */
+
+		allocator_type _alloc;
+		size_type _size;
+		pointer _start;
+		size_type _capacity;
 	};
 
 	/* ********************************** Non-member functions ********************************** */
@@ -619,7 +608,6 @@ namespace ft
 	{
 		x.swap(y);
 	}
-
 };
 
 #endif // VECTOR_HPP

@@ -10,8 +10,7 @@ namespace ft
 	template <class T>
 	class random_access_iterator
 	{
-
-		/* ************************************** Member types ************************************** */
+		/* ************************************ Member types ************************************ */
 
 	public:
 		typedef T value_type;
@@ -22,14 +21,8 @@ namespace ft
 		typedef std::ptrdiff_t difference_type;
 		typedef std::random_access_iterator_tag iterator_category;
 
-		/* ********************************** Private data members ********************************** */
+		/* ************************************ Constructors ************************************ */
 
-	private:
-		pointer _ptr;
-
-		/* ************************************** Constructors ************************************** */
-
-	public:
 		// Default constructor
 		random_access_iterator() : _ptr(NULL) {}
 
@@ -44,6 +37,8 @@ namespace ft
 
 		// Destructor
 		~random_access_iterator() {}
+
+		/* ********************************** Member Functions ********************************** */
 
 		// Assignment operator
 		random_access_iterator &operator=(const random_access_iterator &rhs)
@@ -173,121 +168,17 @@ namespace ft
 		{
 			return (_ptr[n]);
 		}
-	};
 
-	template <class T>
-	class bidirectional_iterator
-	{
-
-		/* ************************************** Member types ************************************** */
-
-	public:
-		typedef typename random_access_iterator<T>::value_type value_type;
-		typedef typename random_access_iterator<T>::reference reference;
-		typedef typename random_access_iterator<T>::const_reference const_reference;
-		typedef typename random_access_iterator<T>::pointer pointer;
-		typedef typename random_access_iterator<T>::const_pointer const_pointer;
-		typedef typename random_access_iterator<T>::difference_type difference_type;
-		typedef std::bidirectional_iterator_tag iterator_category;
-
-		/* ********************************** Private data members ********************************** */
+		/* ******************************** Private data members ******************************** */
 
 	private:
-		random_access_iterator<T> _it;
-
-		/* ************************************** Constructors ************************************** */
-
-	public:
-		// Default constructor
-		bidirectional_iterator() {}
-
-		// Copy constructor
-		bidirectional_iterator(const bidirectional_iterator &other)
-		{
-			*this = other;
-		}
-
-		// Pointer constructor
-		bidirectional_iterator(pointer ptr) : _it(ptr) {}
-
-		// Destructor
-		~bidirectional_iterator() {}
-
-		// Assignment operator
-		bidirectional_iterator &operator=(const bidirectional_iterator &other)
-		{
-			_it = other._it;
-
-			return (*this);
-		}
-
-		/* ************************************ Member functions ************************************ */
-
-		// Conversion operator to const_iterator
-		operator bidirectional_iterator<const value_type>() const
-		{
-			return (_it);
-		}
-
-		// Comparison operator, const compatible
-		bool operator==(const bidirectional_iterator &rhs) const
-		{
-			return (_it == rhs._it);
-		}
-
-		// Comparison operator, const compatible
-		bool operator!=(const bidirectional_iterator &rhs) const
-		{
-			return (!(*this == rhs));
-		}
-
-		// Dereference operator, const compatible
-		reference operator*() const
-		{
-			return (*_it);
-		}
-
-		// Member access operator, const compatible
-		pointer operator->() const
-		{
-			return (_it.operator->());
-		}
-
-		// Prefix increment
-		bidirectional_iterator &operator++()
-		{
-			_it++;
-			return (*this);
-		}
-
-		// Postfix increment
-		bidirectional_iterator operator++(int)
-		{
-			bidirectional_iterator old = *this;
-			operator++();
-			return (old);
-		}
-
-		// Prefix decrement
-		bidirectional_iterator &operator--()
-		{
-			_it--;
-			return (*this);
-		}
-
-		// Postfix decrement
-		bidirectional_iterator operator--(int)
-		{
-			bidirectional_iterator old = *this;
-			operator--();
-			return (old);
-		}
+		pointer _ptr;
 	};
 
 	template <class Iterator>
 	class reverse_iterator
 	{
-
+		/* ************************************ Member types ************************************ */
 	public:
 		typedef Iterator iterator_type;
 		typedef typename iterator_traits<Iterator>::iterator_category iterator_category;
@@ -296,12 +187,16 @@ namespace ft
 		typedef typename iterator_traits<Iterator>::pointer pointer;
 		typedef typename iterator_traits<Iterator>::reference reference;
 
+		/* ************************************ Constructors ************************************ */
+
 		reverse_iterator() : _base(iterator_type()) {}
 
 		explicit reverse_iterator(iterator_type it) : _base(it - 1) {}
 
 		template <class Iter>
 		reverse_iterator(const reverse_iterator<Iter> &rev_it) : _base(rev_it._base) {}
+
+		/* ********************************** Member Functions ********************************** */
 
 		// Returns a copy of the base iterator
 		iterator_type base() const
@@ -374,6 +269,7 @@ namespace ft
 			return (base()[-n - 1]);
 		}
 
+		/* ********************************** Private data members ****************************** */
 	private:
 		iterator_type _base;
 	};

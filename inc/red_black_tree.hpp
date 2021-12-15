@@ -2,12 +2,31 @@
 #define RED_BLACK_TREE_HPP
 
 #include <functional>
+#include <iostream>
 
 namespace ft
 {
 
-	template <class T, bool Const> class RBTiterator;
-	template <class T> class RBTreverse_iterator;
+	template <bool Cond, class IsTrue, class IsFalse>
+	struct SelectType;
+
+	template <class IsTrue, class IsFalse>
+	struct SelectType<true, IsTrue, IsFalse>
+	{
+		typedef IsTrue type;
+	};
+
+	template <class IsTrue, class IsFalse>
+	struct SelectType<false, IsTrue, IsFalse>
+	{
+		typedef IsFalse type;
+	};
+
+	template <class T, bool is_const>
+	class RBTiterator;
+
+	template<class Iterator>
+	class RBTreverse_iterator;
 
 	enum RBTcolor
 	{
@@ -39,12 +58,12 @@ namespace ft
 									  left(0),
 									  right(0) {}
 
-		RBTnode(const RBTnode& other)
+		RBTnode(const RBTnode &other)
 		{
 			*this = other;
 		}
 
-		RBTnode& operator=(const RBTnode& rhs)
+		RBTnode &operator=(const RBTnode &rhs)
 		{
 			if (this == &rhs)
 			{
@@ -61,7 +80,6 @@ namespace ft
 		}
 
 		~RBTnode() {}
-
 	};
 
 	template <
@@ -79,20 +97,19 @@ namespace ft
 		typedef Compare key_compare;
 		typedef RBTnode<T> node;
 		typedef node *node_pointer;
-		typedef RBTiterator<const value_type> const_iterator;
-		typedef RBTiterator<value_type> iterator;
-		typedef RBTreverse_iterator<value_type> reverse_iterator;
-		typedef RBTreverse_iterator<const value_type> const_reverse_iterator;
+		typedef RBTiterator<value_type, false> iterator;
+		typedef RBTiterator<value_type, true> const_iterator;
+		typedef RBTreverse_iterator<iterator> reverse_iterator;
+		typedef RBTreverse_iterator<const_iterator> const_reverse_iterator;
 
 		/* ************************************ Constructors ************************************ */
 
-	public:
 		explicit RedBlackTree(
 			const key_compare &comp = key_compare(),
 			const allocator_type &alloc = allocator_type()) : alloc(alloc),
-													comp(comp),
-													nil(new node(black)),
-													root(nil) {}
+															  comp(comp),
+															  nil(new node(black)),
+															  root(nil) {}
 
 		RedBlackTree(const RedBlackTree &other) : nil(0), root(0)
 		{
@@ -188,7 +205,6 @@ namespace ft
 
 		/* ********************************** Helper functions ********************************** */
 
-	public:
 		static node_pointer min(node_pointer x)
 		{
 			if (!x || !x->left)
@@ -577,31 +593,24 @@ namespace ft
 			return (n);
 		}
 
-	public:
 		allocator_type alloc;
 		Compare comp;
 		node_pointer nil;
 		node_pointer root;
 	};
 
-	template <class T, bool Const = false>
+	template <class T, bool is_const = false>
 	class RBTiterator
 	{
-
+		/* ************************************** Member types ********************************** */
 	public:
 		typedef T value_type;
-		typedef T &reference;
-		typedef const T &const_reference;
-		typedef T *pointer;
-		typedef const T *const_pointer;
+		typedef typename SelectType<is_const, T const &, T &>::type reference;
+		typedef typename SelectType<is_const, T const *, T *>::type pointer;
 		typedef std::ptrdiff_t difference_type;
 		typedef std::bidirectional_iterator_tag iterator_category;
 		typedef RBTnode<T> *node_pointer;
 
-	private:
-		node_pointer _node;
-
-	public:
 		// Default constructor
 		RBTiterator() : _node(NULL) {}
 
@@ -612,7 +621,7 @@ namespace ft
 		}
 
 		// Pointer constructor
-		RBTiterator( node_pointer ptr) : _node(ptr) {}
+		RBTiterator(node_pointer ptr) : _node(ptr) {}
 
 		// Destructor
 		~RBTiterator() {}
@@ -627,12 +636,6 @@ namespace ft
 
 			_node = rhs._node;
 			return (*this);
-		}
-
-		// Conversion operator to const_iterator
-		operator RBTiterator<const value_type>() const
-		{
-			return (_node);
 		}
 
 		// Comparison operator, const compatible
@@ -650,7 +653,7 @@ namespace ft
 		// Dereference operator, const compatible
 		reference operator*() const
 		{
-			return (*(_node->data));
+			return (*_node->data);
 		}
 
 		// Member access operator, const compatible
@@ -689,87 +692,68 @@ namespace ft
 			return (old);
 		}
 
-		node_pointer	getNode()
+		node_pointer getNode() const
 		{
 			return (_node);
 		}
-	};
-
-	template <class T>
-	class RBTreverse_iterator
-	{
-
-	public:
-		typedef T value_type;
-		typedef value_type &reference;
-		typedef const value_type &const_reference;
-		typedef value_type *pointer;
-		typedef const value_type *const_pointer;
-		typedef std::ptrdiff_t difference_type;
-		typedef std::bidirectional_iterator_tag iterator_category;
-		typedef RBTnode<value_type> *node_pointer;
 
 	private:
 		node_pointer _node;
+	};
 
+	template<class Iterator>
+	class RBTreverse_iterator
+	{
+
+		/* ************************************ Member types ************************************ */
 	public:
-		// Default constructor
-		RBTreverse_iterator() {}
+		typedef Iterator iterator_type;
+		typedef typename iterator_traits<Iterator>::iterator_category iterator_category;
+		typedef typename iterator_traits<Iterator>::value_type value_type;
+		typedef typename iterator_traits<Iterator>::difference_type difference_type;
+		typedef typename iterator_traits<Iterator>::pointer pointer;
+		typedef typename iterator_traits<Iterator>::reference reference;
 
-		// Copy constructor
-		RBTreverse_iterator(const RBTreverse_iterator &other)
+		/* ************************************ Constructors ************************************ */
+
+
+		RBTreverse_iterator() : _base(iterator_type()) {}
+
+		explicit RBTreverse_iterator(iterator_type it) : _base(it) {}
+
+		template <class Iter>
+		RBTreverse_iterator(const RBTreverse_iterator<Iter> &rev_it) : _base(rev_it._base) {}
+
+		/* ********************************** Member Functions ********************************** */
+
+		iterator_type base() const
 		{
-			*this = other;
+			return (_base);
 		}
 
-		// Pointer constructor
-		RBTreverse_iterator(node_pointer ptr) : _node(ptr) {}
-
-		// Destructor
-		~RBTreverse_iterator() {}
-
-		// Assignment operator
-		RBTreverse_iterator &operator=(const RBTreverse_iterator &other)
-		{
-			_node = other._node;
-
-			return (*this);
-		}
-
-		// Conversion operator to const_iterator
-		operator RBTreverse_iterator<const value_type>() const
-		{
-			return (_node);
-		}
-
-		// Comparison operator, const compatible
 		bool operator==(const RBTreverse_iterator &rhs) const
 		{
-			return (_node == rhs._node);
+			return (_base == rhs._base);
 		}
 
-		// Comparison operator, const compatible
 		bool operator!=(const RBTreverse_iterator &rhs) const
 		{
 			return (!(*this == rhs));
 		}
 
-		// Dereference operator, const compatible
 		reference operator*() const
 		{
-			return (*(_node->data));
+			return (*_base);
 		}
 
-		// Member access operator, const compatible
 		pointer operator->() const
 		{
-			return (_node->data);
+			return (&(operator*()));
 		}
 
-		// Prefix increment
 		RBTreverse_iterator &operator++()
 		{
-			_node = RedBlackTree<value_type>::predecessor(_node);
+			--_base;
 			return (*this);
 		}
 
@@ -784,7 +768,7 @@ namespace ft
 		// Prefix decrement
 		RBTreverse_iterator &operator--()
 		{
-			_node = RedBlackTree<value_type>::successor(_node);
+			++_base;
 			return (*this);
 		}
 
@@ -796,12 +780,11 @@ namespace ft
 			return (old);
 		}
 
-		node_pointer	getNode()
-		{
-			return (_node);
-		}
+		/* ********************************** Private data members ****************************** */
+	private:
+		iterator_type _base;
 	};
 
-}
+};
 
 #endif // RED_BLACK_TREE_HPP

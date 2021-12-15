@@ -31,10 +31,10 @@ namespace ft
 		typedef Compare key_compare;
 		typedef pair<const Key, T> value_type;
 		typedef Alloc allocator_type;
-		typedef RBTiterator<const value_type> const_iterator;
-		typedef RBTiterator<value_type> iterator;
-		typedef typename RedBlackTree::const_reverse_iterator const_reverse_iterator;
+		typedef typename RedBlackTree::iterator iterator;
+		typedef typename RedBlackTree::const_iterator const_iterator;
 		typedef typename RedBlackTree::reverse_iterator reverse_iterator;
+		typedef typename RedBlackTree::const_reverse_iterator const_reverse_iterator;
 		typedef typename allocator_type::reference reference;
 		typedef typename allocator_type::const_reference const_reference;
 		typedef typename allocator_type::pointer pointer;
