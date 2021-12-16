@@ -88,7 +88,7 @@ namespace ft
 			{
 				return comp(x.first, y.first);
 			}
-			value_compare(const key_compare& c = key_compare()) : comp(c) {}
+			value_compare(const key_compare &c = key_compare()) : comp(c) {}
 		};
 
 		/* ************************************** Iterator ************************************** */
@@ -158,15 +158,42 @@ namespace ft
 
 		iterator insert(iterator position, const value_type &val)
 		{
-			typename RedBlackTree::node_pointer target, new_node;
+			typename RedBlackTree::node_pointer target, node;
 
+			node = _rbt.findKey(_rbt.root, val);
+			if (node)
+			{
+				return (iterator(node));
+			}
 			target = position.getNode();
-			new_node = _rbt.newNode(val);
+			node = _rbt.newNode(val);
+			value_compare comp;
+			while (target->parent)
+			{
+				if (target->parent->left == target)
+				{
+					if (comp(*target->parent->data, val))
+					{
+						target = target->parent;
+						continue;
+					}
+					break;
+				}
+				else
+				{
+					if (comp(val, *target->parent->data))
+					{
+						target = target->parent;
+						continue;
+					}
+					break;
+				}
+			}
 
-			_rbt.bstInsert(new_node, target);
-			_rbt.fixInsert(new_node);
+			_rbt.bstInsert(node, target);
+			_rbt.fixInsert(node);
 			_size++;
-			return (iterator(new_node));
+			return (iterator(node));
 		}
 
 		template <class InputIterator>
@@ -187,8 +214,9 @@ namespace ft
 		size_type erase(const key_type &k)
 		{
 			size_type i = 0;
+			value_type pair(k, mapped_type());
 
-			while (_rbt.remove(k))
+			while (_rbt.remove(pair))
 			{
 				i++;
 			}
@@ -200,7 +228,7 @@ namespace ft
 		{
 			while (first != last)
 			{
-				erase(*first++);
+				erase(first++);
 			}
 		}
 
@@ -230,10 +258,9 @@ namespace ft
 
 		/* ************************************* Observers ************************************** */
 
-		key_compare key_comp() const
-		{
-			return (_comp);
-		}
+		key_compare key_comp() const { return (_comp); }
+
+		value_compare value_comp() const { return (_comp); }
 
 		/* ************************************* Operations ************************************* */
 
@@ -249,23 +276,9 @@ namespace ft
 			return (const_iterator(_rbt.findKey(_rbt.root, p)));
 		}
 
-		size_type countHelper(typename RedBlackTree::node_pointer n, const value_type &val) const
-		{
-			size_type ret;
-
-			if (n == _rbt.nil)
-			{
-				return 0;
-			}
-
-			!(_rbt.comp(val, *n->data) || _rbt.comp(*n->data, val)) == true ? ret = 1 : ret = 0;
-			return (countHelper(n->left, val) + countHelper(n->right, val) + ret);
-		}
-
 		size_type count(const key_type &k) const
 		{
 			value_type p(k, mapped_type());
-
 			return (countHelper(_rbt.root, p));
 		}
 
@@ -277,11 +290,11 @@ namespace ft
 
 			while (n != _rbt.nil)
 			{
-				if (comp(*n->data, key) == false)
+				if (_comp(n->data->first, key) == false)
 				{
 					return (iterator(n));
 				}
-				if (comp(*n->data, key))
+				if (_comp(n->data->first, key))
 				{
 					n = n->right;
 				}
@@ -301,11 +314,11 @@ namespace ft
 
 			while (n != _rbt.nil)
 			{
-				if (comp(*n->data, key) == false)
+				if (_comp(n->data->first, key) == false)
 				{
 					return (iterator(n));
 				}
-				if (comp(*n->data, key))
+				if (_comp(n->data->first, key))
 				{
 					n = n->right;
 				}
@@ -325,11 +338,11 @@ namespace ft
 
 			while (n != _rbt.nil)
 			{
-				if (comp(key, *n->data) == true)
+				if (_comp(key, n->data->first) == true)
 				{
 					return (iterator(n));
 				}
-				if (comp(*n->data, key))
+				if (_comp(n->data->first, key))
 				{
 					n = n->right;
 				}
@@ -349,11 +362,11 @@ namespace ft
 
 			while (n != _rbt.nil)
 			{
-				if (comp(key, *n->data) == true)
+				if (_comp(key, n->data->first) == true)
 				{
 					return (iterator(n));
 				}
-				if (comp(*n->data, key))
+				if (_comp(n->data->first, key))
 				{
 					n = n->right;
 				}
@@ -384,7 +397,20 @@ namespace ft
 
 		/* ********************************** Private data members ****************************** */
 
-		private:
+	private:
+
+		size_type countHelper(typename RedBlackTree::node_pointer n, const value_type &val) const
+		{
+			size_type ret;
+
+			if (n == _rbt.nil)
+			{
+				return 0;
+			}
+
+			!(_rbt.comp(val, *n->data) || _rbt.comp(*n->data, val)) == true ? ret = 1 : ret = 0;
+			return (countHelper(n->left, val) + countHelper(n->right, val) + ret);
+		}
 
 		RedBlackTree _rbt;
 		key_compare _comp;
