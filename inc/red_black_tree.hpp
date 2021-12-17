@@ -25,7 +25,7 @@ namespace ft
 	template <class T, bool is_const>
 	class RBTiterator;
 
-	template<class Iterator>
+	template <class Iterator>
 	class RBTreverse_iterator;
 
 	enum RBTcolor
@@ -276,7 +276,6 @@ namespace ft
 
 		void freeNode(node_pointer n)
 		{
-			// std::cout << *n->data << std::endl;
 			alloc.destroy(n->data);
 			alloc.deallocate(n->data, 1);
 			delete n;
@@ -701,7 +700,7 @@ namespace ft
 		node_pointer _node;
 	};
 
-	template<class Iterator>
+	template <class Iterator>
 	class RBTreverse_iterator
 	{
 
@@ -715,7 +714,6 @@ namespace ft
 		typedef typename iterator_traits<Iterator>::reference reference;
 
 		/* ************************************ Constructors ************************************ */
-
 
 		RBTreverse_iterator() : _base(iterator_type()) {}
 

@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Dec 16 10:54:41 2021
+# Make data base, printed on Fri Dec 17 11:40:26 2021
 
 # Variables
 
@@ -28,7 +28,6 @@ OBJ = $(SRC:%.cpp=obj/%.o)
 XDG_SESSION_CLASS = user
 # makefile (from 'Makefile', line 3)
 SRC = $(shell find $(SRC_DIR) -type f -name "*.cpp")
- 
 # environment
 XDG_SESSION_TYPE = x11
 # environment
@@ -66,13 +65,13 @@ GNUMAKEFLAGS :=
 # environment
 XDG_DATA_DIRS = /usr/share/xfce4:/home/dcavalei/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/usr/share
 # environment
-DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-OW6ZyUctgj,guid=a79fdadb0d6fd4fd7cb3bb0561bb19f7
+DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-Rk703ecmdr,guid=57e2d85ab6a9dfd1843c453461bc76f4
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
 QT_SCALE_FACTOR = 1
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-ad414e3b-e033-4e46-9f23-5938de1f379d.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-def86773-5511-4409-8852-c9f63aad6307.sock
 # environment
 VSCODE_CWD = /home/dcavalei/Desktop/ft_containers
 # environment
@@ -84,7 +83,7 @@ PATH = /usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-SESSION_MANAGER = local/mx:@/tmp/.ICE-unix/3462,unix/mx:/tmp/.ICE-unix/3462
+SESSION_MANAGER = local/mx:@/tmp/.ICE-unix/3978,unix/mx:/tmp/.ICE-unix/3978
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -112,7 +111,7 @@ LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 # environment
 XDG_SESSION_DESKTOP = xfce
 # environment
-SSH_AUTH_SOCK = /tmp/ssh-aLT3gR13cCPz/agent.3462
+SSH_AUTH_SOCK = /tmp/ssh-3SRyQYw6EuZL/agent.3978
 # automatic
 %F = $(notdir $%)
 # environment
@@ -128,7 +127,7 @@ QT_QPA_PLATFORMTHEME = gtk2
 # environment
 XDG_SEAT = seat0
 # environment
-SSH_AGENT_PID = 3533
+SSH_AGENT_PID = 4061
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = XFCE
 # makefile (from 'Makefile', line 19)
@@ -144,7 +143,7 @@ HOME = /home/dcavalei
 # environment
 VSCODE_CLI = 1
 # environment
-VSCODE_CODE_CACHE_PATH = /home/dcavalei/.config/Code/CachedData/ccbaa2d27e38e5afa3e5c21c1c7bef4657064247
+VSCODE_CODE_CACHE_PATH = /home/dcavalei/.config/Code/CachedData/fe719cd3e5825bf14e14182fddeb88ee8daf044f
 # environment
 LOGNAME = dcavalei
 # environment
@@ -196,7 +195,7 @@ OLDPWD = /home/dcavalei
 # environment
 XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-2a99230f-1.62.3-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-2a99230f-1.63.1-main.sock
 # environment
 PANEL_GDK_CORE_DEVICE_EVENTS = 0
 # makefile (from 'Makefile', line 18)
@@ -252,7 +251,7 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 5388
+VSCODE_PID = 5809
 # variable set hash-table stats:
 # Load=121/1024=12%, Rehash=0, Collisions=15/180=8%
 
@@ -264,10 +263,10 @@ VSCODE_PID = 5388
 
 # . (device 66309, inode 1345528): 12 files, no impossibilities.
 # test (device 66309, inode 1357072): No files, no impossibilities so far.
-# src (device 66309, inode 1345662): 1 files, no impossibilities so far.
+# src (device 66309, inode 1345662): 2 files, no impossibilities so far.
 # inc (device 66309, inode 1345656): 12 files, no impossibilities so far.
 
-# 25 files, no impossibilities in 4 directories.
+# 26 files, no impossibilities in 4 directories.
 
 # Implicit Rules
 
@@ -277,7 +276,6 @@ obj/src/%.o: src/%.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp inc/iterat
 				@$(CCPP) $(CPPFLAGS) -I$(INC_DIR) -c $< -o $@
 
 obj/test/%.o: test/%.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp inc/iterator.hpp inc/type_traits.hpp inc/test.hpp inc/iterator_traits.hpp inc/map.hpp inc/utility.hpp inc/color.hpp inc/red_black_tree.hpp Makefile
- 
 #  recipe to execute (from 'Makefile', line 35):
 				$(eval FNAME=$(subst .o,,$@))
 				@mkdir -pv $(dir $@)
@@ -285,6 +283,7 @@ obj/test/%.o: test/%.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp inc/iter
 				@$(CCPP) $(CPPFLAGS) -D_IS_TEST -I$(INC_DIR) -c $< -o $@
 				@$(CCPP) $(CPPFLAGS) $@ -o $(FNAME)_ft
 				@./$(FNAME)_ft > $(FNAME)_ft.log
+ 
 				$(eval CPPFLAGS=$(subst -std=c++98,-std=c++11,$(CPPFLAGS)))
 				@$(CCPP) $(CPPFLAGS) -I$(INC_DIR) -c $< -o $@
 				@$(CCPP) $(CPPFLAGS) $@ -o $(FNAME)_std
@@ -303,7 +302,7 @@ obj/test/%.o: test/%.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp inc/iter
 # Not a target:
 inc/red_black_tree.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-12-16 10:54:33.083658236
+#  Last modified 2021-12-16 20:46:50.663211887
 #  File has been updated.
 #  Successfully updated.
 
@@ -327,6 +326,12 @@ inc/iterator.hpp:
 #  Successfully updated.
 
 # Not a target:
+obj/test/test_map_observers.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 inc/vector.hpp:
 #  Implicit rule search has been done.
 #  Last modified 2021-12-16 10:54:33.083658236
@@ -348,7 +353,7 @@ all: main.out
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/6=0%
 
-main.out: obj/src/vector.o obj/src/main.o
+main.out: obj/src/main.o
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has been updated.
@@ -396,7 +401,6 @@ inc/type_traits.hpp:
 #  Successfully updated.
 
 # Not a target:
- 
 obj/test/test_map_capacity_functions.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -415,10 +419,16 @@ obj/test/test_get_allocator.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-test: obj/test/test_is_integral.o obj/test/test_assign.o obj/test/test_make_pair.o obj/test/test_get_allocator.o obj/test/test_iterator.o obj/test/test_erase.o obj/test/test_enable_if.o obj/test/test_map_ctor.o obj/test/test_at.o obj/test/test_resize.o obj/test/test_reverse_iterator.o obj/test/test_default_ctor.o obj/test/test_swap.o obj/test/test_stack.o obj/test/test_reserve.o obj/test/test_map_capacity_functions.o obj/test/test_pair.o obj/test/test_lexicographical_compare.o obj/test/test_range_ctor.o obj/test/test_push_back.o obj/test/test_pop_back.o obj/test/test_relational_operators.o obj/test/test_equal.o obj/test/test_insert.o obj/test/test_copy_ctor.o obj/test/test_map_iterator_functions.o obj/test/test_fill_ctor.o obj/test/test_clear.o
+test: obj/test/test_is_integral.o obj/test/test_assign.o obj/test/test_make_pair.o obj/test/test_get_allocator.o obj/test/test_iterator.o obj/test/test_erase.o obj/test/test_enable_if.o obj/test/test_map_ctor.o obj/test/test_map_modifiers.o obj/test/test_at.o obj/test/test_resize.o obj/test/test_map_element_access.o obj/test/test_reverse_iterator.o obj/test/test_default_ctor.o obj/test/test_map_observers.o obj/test/test_swap.o obj/test/test_stack.o obj/test/test_reserve.o obj/test/test_map_capacity_functions.o obj/test/test_pair.o obj/test/test_lexicographical_compare.o obj/test/test_range_ctor.o obj/test/test_push_back.o obj/test/test_pop_back.o obj/test/test_relational_operators.o obj/test/test_equal.o obj/test/test_insert.o obj/test/test_copy_ctor.o obj/test/test_map_iterator_functions.o obj/test/test_fill_ctor.o obj/test/test_map_operations.o obj/test/test_clear.o
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+obj/test/test_map_operations.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
@@ -447,13 +457,6 @@ obj/test/test_relational_operators.o:
 #  File has not been updated.
 
 # Not a target:
-src/vector.cpp:
-#  Implicit rule search has been done.
-#  Last modified 2021-10-27 14:23:54.068984793
-#  File has been updated.
-#  Successfully updated.
-
-# Not a target:
 obj/test/test_enable_if.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -476,7 +479,6 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
- 
 #  recipe to execute (from 'Makefile', line 64):
 				@rm -vrf $(NAME)
 				@rm -vrf $(subst .o,,$(OBJ_TEST))
@@ -519,6 +521,12 @@ obj/test/test_reverse_iterator.o:
 #  File has not been updated.
 
 # Not a target:
+obj/test/test_map_modifiers.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 obj/test/test_reserve.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -537,35 +545,6 @@ inc/test.hpp:
 #  Last modified 2021-12-06 09:01:53.400479262
 #  File has been updated.
 #  Successfully updated.
-
-obj/src/vector.o: src/vector.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp inc/iterator.hpp inc/type_traits.hpp inc/test.hpp inc/iterator_traits.hpp inc/map.hpp inc/utility.hpp inc/color.hpp inc/red_black_tree.hpp Makefile
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'vector'
-#  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := obj/src/vector.o
-# automatic
-# % := 
-# automatic
-# * := vector
-# automatic
-# + := src/vector.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp inc/iterator.hpp inc/type_traits.hpp inc/test.hpp inc/iterator_traits.hpp inc/map.hpp inc/utility.hpp inc/color.hpp inc/red_black_tree.hpp Makefile
-# automatic
-# | := 
-# automatic
-# < := src/vector.cpp
-# automatic
-# ^ := src/vector.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp inc/iterator.hpp inc/type_traits.hpp inc/test.hpp inc/iterator_traits.hpp inc/map.hpp inc/utility.hpp inc/color.hpp inc/red_black_tree.hpp Makefile
- 
-# automatic
-# ? := src/vector.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp inc/iterator.hpp inc/type_traits.hpp inc/test.hpp inc/iterator_traits.hpp inc/map.hpp inc/utility.hpp inc/color.hpp inc/red_black_tree.hpp Makefile
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/17=6%
-#  recipe to execute (from 'Makefile', line 30):
-				@mkdir -pv $(dir $@)
-				@$(CCPP) $(CPPFLAGS) -I$(INC_DIR) -c $< -o $@
 
 # Not a target:
 obj/test/test_pair.o:
@@ -596,11 +575,25 @@ clean:
 				@rm -vrf obj
 				@rm -vrf $(OBJ_TEST)
 
+ 
+# Not a target:
+obj/test/test_map_element_access.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # Not a target:
 obj/test/test_range_ctor.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+
+# Not a target:
+src/main.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-12-16 10:54:33.083658236
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 obj/test/test_iterator.o:
@@ -645,16 +638,38 @@ obj/test/test_stack.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-obj/src/main.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/src/main.o: src/main.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp inc/iterator.hpp inc/type_traits.hpp inc/test.hpp inc/iterator_traits.hpp inc/map.hpp inc/utility.hpp inc/color.hpp inc/red_black_tree.hpp Makefile
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'main'
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := obj/src/main.o
+# automatic
+# % := 
+# automatic
+# * := main
+# automatic
+# + := src/main.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp inc/iterator.hpp inc/type_traits.hpp inc/test.hpp inc/iterator_traits.hpp inc/map.hpp inc/utility.hpp inc/color.hpp inc/red_black_tree.hpp Makefile
+# automatic
+# | := 
+# automatic
+# < := src/main.cpp
+# automatic
+# ^ := src/main.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp inc/iterator.hpp inc/type_traits.hpp inc/test.hpp inc/iterator_traits.hpp inc/map.hpp inc/utility.hpp inc/color.hpp inc/red_black_tree.hpp Makefile
+# automatic
+# ? := src/main.cpp inc/vector.hpp inc/stack.hpp inc/algorithm.hpp inc/iterator.hpp inc/type_traits.hpp inc/test.hpp inc/iterator_traits.hpp inc/map.hpp inc/utility.hpp inc/color.hpp inc/red_black_tree.hpp Makefile
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/17=6%
+#  recipe to execute (from 'Makefile', line 30):
+				@mkdir -pv $(dir $@)
+				@$(CCPP) $(CPPFLAGS) -I$(INC_DIR) -c $< -o $@
 
 # Not a target:
 inc/map.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-12-16 10:54:33.083658236
+#  Last modified 2021-12-16 20:17:55.655643407
 #  File has been updated.
 #  Successfully updated.
 
@@ -665,20 +680,19 @@ obj/test/test_default_ctor.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=53/1024=5%, Rehash=0, Collisions=6/132=5%
+# Load=56/1024=5%, Rehash=0, Collisions=6/138=4%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
- 
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 82 / storage = 1354 B / avg = 16 B
-# current buf: size = 8162 B / used = 1354 B / count = 82 / avg = 16 B
+# strcache buffers: 1 (0) / strings = 85 / storage = 1457 B / avg = 17 B
+# current buf: size = 8162 B / used = 1457 B / count = 85 / avg = 17 B
 
-# strcache performance: lookups = 148 / hit rate = 44%
+# strcache performance: lookups = 152 / hit rate = 44%
 # hash-table stats:
-# Load=82/8192=1%, Rehash=0, Collisions=1/148=1%
-# Finished Make data base on Thu Dec 16 10:54:41 2021
+# Load=85/8192=1%, Rehash=0, Collisions=1/152=1%
+# Finished Make data base on Fri Dec 17 11:40:26 2021
 
  
