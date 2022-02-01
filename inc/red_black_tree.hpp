@@ -625,6 +625,11 @@ namespace ft
 		// Destructor
 		~RBTiterator() {}
 
+		operator RBTiterator<value_type, false>()
+		{
+			return(_node);
+		}
+
 		// Assignment operator
 		RBTiterator &operator=(const RBTiterator &rhs)
 		{
