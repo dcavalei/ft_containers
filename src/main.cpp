@@ -4,11 +4,12 @@
 
 int main()
 {
-	ft::map<char, int> mymap;
+	ft::map<int, int> mymap;
+	srand(0);
 
-	mymap['a'] = 1;
+	for (size_t i = 0; i != 10000000; i++)
+	{
+		mymap.insert(ft::map<int, int>::value_type(rand(), rand()));
+	}
 
-	ft::map<char, int>::iterator it = mymap.cbegin();
-
-	std::cout << it->second << std::endl;
 }

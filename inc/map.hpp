@@ -70,6 +70,8 @@ namespace ft
 			return *this;
 		}
 
+		~map() {}
+
 		// in C++98, it is required to inherit binary_function<value_type,value_type,bool>
 		class value_compare : std::binary_function<value_type, value_type, bool>
 		{
