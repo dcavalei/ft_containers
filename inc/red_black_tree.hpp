@@ -625,7 +625,7 @@ namespace ft
 		// Destructor
 		~RBTiterator() {}
 
-		operator RBTiterator<value_type, false>()
+		operator RBTiterator<value_type, true>()
 		{
 			return(_node);
 		}
