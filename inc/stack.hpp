@@ -6,69 +6,69 @@
 namespace ft
 {
 
-	template <
-		class T,
-		class Container = vector<T> >
-	class stack
-	{
-		/* ************************************ Member types ************************************ */
+    template <
+        class T,
+        class Container = vector<T> >
+    class stack
+    {
+        /* ************************************ Member types ************************************ */
 
-	public:
-		typedef Container container_type;
-		typedef typename Container::value_type value_type;
-		typedef typename Container::size_type size_type;
-		typedef typename Container::reference reference;
-		typedef typename Container::const_reference const_reference;
+    public:
+        typedef Container container_type;
+        typedef typename Container::value_type value_type;
+        typedef typename Container::size_type size_type;
+        typedef typename Container::reference reference;
+        typedef typename Container::const_reference const_reference;
 
-		/* ************************************ Constructors ************************************ */
+        /* ************************************ Constructors ************************************ */
 
-		explicit stack(container_type const &cont = container_type()) : _c(cont) {}
+        explicit stack(container_type const &cont = container_type()) : _c(cont) {}
 
-		~stack(){};
+        ~stack(){};
 
-		stack &operator=(stack const &other)
-		{
-			_c = other._c;
-			return *this;
-		}
+        stack &operator=(stack const &other)
+        {
+            _c = other._c;
+            return *this;
+        }
 
-		/* *********************************** Element access *********************************** */
+        /* *********************************** Element access *********************************** */
 
-		reference top() { return _c.back(); }
+        reference top() { return _c.back(); }
 
-		const_reference top() const { return _c.back(); }
+        const_reference top() const { return _c.back(); }
 
-		/* ************************************** Capacity ************************************** */
+        /* ************************************** Capacity ************************************** */
 
-		bool empty() const { return _c.empty(); }
+        bool empty() const { return _c.empty(); }
 
-		size_type size() const { return _c.size(); }
+        size_type size() const { return _c.size(); }
 
-		/* ************************************* Modifiers ************************************** */
+        /* ************************************* Modifiers ************************************** */
 
-		void push(value_type const &value) { _c.push_back(value); }
+        void push(value_type const &value) { _c.push_back(value); }
 
-		void pop() { _c.pop_back(); }
+        void pop() { _c.pop_back(); }
 
-		/* ******************************** Non-member functions ******************************** */
+        /* ******************************** Non-member functions ******************************** */
 
-		friend bool operator==(stack const &lhs, stack const &rhs) { return lhs._c == rhs._c; }
+        friend bool operator==(stack const &lhs, stack const &rhs) { return lhs._c == rhs._c; }
 
-		friend bool operator!=(stack const &lhs, stack const &rhs) { return lhs._c != rhs._c; }
+        friend bool operator!=(stack const &lhs, stack const &rhs) { return lhs._c != rhs._c; }
 
-		friend bool operator<(stack const &lhs, stack const &rhs) { return lhs._c < rhs._c; }
+        friend bool operator<(stack const &lhs, stack const &rhs) { return lhs._c < rhs._c; }
 
-		friend bool operator<=(stack const &lhs, stack const &rhs) { return lhs._c <= rhs._c; }
+        friend bool operator<=(stack const &lhs, stack const &rhs) { return lhs._c <= rhs._c; }
 
-		friend bool operator>(stack const &lhs, stack const &rhs) { return lhs._c > rhs._c; }
+        friend bool operator>(stack const &lhs, stack const &rhs) { return lhs._c > rhs._c; }
 
-		friend bool operator>=(stack const &lhs, stack const &rhs) { return lhs._c >= rhs._c; }
+        friend bool operator>=(stack const &lhs, stack const &rhs) { return lhs._c >= rhs._c; }
 
-		/* ******************************* Protected data members ******************************* */
+        /* ******************************* Protected data members ******************************* */
 
-	protected:
-		container_type _c;
-	};
+    protected:
+        container_type _c;
+    };
 }
 
 #endif // STACK_HPP
